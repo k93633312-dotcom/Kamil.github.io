@@ -2,6 +2,27 @@
 <title>KamilColorbot</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 
+<script>
+  (function(){
+    try {
+      var url = new URL(window.location.href);
+      var dirty = false;
+      var keys = Array.from(url.searchParams.keys());
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        if (k.indexOf('utm_') === 0 || k === 'fbclid' || k === 'gclid' || k === 'ref' || k === 'source') {
+          url.searchParams.delete(k);
+          dirty = true;
+        }
+      }
+      if (dirty) {
+        var clean = url.pathname + (url.search ? url.search : '') + (url.hash || '');
+        window.history.replaceState({}, '', clean);
+      }
+    } catch (e) {}
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 
