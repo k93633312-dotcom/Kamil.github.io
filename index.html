@@ -1,11 +1,25 @@
+
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GamerDoc — Precision Aim Enhancement</title>
+<meta name="theme-color" content="#06070A">
+<meta name="description" content="KamilColorbot — color analysis and gaming configuration tools.">
+<title>KamilColorbot — Color Analysis Tools</title>
+
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 body {
   font-family: 'Segoe UI', system-ui, sans-serif;
   background: #06070A;
@@ -13,284 +27,642 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+
 .bg-gradient {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 50%),
-              radial-gradient(ellipse at bottom, rgba(6,182,212,0.1) 0%, transparent 50%);
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top, rgba(139,92,246,.15), transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(6,182,212,.1), transparent 50%);
   z-index: -1;
+  pointer-events: none;
 }
+
 nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  padding: 20px 60px; z-index: 100;
-  background: rgba(6,7,10,0.8); backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 60px;
+  z-index: 100;
+  background: rgba(6,7,10,.88);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid #1A1D23;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
-.logo { font-size: 20px; font-weight: 700; }
-.logo-dot { color: #8B5CF6; }
-.nav-links { display: flex; gap: 30px; }
-.nav-links a { color: #71757C; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-.nav-links a:hover { color: #8B5CF6; }
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.logo-dot {
+  color: #8B5CF6;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #9296A0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .2s;
+}
+
+.nav-links a:hover {
+  color: #A78BFA;
+}
+
 .btn {
-  padding: 12px 28px; border-radius: 8px; font-weight: 600;
-  text-decoration: none; display: inline-block; transition: all 0.2s;
-  font-size: 14px; cursor: pointer; border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .2s;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
 }
+
 .btn-primary {
   background: linear-gradient(135deg, #8B5CF6, #A78BFA);
   color: #FFFFFF;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(139,92,246,0.4); }
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(139,92,246,.3);
+}
+
 .btn-secondary {
-  background: transparent; color: #F8F9FA;
-  border: 1px solid #1A1D23;
+  background: transparent;
+  color: #F8F9FA;
+  border-color: #292C35;
 }
-.btn-secondary:hover { border-color: #8B5CF6; color: #8B5CF6; }
+
+.btn-secondary:hover {
+  border-color: #8B5CF6;
+  color: #A78BFA;
+}
+
 .hero {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 100px 40px 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 130px 24px 80px;
 }
-.hero-content { max-width: 900px; }
+
+.hero-content {
+  max-width: 900px;
+}
+
 .badge {
-  display: inline-block; padding: 6px 16px; border-radius: 20px;
-  background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3);
-  color: #A78BFA; font-size: 12px; font-weight: 600; margin-bottom: 24px;
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(139,92,246,.1);
+  border: 1px solid rgba(139,92,246,.3);
+  color: #A78BFA;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 24px;
 }
+
 .hero h1 {
-  font-size: 72px; font-weight: 800; line-height: 1.1; margin-bottom: 24px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #A78BFA 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #FFFFFF, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
 .hero p {
-  font-size: 20px; color: #71757C; margin-bottom: 40px; max-width: 600px;
-  margin-left: auto; margin-right: auto;
+  font-size: 19px;
+  color: #9296A0;
+  margin: 0 auto 40px;
+  max-width: 620px;
 }
-.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.section {
+  padding: 100px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .section-title {
-  text-align: center; font-size: 48px; font-weight: 700; margin-bottom: 16px;
+  text-align: center;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 16px;
 }
-.section-sub { text-align: center; color: #71757C; font-size: 18px; margin-bottom: 60px; }
+
+.section-sub {
+  text-align: center;
+  color: #9296A0;
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
 .features {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
 }
+
 .feature {
-  padding: 32px; background: #0B0C10; border: 1px solid #1A1D23;
-  border-radius: 16px; transition: all 0.3s;
+  padding: 32px;
+  background: #0B0C10;
+  border: 1px solid #1A1D23;
+  border-radius: 16px;
+  transition: transform .3s, border-color .3s;
 }
-.feature:hover { border-color: #8B5CF6; transform: translateY(-4px); }
+
+.feature:hover {
+  border-color: #8B5CF6;
+  transform: translateY(-4px);
+}
+
 .feature-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  background: rgba(139,92,246,0.1); display: flex;
-  align-items: center; justify-content: center;
-  color: #8B5CF6; font-size: 24px; margin-bottom: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(139,92,246,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A78BFA;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
-.feature h3 { font-size: 20px; margin-bottom: 10px; }
-.feature p { color: #71757C; font-size: 14px; }
+
+.feature h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  color: #9296A0;
+  font-size: 14px;
+}
+
 .pricing {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 400px));
+  justify-content: center;
+  gap: 28px;
+  margin: 60px auto 0;
 }
+
 .price-card {
-  padding: 40px 32px; background: #0B0C10; border: 1px solid #1A1D23;
-  border-radius: 16px; text-align: center; position: relative;
+  padding: 40px 32px;
+  background: #0B0C10;
+  border: 1px solid #1A1D23;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
+
 .price-card.featured {
   border-color: #8B5CF6;
-  background: linear-gradient(180deg, rgba(139,92,246,0.05) 0%, #0B0C10 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(139,92,246,.09) 0%,
+    #0B0C10 100%
+  );
 }
+
 .featured-badge {
-  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-  padding: 6px 16px; background: #8B5CF6; color: #FFFFFF;
-  border-radius: 20px; font-size: 11px; font-weight: 700;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }
-.price-name { font-size: 16px; color: #71757C; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-.price-amount { font-size: 56px; font-weight: 800; margin-bottom: 8px; }
-.price-amount span { font-size: 18px; color: #71757C; font-weight: 400; }
-.price-features { list-style: none; text-align: left; margin: 32px 0; }
+
+.price-name {
+  font-size: 16px;
+  color: #A7AAB3;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.price-amount {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.price-amount span {
+  font-size: 17px;
+  color: #9296A0;
+  font-weight: 400;
+}
+
+.price-description {
+  color: #9296A0;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.price-features {
+  list-style: none;
+  text-align: left;
+  margin: 32px 0;
+  flex: 1;
+}
+
 .price-features li {
-  padding: 10px 0; color: #71757C; font-size: 14px;
+  padding: 10px 0;
+  color: #B4B7C0;
+  font-size: 14px;
   border-bottom: 1px solid #1A1D23;
 }
-.price-features li:before {
-  content: "✓ "; color: #8B5CF6; font-weight: 700;
+
+.price-features li::before {
+  content: "✓ ";
+  color: #A78BFA;
+  font-weight: 700;
 }
+
+.price-card .btn {
+  width: 100%;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+
 .faq-item {
-  padding: 24px; background: #0B0C10; border: 1px solid #1A1D23;
-  border-radius: 12px; margin-bottom: 12px;
+  padding: 24px;
+  background: #0B0C10;
+  border: 1px solid #1A1D23;
+  border-radius: 12px;
+  margin-bottom: 12px;
 }
-.faq-item h4 { font-size: 16px; margin-bottom: 8px; color: #F8F9FA; }
-.faq-item p { color: #71757C; font-size: 14px; }
+
+.faq-item h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.faq-item p {
+  color: #9296A0;
+  font-size: 14px;
+}
+
+.contact-content {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.contact-content p {
+  color: #9296A0;
+  margin-top: 28px;
+  font-size: 14px;
+}
+
 footer {
-  padding: 40px; text-align: center; border-top: 1px solid #1A1D23;
-  color: #45484F; font-size: 13px;
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid #1A1D23;
+  color: #777B85;
+  font-size: 13px;
 }
-footer a { color: #8B5CF6; text-decoration: none; }
-@media (max-width: 768px) {
-  .hero h1 { font-size: 44px; }
-  .features, .pricing { grid-template-columns: 1fr; }
-  nav { padding: 16px 20px; }
-  .nav-links { display: none; }
-  .section { padding: 60px 20px; }
+
+footer a {
+  color: #A78BFA;
+  text-decoration: none;
+}
+
+.footer-logo {
+  margin-bottom: 16px;
+  color: #F8F9FA;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-note {
+  margin-top: 16px;
+  font-size: 11px;
+  color: #777B85;
+}
+
+@media (max-width: 800px) {
+  nav {
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section {
+    padding: 75px 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: 90vh;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .features,
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing {
+    gap: 32px;
+    max-width: 400px;
+  }
+
+  .price-card {
+    padding: 36px 24px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  nav > .btn {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div class="bg-gradient"></div>
 
 <nav>
-  <div class="logo">◆ Gamer<span class="logo-dot">Doc</span></div>
+  <a href="#" class="logo" style="text-decoration:none;color:#F8F9FA;">
+    ◆ Kamil<span class="logo-dot">Colorbot</span>
+  </a>
+
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </div>
+
   <a href="#pricing" class="btn btn-primary">Get Started</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <div class="badge">◆ Precision Enhancement Suite</div>
-    <h1>Dominate Every Match</h1>
-    <p>Professional-grade color detection technology with hardware-level input processing. Undetected. Reliable. Lightning fast.</p>
-    <div class="hero-buttons">
-      <a href="#pricing" class="btn btn-primary">View Pricing →</a>
-      <a href="#features" class="btn btn-secondary">Learn More</a>
-    </div>
-  </div>
-</section>
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="badge">◆ Color Analysis & Configuration</div>
+      <h1>KamilColorbot</h1>
+      <p>
+        A simple toolkit for color analysis, personal configuration,
+        and improving your gaming practice.
+      </p>
 
-<section class="section" id="features">
-  <h2 class="section-title">Why GamerDoc</h2>
-  <p class="section-sub">Built for players who demand excellence</p>
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">◎</div>
-      <h3>Precision Detection</h3>
-      <p>Advanced HSV color recognition with sub-pixel accuracy. OpenCL acceleration for AMD, Intel, and NVIDIA GPUs.</p>
+      <div class="hero-buttons">
+        <a href="#pricing" class="btn btn-primary">View Pricing →</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
+      </div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">⚡</div>
-      <h3>Zero Latency</h3>
-      <p>Hardware-level input processing bypasses software stacks. 0.5ms polling with high-priority process scheduling.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🛡</div>
-      <h3>Stealth Mode</h3>
-      <p>Hidden from capture software (OBS, Discord, Game Bar). Stream-safe operation with fake overlay.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">⚔</div>
-      <h3>Weapon Profiles</h3>
-      <p>Pre-built RCS patterns for Vandal, Phantom, Spectre, Odin, Ares, Guardian. Spray transfer between targets.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">◇</div>
-      <h3>Human Movement</h3>
-      <p>Bezier curves, jitter, reaction delays, overshoot correction. Indistinguishable from natural play.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">⚙</div>
-      <h3>Instant Setup</h3>
-      <p>Download, enter license key, play. No installation. No driver signing. Works out of the box.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="pricing">
-  <h2 class="section-title">Simple Pricing</h2>
-  <p class="section-sub">Choose the plan that fits your style</p>
-  <div class="pricing">
-    <div class="price-card">
-      <div class="price-name">7 Days</div>
-      <div class="price-amount">$9<span>/week</span></div>
-      <ul class="price-features">
-        <li>All features included</li>
-        <li>1 PC activation</li>
-        <li>Discord support</li>
-        <li>Instant key delivery</li>
-      </ul>
-      <a href="#contact" class="btn btn-secondary" style="width: 100%;">Get Started</a>
-    </div>
-    <div class="price-card featured">
-      <div class="featured-badge">MOST POPULAR</div>
-      <div class="price-name">30 Days</div>
-      <div class="price-amount">$25<span>/month</span></div>
-      <ul class="price-features">
-        <li>All features included</li>
-        <li>1 PC activation</li>
-        <li>Priority support</li>
-        <li>Free HWID reset (1x)</li>
-        <li>Early access to updates</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Started</a>
-    </div>
-    <div class="price-card">
-      <div class="price-name">Lifetime</div>
-      <div class="price-amount">$79<span>/once</span></div>
-      <ul class="price-features">
-        <li>All features included</li>
-        <li>1 PC activation</li>
-        <li>VIP support</li>
-        <li>Unlimited HWID resets</li>
-        <li>All future updates</li>
-        <li>Private config library</li>
-      </ul>
-      <a href="#contact" class="btn btn-secondary" style="width: 100%;">Get Started</a>
-    </div>
-  </div>
-</section>
+  <section class="section" id="features">
+    <h2 class="section-title">Features</h2>
+    <p class="section-sub">Useful tools for your setup and workflow</p>
 
-<section class="section" id="faq">
-  <h2 class="section-title">FAQ</h2>
-  <p class="section-sub">Common questions answered</p>
-  <div style="max-width: 800px; margin: 40px auto 0;">
-    <div class="faq-item">
-      <h4>Is this detected by anti-cheat?</h4>
-      <p>GamerDoc uses hardware-level input processing and screen color analysis — no memory reading, no injection, no drivers. The software runs externally and is designed to minimize detection vectors.</p>
-    </div>
-    <div class="faq-item">
-      <h4>What do I need to use it?</h4>
-      <p>Windows 10/11, any modern GPU (AMD, Intel, NVIDIA), and a Makcu hardware device for the mouse input layer. Setup takes under 5 minutes.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Can I use it on multiple PCs?</h4>
-      <p>Each license is bound to one hardware ID (HWID). Need to change computers? Contact support for a HWID reset.</p>
-    </div>
-    <div class="faq-item">
-      <h4>How do I get my license key?</h4>
-      <p>After purchase, your key is delivered instantly via email and Discord DM. Keys activate immediately — no waiting.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Refund policy?</h4>
-      <p>Due to the digital nature of the product, all sales are final. Try the 7-day plan first if you want to test before committing.</p>
-    </div>
-  </div>
-</section>
+    <div class="features">
+      <article class="feature">
+        <div class="feature-icon">◎</div>
+        <h3>Color Analysis</h3>
+        <p>
+          Explore color ranges and visual settings to understand
+          the colors used in your applications.
+        </p>
+      </article>
 
-<section class="section" id="contact">
-  <h2 class="section-title">Get Started</h2>
-  <p class="section-sub">Contact us to purchase your license</p>
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="https://discord.gg/YOUR_INVITE" class="btn btn-primary" style="margin: 8px;">💬 Join Discord</a>
-    <a href="mailto:contact@gamerdoc.eu" class="btn btn-secondary" style="margin: 8px;">✉ Email Us</a>
-    <p style="color: #71757C; margin-top: 32px; font-size: 14px;">
-      Response time: usually under 1 hour
-    </p>
-  </div>
-</section>
+      <article class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>Performance Settings</h3>
+        <p>
+          Review your configuration and discover settings
+          that suit your computer and workflow.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">◈</div>
+        <h3>Personal Profiles</h3>
+        <p>
+          Keep your preferred settings organized in a clear,
+          easy-to-manage configuration.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">⌖</div>
+        <h3>Aim Practice</h3>
+        <p>
+          Support your practice routine with tools and settings
+          for compatible training applications.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">◇</div>
+        <h3>Customizable Interface</h3>
+        <p>
+          Organize your workspace and adjust available options
+          to fit your preferences.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">⚙</div>
+        <h3>Simple Setup</h3>
+        <p>
+          Clear instructions help you get started and configure
+          the available features.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <h2 class="section-title">Simple Pricing</h2>
+    <p class="section-sub">Choose the plan that fits your style</p>
+
+    <div class="pricing">
+      <article class="price-card">
+        <div class="price-name">7 Days</div>
+        <div class="price-amount">$50<span>/week</span></div>
+        <p class="price-description">One-week access</p>
+
+        <ul class="price-features">
+          <li>All standard features included</li>
+          <li>1 PC activation</li>
+          <li>Discord support</li>
+          <li>Access instructions included</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Get Started</a>
+      </article>
+
+      <article class="price-card featured">
+        <div class="featured-badge">MOST POPULAR</div>
+        <div class="price-name">30 Days</div>
+        <div class="price-amount">$120<span>/month</span></div>
+        <p class="price-description">One-month access</p>
+
+        <ul class="price-features">
+          <li>All standard features included</li>
+          <li>1 PC activation</li>
+          <li>Priority support</li>
+          <li>One configuration reset</li>
+          <li>Access to updates</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-sub">Common questions answered</p>
+
+    <div class="faq-list">
+      <article class="faq-item">
+        <h3>What is KamilColorbot?</h3>
+        <p>
+          KamilColorbot is presented as a toolkit for color analysis
+          and personal configuration. Check the product documentation
+          for the exact features supported by your version.
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>What do I need to use it?</h3>
+        <p>
+          Requirements depend on the version and features you use.
+          Please check the product documentation before purchasing.
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Can I use it on multiple PCs?</h3>
+        <p>
+          The plans listed here are intended for one PC activation.
+          Contact support if you need help with your configuration.
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>How do I get started?</h3>
+        <p>
+          Use the contact section below to ask about purchasing,
+          access, and setup instructions.
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>What is the refund policy?</h3>
+        <p>
+          Please review the seller's refund terms before purchasing.
+          Make sure the policy complies with applicable consumer laws.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2 class="section-title">Get Started</h2>
+    <p class="section-sub">Contact us about plans and access</p>
+
+    <div class="contact-content">
+      <!-- Replace these example contact details with your real ones. -->
+      <a
+        href="https://discord.com/"
+        class="btn btn-primary"
+        style="margin:8px;"
+        target="_blank"
+        rel="noopener noreferrer"
+      >💬 Join Discord</a>
+
+      <a
+        href="mailto:contact@gamerdoc.eu"
+        class="btn btn-secondary"
+        style="margin:8px;"
+      >✉ Email Us</a>
+
+      <p>Contact us for information about access and support.</p>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <div style="margin-bottom: 16px;">
-    ◆ Gamer<span style="color: #8B5CF6;">Doc</span> © 2026
+  <div class="footer-logo">
+    ◆ Kamil<span style="color:#8B5CF6;">Colorbot</span> © 2026
   </div>
-  <div>
-    <a href="#">Terms</a> · <a href="#">Privacy</a> · <a href="mailto:contact@gamerdoc.eu">Contact</a>
+
+  <div class="footer-links">
+    <a href="#faq">Terms & FAQ</a>
+    <span>·</span>
+    <a href="#contact">Contact</a>
   </div>
-  <div style="margin-top: 16px; font-size: 11px; color: #45484F;">
-    GamerDoc is an independent tool. Not affiliated with Riot Games, Valve, or any game publisher.
+
+  <div class="footer-note">
+    Use software and configuration tools in accordance with
+    the rules of the applications and games you use.
   </div>
 </footer>
 
