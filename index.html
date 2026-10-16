@@ -1,670 +1,719 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>KamilColorbot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#06070A">
-<meta name="description" content="KamilColorbot — color analysis and gaming configuration tools.">
-<title>KamilColorbot — Color Analysis Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ─── TOKENS ─── editorial dark-first, electric violet accent on near-black */
+:root {
+  --bg: #08080F;
+  --surface: #0F0F1A;
+  --surface2: #16162A;
+  --border: rgba(139,92,246,.18);
+  --border-hi: rgba(139,92,246,.55);
+  --fg: #F0EEFF;
+  --fg-dim: #8A87A8;
+  --fg-muted: #4D4A6A;
+  --accent: #8B5CF6;
+  --accent-bright: #A78BFA;
+  --accent-glow: rgba(139,92,246,.22);
+  --discord: #5865F2;
+  --ff-display: 'Syne', system-ui, sans-serif;
+  --ff-body: 'DM Sans', system-ui, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F8F7FF;
+    --surface: #FFFFFF;
+    --surface2: #EEECff;
+    --border: rgba(109,72,226,.15);
+    --border-hi: rgba(109,72,226,.45);
+    --fg: #0D0C1F;
+    --fg-dim: #5A567A;
+    --fg-muted: #9895B5;
+    --accent: #6D48E2;
+    --accent-bright: #8B5CF6;
+    --accent-glow: rgba(109,72,226,.14);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F8F7FF;
+  --surface: #FFFFFF;
+  --surface2: #EEECff;
+  --border: rgba(109,72,226,.15);
+  --border-hi: rgba(109,72,226,.45);
+  --fg: #0D0C1F;
+  --fg-dim: #5A567A;
+  --fg-muted: #9895B5;
+  --accent: #6D48E2;
+  --accent-bright: #8B5CF6;
+  --accent-glow: rgba(109,72,226,.14);
+  color-scheme: light;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background: #06070A;
-  color: #F8F9FA;
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--fg);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
 }
 
-.bg-gradient {
+/* ─── NOISE OVERLAY ─── */
+body::after {
+  content: '';
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(ellipse at top, rgba(139,92,246,.15), transparent 50%),
-    radial-gradient(ellipse at bottom, rgba(6,182,212,.1), transparent 50%);
-  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
+  z-index: 0;
+  opacity: .35;
 }
 
+/* ─── NAV ─── */
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 60px;
-  z-index: 100;
-  background: rgba(6,7,10,.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #1A1D23;
+  inset: 0 0 auto;
+  padding: 0 max(24px, env(safe-area-inset-left, 0px));
+  height: 72px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(8,8,15,.82);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  z-index: 50;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: rgba(8,8,15,.82);
+  z-index: 51;
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--fg);
+  text-decoration: none;
+  letter-spacing: -.3px;
   white-space: nowrap;
 }
-
-.logo-dot {
-  color: #8B5CF6;
-}
+.logo em { font-style: normal; color: var(--accent-bright); }
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 28px;
+  list-style: none;
 }
-
 .nav-links a {
-  color: #9296A0;
+  color: var(--fg-dim);
   text-decoration: none;
-  font-size: 14px;
-  transition: color .2s;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .2px;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--fg); }
+
+.nav-cta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.nav-links a:hover {
-  color: #A78BFA;
-}
-
+/* ─── BUTTONS ─── */
 .btn {
-  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
   border-radius: 8px;
+  font-family: var(--ff-body);
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  display: inline-block;
-  transition: all .2s;
-  font-size: 14px;
   cursor: pointer;
   border: 1px solid transparent;
-  text-align: center;
+  transition: transform .15s, box-shadow .15s, background .15s, border-color .15s;
+  white-space: nowrap;
 }
-
+.btn:hover { transform: translateY(-1px); }
 .btn-primary {
-  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
-  color: #FFFFFF;
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139,92,246,.3);
+.btn-primary:hover { box-shadow: 0 8px 24px var(--accent-glow); background: var(--accent-bright); }
+.btn-discord {
+  background: var(--discord);
+  color: #fff;
+  border-color: var(--discord);
 }
-
-.btn-secondary {
+.btn-discord:hover { box-shadow: 0 8px 24px rgba(88,101,242,.35); filter: brightness(1.1); }
+.btn-ghost {
   background: transparent;
-  color: #F8F9FA;
-  border-color: #292C35;
+  color: var(--fg);
+  border-color: var(--border-hi);
 }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent-bright); }
+.btn-lg { padding: 14px 28px; font-size: 15px; border-radius: 10px; }
 
-.btn-secondary:hover {
-  border-color: #8B5CF6;
-  color: #A78BFA;
-}
-
+/* ─── HERO ─── */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  padding: 160px 0 100px;
   text-align: center;
-  padding: 130px 24px 80px;
+  max-width: 860px;
+  margin: 0 auto;
 }
-
-.hero-content {
-  max-width: 900px;
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
-
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
   border-radius: 20px;
-  background: rgba(139,92,246,.1);
-  border: 1px solid rgba(139,92,246,.3);
-  color: #A78BFA;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 24px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-hi);
+  color: var(--accent-bright);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-eyebrow .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.7); }
 }
 
 .hero h1 {
-  font-size: clamp(42px, 7vw, 72px);
+  font-family: var(--ff-display);
+  font-size: clamp(52px, 8vw, 88px);
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, #FFFFFF, #A78BFA);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  text-wrap: balance;
+  margin-bottom: 8px;
+}
+.hero h1 .line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--accent-bright) 20%, #C4B5FD 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-.hero p {
-  font-size: 19px;
-  color: #9296A0;
-  margin: 0 auto 40px;
-  max-width: 620px;
+.hero-sub {
+  font-size: 17px;
+  color: var(--fg-dim);
+  max-width: 500px;
+  margin: 20px auto 40px;
+  line-height: 1.65;
 }
-
 .hero-buttons {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
+/* ─── SECTION WRAPPER ─── */
 .section {
-  padding: 100px 24px;
-  max-width: 1200px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 96px 0;
+}
+.section-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-head h2 {
+  font-family: var(--ff-display);
+  font-size: clamp(30px, 4.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-wrap: balance;
+  margin-bottom: 12px;
+}
+.section-head p {
+  color: var(--fg-dim);
+  font-size: 16px;
+  max-width: 480px;
   margin: 0 auto;
 }
-
-.section-title {
-  text-align: center;
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 700;
-  margin-bottom: 16px;
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
 }
 
-.section-sub {
-  text-align: center;
-  color: #9296A0;
-  font-size: 18px;
-  margin-bottom: 60px;
-}
-
-.features {
+/* ─── FEATURES ─── */
+.features-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.feature {
-  padding: 32px;
-  background: #0B0C10;
-  border: 1px solid #1A1D23;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border: 1px solid var(--border);
   border-radius: 16px;
-  transition: transform .3s, border-color .3s;
+  overflow: hidden;
+  background: var(--border);
 }
-
-.feature:hover {
-  border-color: #8B5CF6;
-  transform: translateY(-4px);
+.feature-card {
+  background: var(--surface);
+  padding: 32px 28px;
+  transition: background .2s;
+  position: relative;
 }
-
+.feature-card:hover { background: var(--surface2); }
 .feature-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(139,92,246,.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-hi);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #A78BFA;
-  font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  font-size: 18px;
+}
+.feature-card h3 {
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -.2px;
+}
+.feature-card p {
+  color: var(--fg-dim);
+  font-size: 13.5px;
+  line-height: 1.65;
 }
 
-.feature h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.feature p {
-  color: #9296A0;
-  font-size: 14px;
-}
-
-.pricing {
+/* ─── PRICING ─── */
+.pricing-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 400px));
+  grid-template-columns: repeat(2, minmax(0, 440px));
   justify-content: center;
-  gap: 28px;
-  margin: 60px auto 0;
+  gap: 24px;
 }
-
 .price-card {
-  padding: 40px 32px;
-  background: #0B0C10;
-  border: 1px solid #1A1D23;
-  border-radius: 16px;
-  text-align: center;
-  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 36px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s;
 }
-
+.price-card:hover { border-color: var(--border-hi); }
 .price-card.featured {
-  border-color: #8B5CF6;
-  background: linear-gradient(
-    180deg,
-    rgba(139,92,246,.09) 0%,
-    #0B0C10 100%
-  );
+  border-color: var(--accent);
+  background: linear-gradient(160deg, rgba(139,92,246,.1) 0%, var(--surface) 60%);
 }
-
-.featured-badge {
+.price-card.featured::before {
+  content: '';
   position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 16px;
-  background: #8B5CF6;
-  color: #FFFFFF;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+}
+.featured-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   border-radius: 20px;
+}
+.price-label {
   font-size: 11px;
   font-weight: 700;
-  white-space: nowrap;
-}
-
-.price-name {
-  font-size: 16px;
-  color: #A7AAB3;
-  margin-bottom: 16px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--fg-muted);
+  margin-bottom: 20px;
 }
-
 .price-amount {
-  font-size: 56px;
+  font-family: var(--ff-display);
+  font-size: 62px;
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 8px;
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
 }
-
-.price-amount span {
-  font-size: 17px;
-  color: #9296A0;
+.price-period {
+  font-size: 14px;
+  color: var(--fg-dim);
   font-weight: 400;
 }
-
-.price-description {
-  color: #9296A0;
-  font-size: 14px;
-  margin-top: 8px;
+.price-desc {
+  color: var(--fg-dim);
+  font-size: 13px;
+  margin-top: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
 }
-
 .price-features {
   list-style: none;
-  text-align: left;
-  margin: 32px 0;
+  margin: 24px 0 36px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-
 .price-features li {
-  padding: 10px 0;
-  color: #B4B7C0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   font-size: 14px;
-  border-bottom: 1px solid #1A1D23;
+  color: var(--fg-dim);
 }
-
 .price-features li::before {
-  content: "✓ ";
-  color: #A78BFA;
+  content: '✓';
+  color: var(--accent-bright);
   font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
+.price-card .btn { width: 100%; justify-content: center; }
 
-.price-card .btn {
-  width: 100%;
-}
-
+/* ─── FAQ ─── */
 .faq-list {
-  max-width: 800px;
-  margin: 40px auto 0;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--border);
 }
-
 .faq-item {
-  padding: 24px;
-  background: #0B0C10;
-  border: 1px solid #1A1D23;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  background: var(--surface);
+  padding: 24px 28px;
 }
-
 .faq-item h3 {
-  font-size: 16px;
+  font-family: var(--ff-display);
+  font-size: 15px;
+  font-weight: 700;
   margin-bottom: 8px;
 }
-
 .faq-item p {
-  color: #9296A0;
+  color: var(--fg-dim);
   font-size: 14px;
+  line-height: 1.7;
 }
 
-.contact-content {
+/* ─── CONTACT / CTA ─── */
+.cta-block {
   text-align: center;
-  margin-top: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  background: linear-gradient(160deg, var(--surface) 0%, var(--surface2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
 }
-
-.contact-content p {
-  color: #9296A0;
-  margin-top: 28px;
-  font-size: 14px;
+.cta-block::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+  pointer-events: none;
 }
-
-footer {
-  padding: 40px 24px;
-  text-align: center;
-  border-top: 1px solid #1A1D23;
-  color: #777B85;
-  font-size: 13px;
+.cta-block h2 {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  text-wrap: balance;
 }
-
-footer a {
-  color: #A78BFA;
-  text-decoration: none;
+.cta-block p {
+  color: var(--fg-dim);
+  font-size: 15px;
+  margin-bottom: 32px;
 }
-
-.footer-logo {
-  margin-bottom: 16px;
-  color: #F8F9FA;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.footer-links {
+.cta-buttons {
   display: flex;
-  justify-content: center;
   gap: 12px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-.footer-note {
-  margin-top: 16px;
-  font-size: 11px;
-  color: #777B85;
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+footer .logo { font-size: 15px; }
+.footer-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.footer-links a { color: var(--fg-muted); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--accent-bright); }
+
+/* ─── LAYOUT WRAPPER ─── */
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
-@media (max-width: 800px) {
-  nav {
-    padding: 16px 20px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .features {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .section {
-    padding: 75px 20px;
-  }
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  nav .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .features-grid,
+  .pricing-grid { grid-template-columns: 1fr; }
+  .hero { padding: 140px 0 80px; }
+  .price-card { padding: 36px 24px; }
+  .cta-block { padding: 60px 24px; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
 }
 
-@media (max-width: 560px) {
-  .hero {
-    min-height: 90vh;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .features,
-  .pricing {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing {
-    gap: 32px;
-    max-width: 400px;
-  }
-
-  .price-card {
-    padding: 36px 24px;
-  }
-
-  .section-sub {
-    font-size: 16px;
-    margin-bottom: 40px;
-  }
-
-  nav > .btn {
-    padding: 10px 14px;
-    font-size: 12px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
 </style>
-</head>
 
-<body>
-<div class="bg-gradient"></div>
-
+<!-- NAV -->
 <nav>
-  <a href="#" class="logo" style="text-decoration:none;color:#F8F9FA;">
-    ◆ Kamil<span class="logo-dot">Colorbot</span>
-  </a>
-
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+  <a href="#" class="logo">Kamil<em>Colorbot</em></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="https://discord.gg/TXncAahcT" class="btn btn-discord" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+      Discord
+    </a>
+    <a href="#pricing" class="btn btn-primary">Get Started</a>
   </div>
-
-  <a href="#pricing" class="btn btn-primary">Get Started</a>
 </nav>
 
 <main>
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
-      <div class="badge">◆ Color Analysis & Configuration</div>
-      <h1>KamilColorbot</h1>
-      <p>
-        A simple toolkit for color analysis, personal configuration,
-        and improving your gaming practice.
-      </p>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-eyebrow"><span class="dot"></span>Color Analysis & Gaming Config</div>
+    <h1>
+      See every pixel.<br>
+      <span class="line2">Win every fight.</span>
+    </h1>
+    <p class="hero-sub">
+      KamilColorbot gives you precision color detection and personal configuration tooling built for competitive play.
+    </p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn btn-primary btn-lg">View Pricing →</a>
+      <a href="https://discord.gg/TXncAahcT" class="btn btn-discord btn-lg" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+        Join Discord
+      </a>
+    </div>
+  </section>
 
-      <div class="hero-buttons">
-        <a href="#pricing" class="btn btn-primary">View Pricing →</a>
-        <a href="#features" class="btn btn-secondary">Learn More</a>
+  <hr class="section-divider">
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-head">
+      <h2>Built for competitive players</h2>
+      <p>Every tool in your kit, tuned for the edge cases that matter.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">◎</div>
+        <h3>Color Analysis</h3>
+        <p>Scan color ranges across your display with per-pixel precision. Understand exactly what the engine sees.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Performance Tuning</h3>
+        <p>Find settings that push your hardware. Built for the machine on your desk, not a spec sheet.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">◈</div>
+        <h3>Personal Profiles</h3>
+        <p>Your config, saved and versioned. Switch setups in seconds without touching a config file.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⌖</div>
+        <h3>Aim Practice Tools</h3>
+        <p>Pair your config with compatible aim trainers and carry your settings across sessions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">◇</div>
+        <h3>Customizable UI</h3>
+        <p>Strip the interface back to what you use, or expand it. Your workspace, your rules.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙</div>
+        <h3>Quick Setup</h3>
+        <p>You're running in minutes. Docs included, Discord support standing by if you hit a snag.</p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="features">
-    <h2 class="section-title">Features</h2>
-    <p class="section-sub">Useful tools for your setup and workflow</p>
+  <hr class="section-divider">
 
-    <div class="features">
-      <article class="feature">
-        <div class="feature-icon">◎</div>
-        <h3>Color Analysis</h3>
-        <p>
-          Explore color ranges and visual settings to understand
-          the colors used in your applications.
-        </p>
-      </article>
-
-      <article class="feature">
-        <div class="feature-icon">⚡</div>
-        <h3>Performance Settings</h3>
-        <p>
-          Review your configuration and discover settings
-          that suit your computer and workflow.
-        </p>
-      </article>
-
-      <article class="feature">
-        <div class="feature-icon">◈</div>
-        <h3>Personal Profiles</h3>
-        <p>
-          Keep your preferred settings organized in a clear,
-          easy-to-manage configuration.
-        </p>
-      </article>
-
-      <article class="feature">
-        <div class="feature-icon">⌖</div>
-        <h3>Aim Practice</h3>
-        <p>
-          Support your practice routine with tools and settings
-          for compatible training applications.
-        </p>
-      </article>
-
-      <article class="feature">
-        <div class="feature-icon">◇</div>
-        <h3>Customizable Interface</h3>
-        <p>
-          Organize your workspace and adjust available options
-          to fit your preferences.
-        </p>
-      </article>
-
-      <article class="feature">
-        <div class="feature-icon">⚙</div>
-        <h3>Simple Setup</h3>
-        <p>
-          Clear instructions help you get started and configure
-          the available features.
-        </p>
-      </article>
-    </div>
-  </section>
-
+  <!-- PRICING -->
   <section class="section" id="pricing">
-    <h2 class="section-title">Simple Pricing</h2>
-    <p class="section-sub">Choose the plan that fits your style</p>
-
-    <div class="pricing">
+    <div class="section-head">
+      <h2>Simple, honest pricing</h2>
+      <p>Pick your window. No subscriptions, no auto-renewal.</p>
+    </div>
+    <div class="pricing-grid">
       <article class="price-card">
-        <div class="price-name">7 Days</div>
-        <div class="price-amount">$50<span>/week</span></div>
-        <p class="price-description">One-week access</p>
-
+        <div class="price-label">7 Days</div>
+        <div class="price-amount">$50<span class="price-period"> / week</span></div>
+        <p class="price-desc">One-week access — try it out, see if it fits.</p>
         <ul class="price-features">
-          <li>All standard features included</li>
+          <li>All standard features</li>
           <li>1 PC activation</li>
           <li>Discord support</li>
-          <li>Access instructions included</li>
+          <li>Setup guide included</li>
         </ul>
-
-        <a href="#contact" class="btn btn-secondary">Get Started</a>
+        <a href="https://discord.gg/TXncAahcT" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Get Started</a>
       </article>
 
       <article class="price-card featured">
-        <div class="featured-badge">MOST POPULAR</div>
-        <div class="price-name">30 Days</div>
-        <div class="price-amount">$120<span>/month</span></div>
-        <p class="price-description">One-month access</p>
-
+        <div class="featured-tag">Most Popular</div>
+        <div class="price-label">30 Days</div>
+        <div class="price-amount">$120<span class="price-period"> / month</span></div>
+        <p class="price-desc">Full month — room to dial in every setting properly.</p>
         <ul class="price-features">
-          <li>All standard features included</li>
+          <li>All standard features</li>
           <li>1 PC activation</li>
-          <li>Priority support</li>
+          <li>Priority Discord support</li>
           <li>One configuration reset</li>
           <li>Access to updates</li>
         </ul>
-
-        <a href="#contact" class="btn btn-primary">Get Started</a>
+        <a href="https://discord.gg/TXncAahcT" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Started</a>
       </article>
     </div>
   </section>
 
+  <hr class="section-divider">
+
+  <!-- FAQ -->
   <section class="section" id="faq">
-    <h2 class="section-title">FAQ</h2>
-    <p class="section-sub">Common questions answered</p>
-
+    <div class="section-head">
+      <h2>Questions</h2>
+      <p>The ones people actually ask before buying.</p>
+    </div>
     <div class="faq-list">
-      <article class="faq-item">
+      <div class="faq-item">
         <h3>What is KamilColorbot?</h3>
-        <p>
-          KamilColorbot is presented as a toolkit for color analysis
-          and personal configuration. Check the product documentation
-          for the exact features supported by your version.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>What do I need to use it?</h3>
-        <p>
-          Requirements depend on the version and features you use.
-          Please check the product documentation before purchasing.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>Can I use it on multiple PCs?</h3>
-        <p>
-          The plans listed here are intended for one PC activation.
-          Contact support if you need help with your configuration.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>How do I get started?</h3>
-        <p>
-          Use the contact section below to ask about purchasing,
-          access, and setup instructions.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>What is the refund policy?</h3>
-        <p>
-          Please review the seller's refund terms before purchasing.
-          Make sure the policy complies with applicable consumer laws.
-        </p>
-      </article>
+        <p>A toolkit for color detection and competitive gaming configuration. It reads pixel-level color data from your display and helps you build profiles optimized for your setup and the games you play.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What do I need to run it?</h3>
+        <p>A Windows PC. Check the setup guide in Discord for exact requirements — they depend on the features you want to use.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I use it on more than one PC?</h3>
+        <p>Both plans cover one PC activation. Reach out on Discord if you need something else — we'll sort it out.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I buy?</h3>
+        <p>Join the Discord, open a ticket, and we'll walk you through access and payment. Takes a few minutes.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What's the refund policy?</h3>
+        <p>No refunds once access is delivered. If something isn't working, contact support first — we'll fix it before calling it done.</p>
+      </div>
     </div>
   </section>
 
+  <!-- CONTACT CTA -->
   <section class="section" id="contact">
-    <h2 class="section-title">Get Started</h2>
-    <p class="section-sub">Contact us about plans and access</p>
-
-    <div class="contact-content">
-      <!-- Replace these example contact details with your real ones. -->
-      <a
-        href="https://discord.com/"
-        class="btn btn-primary"
-        style="margin:8px;"
-        target="_blank"
-        rel="noopener noreferrer"
-      >💬 Join Discord</a>
-
-      <a
-        href="mailto:contact@gamerdoc.eu"
-        class="btn btn-secondary"
-        style="margin:8px;"
-      >✉ Email Us</a>
-
-      <p>Contact us for information about access and support.</p>
+    <div class="cta-block">
+      <h2>Ready to lock in your config?</h2>
+      <p>Join the Discord to get started. Support, updates, and the community are all in one place.</p>
+      <div class="cta-buttons">
+        <a href="https://discord.gg/TXncAahcT" class="btn btn-discord btn-lg" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+          Join Discord
+        </a>
+        <a href="#pricing" class="btn btn-ghost btn-lg">See Plans</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="footer-logo">
-    ◆ Kamil<span style="color:#8B5CF6;">Colorbot</span> © 2026
-  </div>
-
-  <div class="footer-links">
-    <a href="#faq">Terms & FAQ</a>
-    <span>·</span>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <div class="footer-note">
-    Use software and configuration tools in accordance with
-    the rules of the applications and games you use.
+  <div class="wrapper" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%;">
+    <a href="#" class="logo" style="color:var(--fg);">Kamil<em>Colorbot</em></a>
+    <ul class="footer-links">
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://discord.gg/TXncAahcT" target="_blank" rel="noopener noreferrer">Discord</a></li>
+    </ul>
+    <span>© 2026 KamilColorbot</span>
   </div>
 </footer>
 
-</body>
-</html>
+</body></html>
