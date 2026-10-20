@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="aerv-brand-refinement">
 /* Crisp flat icon + restrained editorial brand lockup */
 .logo {gap:11px;align-items:center}
@@ -165,8 +166,129 @@ nav .nav-links a:hover { color:#fff; }
   }
   .slot-bar-fill {transform:scaleX(1)!important}
 }
+</style>
+<style id="aerv-final-refinement">
+/* Quiet editorial design: typography, whitespace, and interaction—not glow. */
+:root { --accent-glow: rgba(255,255,255,.035); }
+html { scroll-padding-top: 92px; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+.section { padding-top:clamp(68px,7.6vw,106px); padding-bottom:clamp(68px,7.6vw,106px); }
+.section-head { margin-bottom:clamp(28px,4vw,48px); }
+.section-head h2 { line-height:1.12; letter-spacing:-.045em; }
+.section-head p { line-height:1.75; max-width:640px; }
+.hero-sub { line-height:1.75; max-width:620px; }
+.product-card,.price-card,.feature-card,.req-card,.how-step,.faq-item { border-color:rgba(255,255,255,.095)!important; }
+.product-card,.price-card,.req-card,.how-step { box-shadow:none!important; }
+.product-card:hover,.price-card:hover,.how-step:hover { border-color:rgba(255,255,255,.24)!important; transform:translateY(-2px)!important; box-shadow:0 14px 35px rgba(0,0,0,.15)!important; }
+.product-card,.price-card,.how-step,.btn,.faq-item { transition:transform .36s cubic-bezier(.2,.8,.2,1),border-color .3s ease,background-color .3s ease,opacity .3s ease!important; }
+.product-card p,.price-card p,.how-step p,.feature-card p { line-height:1.7; }
+.price-card { padding:clamp(24px,3vw,38px)!important; }
+.price-amount { letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
+.btn:focus-visible,a:focus-visible,button:focus-visible {outline:2px solid #efeff2!important;outline-offset:4px!important;}
+nav { border-bottom-color:rgba(255,255,255,.08)!important; }
+@media (min-width:721px) {.products-grid{gap:22px!important}.pricing-grid{gap:18px!important}}
+@media(max-width:720px){
+  .section { padding-top:62px!important;padding-bottom:62px!important; }
+  .section-head { margin-bottom:30px!important; }
+  .section-head h2 {font-size:clamp(30px,8vw,40px)!important;line-height:1.13!important;overflow-wrap:normal;}
+  .section-head p {font-size:15.5px!important;line-height:1.75!important;}
+  .product-card,.price-card,.req-card,.how-step { padding:24px!important; }
+  .hero-sub {font-size:16px!important;line-height:1.72!important;}
+  .hero-buttons .btn {min-height:48px!important;}
+  .product-card h3 {font-size:21px!important;}
+  .price-amount {font-size:clamp(48px,12vw,61px)!important;}
+}
+@media(prefers-reduced-motion:reduce){.product-card,.price-card,.how-step,.btn,.faq-item{transition:none!important;transform:none!important}}
+</style>
+<style id="aerv-v3-style">
+/* AERV V3 — intentional monochrome design, overrides only */
+:root{--a3-black:#090a0c;--a3-card:#111215;--a3-edge:#292b30;--a3-text:#f4f4f5;--a3-muted:#a9aab1;--a3-ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth;scroll-padding-top:94px}
+body{background:var(--a3-black);color:var(--a3-text);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body,button,input{font-feature-settings:'ss01' on}
+::selection{background:#414147;color:white}
+/* Header: quiet satin glass, stable nav across screens */
+nav{background:rgba(9,10,12,.82)!important;border-bottom:1px solid rgba(255,255,255,.095)!important;backdrop-filter:blur(18px) saturate(115%)!important;-webkit-backdrop-filter:blur(18px) saturate(115%)!important;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease!important}
+body.aerv-v3-scrolled nav{background:rgba(9,10,12,.96)!important;box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.logo-mark{filter:none!important;transition:transform .5s var(--a3-ease)!important}
+.logo:hover .logo-mark{transform:translateY(-2px)!important}
+.aerv-wordmark{letter-spacing:.17em!important;font-weight:800}
+.nav-links{gap:clamp(13px,1.6vw,24px)!important}
+.nav-links a{font-size:13px!important;letter-spacing:.015em!important;transition:color .25s ease!important}
+.nav-links a:hover,.nav-links a[aria-current='true']{color:#fff!important}
+.nav-links a[aria-current='true']{text-decoration:underline;text-underline-offset:9px;text-decoration-color:#797a80}
+.nav-cta .btn,.nav-hamburger{min-height:44px}
+/* Higher contrast and generous type, no lilac fog */
+:root{--accent:#a1a1aa;--accent-bright:#d4d4d8;--accent-glow:rgba(255,255,255,.035);--border:rgba(255,255,255,.1);--border-hi:rgba(255,255,255,.24)}
+.hero::before,.hero-glow{display:none!important}
+.hero{max-width:1040px!important;padding:clamp(120px,13vw,180px) 18px 90px!important;isolation:isolate}
+.aerv-v3-kicker{font:600 11px/1.5 var(--ff-body),sans-serif;letter-spacing:.21em;color:#8d8e96;margin-bottom:34px}
+.aerv-hero-stage{max-width:860px;margin-inline:auto}
+.aerv-hero-icon{margin-bottom:24px}
+.aerv-hero-icon svg{width:clamp(42px,5vw,58px);height:auto}
+.aerv-hero-wordmark{display:block;width:min(95%,670px);height:auto;margin:0 auto;overflow:visible}
+.aerv-hero-title .line2{font-size:clamp(13px,2vw,18px)!important;letter-spacing:.18em!important;background:none!important;color:#e6e6e8!important;-webkit-text-fill-color:currentColor!important;margin-top:22px!important}
+.hero-sub{font-size:clamp(16px,1.65vw,19px)!important;line-height:1.8!important;max-width:620px!important;color:#b2b3bb!important}
+.hero-buttons{margin-top:24px!important;gap:12px!important}
+.btn{border-radius:10px!important;transition:transform .32s var(--a3-ease),background .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease!important}
+.btn:hover{transform:translateY(-2px)!important;box-shadow:0 8px 22px rgba(0,0,0,.18)!important}
+.btn:active{transform:translateY(0)!important}
+.btn-primary{background:#efeff1!important;color:#101115!important;border-color:#efeff1!important}
+.btn-primary:hover{background:#fff!important}
+.btn-discord{background:#191a1f!important;border-color:#393a40!important;color:#f2f2f3!important}
+.btn-discord:hover{filter:none!important;background:#232428!important}
+.btn-ghost{background:transparent!important;border:1px solid #393a41!important;color:#f1f1f2!important}
+.btn-ghost:hover{background:#1b1c20!important}
+.aerv-v3-hairline{width:82px;height:1px;background:#484951;margin:58px auto 0;opacity:.8}
+.slot-bar-wrap,.hero-stats{background:#101115!important;border:1px solid #292b31!important;box-shadow:none!important}
+.slot-bar-fill{background:#b3b4bc!important}
+.slot-bar-fill::after{display:none!important}
+.stat-num,.slot-bar-count strong{color:#ededee!important}
+.section{padding-top:clamp(70px,8vw,112px)!important;padding-bottom:clamp(70px,8vw,112px)!important}
+.section-head{margin-bottom:clamp(30px,5vw,56px)!important}
+.section-head h2{font-size:clamp(33px,4vw,50px)!important;line-height:1.14!important;letter-spacing:-.05em!important;color:#f3f3f5!important}
+.section-head p{font-size:clamp(15px,1.5vw,18px)!important;line-height:1.75!important;color:#afb0b8!important;max-width:650px!important}
+/* Premium cards and pricing with a single monochrome accent system */
+.product-card,.feature-card,.price-card,.req-card,.how-step,.trust-item,.pv-card{background:#111216!important;border:1px solid rgba(255,255,255,.10)!important;box-shadow:none!important;transition:transform .48s var(--a3-ease),border-color .35s ease,background .35s ease!important}
+.product-card:hover,.price-card:hover,.how-step:hover{transform:translateY(-4px)!important;border-color:rgba(255,255,255,.29)!important;box-shadow:none!important}
+.product-card h3,.price-card .price-label{color:#f4f4f5!important}
+.product-card p,.price-desc,.price-features,.feature-card p{color:#b0b1b8!important}
+.pricing-grid{align-items:stretch!important;gap:16px!important}
+.price-card{border-radius:17px!important;padding:clamp(25px,3vw,39px)!important;min-height:400px!important;background:#101114!important}
+.price-card.featured{background:#17181c!important;border-color:#777982!important}
+.price-card.lifetime{background:#111216!important;border-color:#32343b!important}
+.price-card.lifetime::before,.price-card.featured::before{display:none!important}
+.price-card .price-amount{font-size:clamp(48px,5vw,66px)!important;line-height:1.12!important;letter-spacing:-.06em!important;color:#f4f4f5!important;white-space:normal!important;overflow-wrap:normal!important}
+.price-card .price-period{font-size:clamp(12px,1.1vw,15px)!important;letter-spacing:0!important;color:#a9aab2!important;font-weight:500!important}
+.price-card .price-desc{font-size:15px!important;line-height:1.65!important}
+.price-card .price-features li{font-size:14px!important;line-height:1.65!important}
+.price-card .price-features li::before{color:#d5d5d8!important}
+.featured-tag,.lifetime-tag{background:#303137!important;color:#eeeef0!important;border:1px solid #43444a!important;box-shadow:none!important}
+.price-card .btn{margin-top:auto;min-height:46px;justify-content:center}
+/* Details */
+.product-status,.product-tag,.nav-badge,.hero-eyebrow,.why-eyebrow{box-shadow:none!important}
+.section-divider{border-color:#222329!important}
+.faq-item,.faq-question{transition:background .25s ease,border-color .25s ease!important}
+:focus-visible{outline:2px solid #e4e4e7!important;outline-offset:4px!important}
+/* V3 gentle entrance: no hide-until-JS, no forced GPU-heavy effects */
+@keyframes a3-reveal{from{opacity:0;transform:translate3d(0,17px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes a3-glyph{from{opacity:0;transform:translateY(11px)}to{opacity:1;transform:translateY(0)}}
+body.aerv-v3-ready .aerv-v3-kicker{animation:a3-reveal .85s .05s var(--a3-ease) both}
+body.aerv-v3-ready .aerv-hero-icon{animation:a3-reveal .85s .14s var(--a3-ease) both}
+body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph{animation:a3-glyph .85s var(--a3-ease) both}
+body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph:nth-of-type(1){animation-delay:.22s}
+body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph:nth-of-type(2){animation-delay:.30s}
+body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph:nth-of-type(3){animation-delay:.38s}
+body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph:nth-of-type(4){animation-delay:.46s}
+body.aerv-v3-ready .hero-sub{animation:a3-reveal .95s .56s var(--a3-ease) both}
+body.aerv-v3-ready .hero-buttons{animation:a3-reveal .95s .64s var(--a3-ease) both}
+/* Mobile-first refinements */
+@media(max-width:900px){.hero{padding-top:118px!important}.nav-links{gap:8px!important}.price-card{min-height:380px!important}}
+@media(max-width:720px){html{scroll-padding-top:82px}.hero{padding:112px 6px 58px!important}.aerv-v3-kicker{font-size:10px;letter-spacing:.14em;margin-bottom:20px}.aerv-hero-title .line2{letter-spacing:.11em!important;font-size:12px!important}.hero-sub{font-size:16px!important;line-height:1.65!important;padding:0 7px}.hero-buttons .btn{min-height:48px;font-size:14px!important}.hero-stats{gap:18px!important}.section{padding-top:68px!important;padding-bottom:68px!important}.section-head h2{font-size:clamp(30px,8vw,39px)!important}.section-head p{font-size:16px!important}.price-card{min-height:0!important;padding:28px 25px!important}.price-card .price-amount{font-size:53px!important}.pricing-grid{gap:14px!important}.nav-cta{gap:8px!important}.nav-cta .btn{font-size:13px!important}.aerv-v3-hairline{margin-top:40px}.product-card{padding:24px!important}}
+@media(max-width:390px){.logo{gap:6px!important}.nav-cta .btn{padding:10px 12px!important}.aerv-hero-wordmark{width:100%}.hero-buttons{gap:9px!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}body.aerv-v3-ready .aerv-v3-kicker,body.aerv-v3-ready .aerv-hero-icon,body.aerv-v3-ready .aerv-hero-wordmark .aerv-glyph,body.aerv-v3-ready .hero-sub,body.aerv-v3-ready .hero-buttons{animation:none!important;opacity:1!important;transform:none!important}}
 </style></head><body>
-<title>AERV — Slotted Cheats</title><meta content="#08080F" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308080F'/%3E%3Cpath d='M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z' fill='white'/%3E%3Cpath d='M25 46 L30 38 H34 L39 46 Z' fill='%238B5CF6'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><style>.logo .logo-mark{filter:none!important;transition:none!important}.logo:hover .logo-mark{transform:none!important}.aerv-wordmark{font-family:Syne,system-ui,sans-serif;font-weight:800;letter-spacing:.15em;font-size:19px;color:var(--fg)}</style>
+<title>AERV — Limited Access Software</title><meta content="#08080F" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308080F'/%3E%3Cpath d='M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z' fill='white'/%3E%3Cpath d='M25 46 L30 38 H34 L39 46 Z' fill='%238B5CF6'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><style>.logo .logo-mark{filter:none!important;transition:none!important}.logo:hover .logo-mark{transform:none!important}.aerv-wordmark{font-family:Syne,system-ui,sans-serif;font-weight:800;letter-spacing:.15em;font-size:19px;color:var(--fg)}</style>
 <script>
   (function(){
     try {
@@ -2555,7 +2677,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 <a class="logo" href="#">
 <svg aria-hidden="true" class="logo-mark" fill="none" height="32" viewbox="0 0 64 64" width="32"><path d="M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z" fill="#F6F6F8"></path><path d="M25 46 L30 38 H34 L39 46 Z" fill="#8B5CF6"></path></svg><span class="aerv-brand"><span class="aerv-wordmark">AERV</span><span class="aerv-store">SLOTTED</span></span>
 </a>
-<span class="nav-badge" title="Last update: Oct 14, 2026"><span class="nav-badge-dot"></span>Updated 2d ago</span>
+<span class="nav-badge" title="Limited release"><span class="nav-badge-dot"></span>Limited release</span>
 </div>
 <ul class="nav-links">
 <li><a href="#products">Products</a></li>
@@ -2577,13 +2699,36 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </nav><div aria-hidden="true" class="aerv-scroll-progress"></div>
 <main>
 <!-- HERO -->
-<section class="hero">
+<section class="hero"><div aria-hidden="true" class="aerv-v3-kicker">AERV  /  INDEPENDENT TECHNOLOGY</div>
+<div aria-label="AERV independent software" class="aerv-hero-overline">
+<span aria-hidden="true" class="aerv-overline-dash"></span>
+  INDEPENDENT SOFTWARE <span aria-hidden="true" class="aerv-overline-sep">/</span> LIMITED RELEASE
+</div>
 <div aria-hidden="true" class="hero-glow"></div>
-<h1>
-      AERV<span class="line2">LIMITED ACCESS SOFTWARE</span>
+<!-- AERV / Interactive hero: original flat geometric identity, no external image assets -->
+<div class="aerv-hero-stage" id="aervHeroStage">
+<div class="aerv-hero-moving">
+<div aria-hidden="true" class="aerv-hero-icon">
+<svg aria-hidden="true" focusable="false" height="58" viewbox="0 0 64 64" width="58">
+<path d="M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z" fill="currentColor"></path>
+<path class="aerv-hero-purple" d="M25 46 L30 38 H34 L39 46 Z" fill="#8160ce"></path>
+</svg>
+</div>
+<h1 aria-label="AERV — Limited Access Software" class="aerv-hero-title">
+<svg aria-hidden="true" class="aerv-hero-wordmark" focusable="false" role="presentation" viewbox="0 0 670 116">
+<!-- Geometric flat A, E, R, V: designed to match AERV navigation icon -->
+<path class="aerv-glyph aerv-glyph-1" d="M 2 110 L 77 6 H 99 L 174 110 H 138 L 88 40 L 38 110 Z" fill="currentColor"></path>
+<path class="aerv-glyph aerv-glyph-2" d="M 201 7 H 321 V 32 H 201 Z M 201 47 H 321 V 70 H 201 Z M 201 86 H 321 V 110 H 201 Z" fill="currentColor"></path>
+<path class="aerv-glyph aerv-glyph-3" d="M 350 7 H 435 C 466 7 478 21 478 42 C 478 61 465 75 440 78 L 476 110 H 432 L 395 75 H 383 V 110 H 350 V 52 H 432 C 442 52 447 48 447 41 C 447 35 442 31 432 31 H 350 Z" fill="currentColor"></path>
+<path class="aerv-glyph aerv-glyph-4" d="M 500 7 H 536 L 583 78 L 631 7 H 667 L 600 110 H 567 Z" fill="currentColor"></path>
+</svg>
+<span class="line2">LIMITED ACCESS SOFTWARE</span>
 </h1>
+<div aria-hidden="true" class="aerv-hero-rule"><span></span></div>
+</div>
+</div>
 <p class="hero-sub">
-      Limited availability. Focused development. Direct support.
+      Considered design. Limited availability. Direct support.
     </p>
 <!-- DEPLOYMENT STATUS BAR -->
 <div class="slot-bar-wrap">
@@ -2612,7 +2757,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
         Join Discord
       </a>
 </div>
-</section>
+<div aria-hidden="true" class="aerv-v3-hairline"></div></section>
 <!-- TRUST / SAFETY STRIP -->
 <section class="trust-strip">
 <div class="trust-grid">
@@ -2710,9 +2855,10 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </section>
 <hr class="section-divider"/>
 <!-- PRODUCTS -->
-<section class="section" id="products">
+<section class="section aerv-v3-section" id="products">
 <div class="section-head">
-<h2>Our products</h2>
+<span class="aerv-section-label">01 — THE COLLECTION</span>
+<h2>Software collection</h2>
 <p>Four tools in rotation. Two live, two in deployment.</p>
 </div>
 <div class="products-grid">
@@ -2725,7 +2871,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 <p>Pixel-based color detection built for competitive Valorant. 20-slot cap, Makcu-powered, undetected since launch.</p>
 <div class="product-foot">
 <a class="btn btn-primary" href="#pricing">Get Access</a>
-<a class="product-link" href="#preview">Preview →</a>
+<a class="product-link" href="#compare">Compare →</a>
 </div>
 </article>
 <article class="product-card live">
@@ -2798,7 +2944,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </section>
 <hr class="section-divider"/>
 <!-- COMPARISON MATRIX -->
-<section class="section" id="compare">
+<section class="section aerv-v3-section" id="compare">
 <div class="section-head">
 <h2>Which product fits you</h2>
 <p>Side-by-side so you can pick without the Discord ticket.</p>
@@ -2863,205 +3009,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </section>
 <hr class="section-divider"/>
 <!-- PRODUCT PREVIEW -->
-<section class="section" id="preview">
-<div class="section-head">
-<span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Live preview</span>
-<h2>Inside the Colorbot panel</h2>
-<p>Nine modules, every slider and toggle a click away. Click a tab to see what's under the hood.</p>
-</div>
-<div class="preview-shell">
-<div class="pv-chrome">
-<div class="pv-title">
-<span class="pv-logo">◆</span>
-<strong>AERV</strong><span class="pv-sub">Colorbot</span>
-<span class="pv-ver">v2.0</span>
-</div>
-<div class="pv-chrome-right">
-<span class="pv-pill off"><span class="pv-pill-dot"></span>VG off</span>
-<span class="pv-wctl">— ×</span>
-</div>
-</div>
-<div class="pv-grid">
-<aside class="pv-side">
-<div class="pv-side-head">Status</div>
-<div class="pv-status-box">
-<strong><span class="pv-pill-dot" style="color:#4ADE80"></span>Standby</strong>
-<small>ready</small>
-</div>
-<div class="pv-side-head">Modules</div>
-<div class="pv-nav" id="pvNav">
-<button class="pv-nav-btn active" data-pane="aim"><span class="pv-nav-ico">◎</span>Aim</button>
-<button class="pv-nav-btn" data-pane="trigger"><span class="pv-nav-ico">→</span>Trigger</button>
-<button class="pv-nav-btn" data-pane="flick"><span class="pv-nav-ico">⇾</span>Flick</button>
-<button class="pv-nav-btn" data-pane="weapons"><span class="pv-nav-ico">⚔</span>Weapons</button>
-<button class="pv-nav-btn" data-pane="vision"><span class="pv-nav-ico">◇</span>Vision</button>
-<button class="pv-nav-btn" data-pane="safety"><span class="pv-nav-ico">⬢</span>Safety</button>
-<button class="pv-nav-btn" data-pane="perf"><span class="pv-nav-ico">⚡</span>Perf</button>
-<button class="pv-nav-btn" data-pane="stealth"><span class="pv-nav-ico">◍</span>Stealth</button>
-<button class="pv-nav-btn" data-pane="diag"><span class="pv-nav-ico">☰</span>Diag</button>
-</div>
-<div class="pv-side-head">Profile</div>
-<div class="pv-profile-sel">normal <span class="arr">▾</span></div>
-</aside>
-<main class="pv-main" id="pvMain">
-<div class="pv-pane active" data-pane="aim">
-<div class="pv-head"><h4>Aim</h4><small>detection + tracking</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Detection <small>preset · zone · FOV</small></div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Color</span><span class="pv-row-ctl"></span><span class="pv-sel">purple <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">Zone</span><span class="pv-row-ctl"></span><span class="pv-sel">Head <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">FOV</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:62%"></span><span class="pv-sld-knob" style="left:62%"></span></span></span><span class="pv-row-val">82px</span></div>
-</div>
-<div class="pv-card">
-<div class="pv-card-title">Tracking</div>
-<div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:70%"></span><span class="pv-sld-knob" style="left:70%"></span></span></span><span class="pv-row-val pink">4/10</span></div>
-<div class="pv-row"><span class="pv-row-label">Humanize</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:24%"></span><span class="pv-sld-knob" style="left:24%"></span></span></span><span class="pv-row-val pink">24%</span></div>
-<div class="pv-row"><span class="pv-row-label">Off X</span><span class="pv-row-ctl"></span><input class="pv-row-input" readonly="" value="1"/></div>
-<div class="pv-row"><span class="pv-row-label">Off Y</span><span class="pv-row-ctl"></span><input class="pv-row-input" readonly="" value="7"/></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="trigger">
-<div class="pv-head"><h4>Trigger</h4><small>auto-fire on target</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Behavior</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Mode</span><span class="pv-row-ctl"></span><span class="pv-sel">tap <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton1 <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:22%"></span><span class="pv-sld-knob" style="left:22%"></span></span></span><span class="pv-row-val">220ms</span></div>
-<div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">3</span></div>
-<div class="pv-row"><span class="pv-row-label">Burst</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:33%"></span><span class="pv-sld-knob" style="left:33%"></span></span></span><span class="pv-row-val">3</span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="flick">
-<div class="pv-head"><h4>Flick</h4><small>snap to target</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Snap</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
-<div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton2 <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:100%"></span><span class="pv-sld-knob" style="left:100%"></span></span></span><span class="pv-row-val pink">100%</span></div>
-<div class="pv-row"><span class="pv-row-label">Max step</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">180</span></div>
-<div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:15%"></span><span class="pv-sld-knob" style="left:15%"></span></span></span><span class="pv-row-val">300ms</span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="weapons">
-<div class="pv-head"><h4>Weapons</h4><small>per-weapon recoil patterns</small></div>
-<div class="pv-card">
-<div class="pv-card-title">RCS</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Active</span><span class="pv-row-ctl"></span><span class="pv-sel">Rifle <span class="arr">▾</span></span></div>
-<div class="pv-row"><span class="pv-row-label">RCS X</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:0%"></span><span class="pv-sld-knob" style="left:0%"></span></span></span><span class="pv-row-val">0</span></div>
-<div class="pv-row"><span class="pv-row-label">RCS Y</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">20</span></div>
-<div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:50%"></span><span class="pv-sld-knob" style="left:50%"></span></span></span><span class="pv-row-val">5</span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="vision">
-<div class="pv-head"><h4>Vision</h4><small>silent aim + crosshair assist</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Silent aim</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
-<div class="pv-row"><span class="pv-row-label">Max pixels</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">60</span></div>
-<div class="pv-row"><span class="pv-row-label">Boost</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">1.3x</span></div>
-</div>
-<div class="pv-card">
-<div class="pv-card-title">Crosshair assist</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:20%"></span><span class="pv-sld-knob" style="left:20%"></span></span></span><span class="pv-row-val">20%</span></div>
-<div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">40</span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="safety">
-<div class="pv-head"><h4>Safety</h4><small>watchdog + protection</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Watchdog</div>
-<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">OBS</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Discord</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Shadowplay</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-</div>
-<div class="pv-card">
-<div class="pv-card-title">Protection</div>
-<div class="pv-row"><span class="pv-row-label">HWID lock</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Panic key</span><span class="pv-row-ctl"></span><span class="pv-sel">F8 <span class="arr">▾</span></span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="perf">
-<div class="pv-head"><h4>Perf</h4><small>resource &amp; priority</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Runtime</div>
-<div class="pv-row"><span class="pv-row-label">OpenCL</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Low-latency</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">High priority</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Poll (ms)</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:12%"></span><span class="pv-sld-knob" style="left:12%"></span></span></span><span class="pv-row-val">0.5</span></div>
-</div>
-<div class="pv-card">
-<div class="pv-card-title">Live stats</div>
-<div class="pv-row"><span class="pv-row-label">CPU</span><span class="pv-row-ctl"></span><span class="pv-row-val">1.2%</span></div>
-<div class="pv-row"><span class="pv-row-label">RAM</span><span class="pv-row-ctl"></span><span class="pv-row-val">48 MB</span></div>
-<div class="pv-row"><span class="pv-row-label">Latency</span><span class="pv-row-ctl"></span><span class="pv-row-val green">0.8 ms</span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="stealth">
-<div class="pv-head"><h4>Stealth</h4><small>Makcu bridge</small></div>
-<div class="pv-card">
-<div class="pv-card-title">Makcu</div>
-<div class="pv-row"><span class="pv-row-label">Device</span><span class="pv-row-ctl"></span><span class="pv-row-val" style="min-width:140px;">Makcu v5 · COM3</span></div>
-<div class="pv-row"><span class="pv-row-label">Status</span><span class="pv-row-ctl"></span><span class="pv-row-val green">connected</span></div>
-<div class="pv-row"><span class="pv-row-label">Auto-reconnect</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-</div>
-<div class="pv-card">
-<div class="pv-card-title">Humanize</div>
-<div class="pv-row"><span class="pv-row-label">Bezier curve</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Curvature</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:25%"></span><span class="pv-sld-knob" style="left:25%"></span></span></span><span class="pv-row-val">25</span></div>
-<div class="pv-row"><span class="pv-row-label">Jitter</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-<div class="pv-row"><span class="pv-row-label">Reaction</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:18%"></span><span class="pv-sld-knob" style="left:18%"></span></span></span><span class="pv-row-val">90ms</span></div>
-<div class="pv-row"><span class="pv-row-label">Overshoot</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-</div>
-</div>
-<div class="pv-pane" data-pane="diag">
-<div class="pv-head"><h4>Diag</h4><small>live log</small></div>
-<div class="pv-card">
-<div class="pv-card-title">System log <small>last 5 events</small></div>
-<div class="pv-log">
-<div class="pv-log-line"><span class="pv-log-ts">16:48:02</span><span class="pv-log-ok">OK</span>Makcu v5 handshake complete</div>
-<div class="pv-log-line"><span class="pv-log-ts">16:48:01</span><span class="pv-log-ok">OK</span>Profile <strong style="color:var(--accent-bright)">normal</strong> loaded</div>
-<div class="pv-log-line"><span class="pv-log-ts">16:47:58</span><span class="pv-log-ok">OK</span>OpenCL ACTIVE · HIGH priority</div>
-<div class="pv-log-line"><span class="pv-log-ts">16:47:56</span><span class="pv-log-wn">!</span>VG not detected — standby</div>
-<div class="pv-log-line"><span class="pv-log-ts">16:47:55</span><span class="pv-log-ok">OK</span>Engine running · FOV 82px</div>
-</div>
-</div>
-</div>
-<div class="pv-actions">
-<button class="pv-btn pv-btn-stop">■ STOP</button>
-<button class="pv-btn pv-btn-start">▶ START</button>
-</div>
-</main>
-</div>
-</div>
-<script>
-      (function(){
-        var nav = document.getElementById('pvNav');
-        var main = document.getElementById('pvMain');
-        if (!nav || !main) return;
-        var btns = nav.querySelectorAll('.pv-nav-btn');
-        var panes = main.querySelectorAll('.pv-pane');
-        nav.addEventListener('click', function(e){
-          var btn = e.target.closest('.pv-nav-btn');
-          if (!btn) return;
-          var target = btn.getAttribute('data-pane');
-          for (var i=0; i<btns.length; i++) {
-            if (btns[i] === btn) btns[i].classList.add('active');
-            else btns[i].classList.remove('active');
-          }
-          for (var j=0; j<panes.length; j++) {
-            if (panes[j].getAttribute('data-pane') === target) panes[j].classList.add('active');
-            else panes[j].classList.remove('active');
-          }
-        }, { passive: true });
-      })();
-    </script>
-</section>
-<!-- WHY SLOTTED -->
+<!-- The oversized interactive Colorbot preview was intentionally removed. -->
 <section class="section" id="why-slotted">
 <div class="why-grid">
 <div class="why-copy">
@@ -3218,14 +3166,15 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </section>
 <hr class="section-divider"/>
 <!-- PRICING -->
-<section class="section" id="pricing">
+<section class="section aerv-v3-section" id="pricing">
 <div class="section-head">
+<span class="aerv-section-label">02 — ACCESS OPTIONS</span>
 <span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Pricing</span>
-<h2>Simple, honest pricing</h2>
+<h2>Choose your access</h2>
 <p>Pick your window. No subscriptions, no auto-renewal.</p>
 </div>
 <div class="pricing-grid">
-<article class="price-card">
+<article class="price-card" data-plan="7 Days">
 <div class="price-label">7 Days</div>
 <div class="price-amount">$35<span class="price-period"> / week</span></div>
 <p class="price-desc">One-week access — try it out, see if it fits.</p>
@@ -3237,7 +3186,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </ul>
 <a class="btn btn-ghost" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Started</a>
 </article>
-<article class="price-card featured">
+<article class="price-card featured" data-plan="30 Days">
 <div class="featured-tag">Most Popular</div>
 <div class="price-label">30 Days</div>
 <div class="price-amount">$90<span class="price-period"> / month</span></div>
@@ -3251,7 +3200,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </ul>
 <a class="btn btn-primary" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Started</a>
 </article>
-<article class="price-card lifetime">
+<article class="price-card lifetime" data-plan="Lifetime">
 <div class="featured-tag lifetime-tag">Best Value</div>
 <div class="price-label">Lifetime</div>
 <div class="price-amount">$500<span class="price-period"> / one-time</span></div>
@@ -3303,8 +3252,9 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 </section>
 <hr class="section-divider"/>
 <!-- FAQ -->
-<section class="section" id="faq">
+<section class="section aerv-v3-section" id="faq">
 <div class="section-head">
+<span class="aerv-section-label">04 — SUPPORT</span>
 <h2>Questions</h2>
 <p>The ones people actually ask before buying.</p>
 </div>
@@ -3322,7 +3272,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 <section class="section" id="contact">
 <div class="cta-block">
 <h2>Ready to lock in your config?</h2>
-<p>Join the Discord to get started. Support, updates, and the community are all in one place.</p>
+<p>Access, updates, and direct support — all in one place.</p>
 <div class="cta-buttons">
 <a class="btn btn-discord btn-lg" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" fill="currentColor" height="12" viewbox="0 0 16 12" width="16"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"></path></svg>
@@ -3359,7 +3309,7 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
 <a href="#status">Status</a>
 <a href="#compare">Compare</a>
 <a href="#woofer">Manual Woofer</a>
-<a href="#preview">Colorbot preview</a>
+<a href="#products">Products</a>
 <a href="#features">Features</a>
 <a href="#requirements">Requirements</a>
 <a href="#pricing">Pricing</a>
@@ -3456,7 +3406,6 @@ nav{background:rgba(9,10,11,.96);border-color:var(--border)}
     });
   })();
 </script>
-
 <script>(function(){
   'use strict';
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3647,4 +3596,518 @@ a:focus-visible,button:focus-visible,summary:focus-visible {outline:2px solid #f
   *,*::before,*::after {scroll-behavior:auto!important}
 }
 
-</style></body></html>
+</style><style id="aerv-interactive-hero-style">
+/* ==========================================================
+   AERV INTERACTIVE HERO — flat geometric wordmark, editorial motion.
+   No new URLs, external assets, heavy effects or dependency changes.
+   ========================================================== */
+.hero .aerv-hero-stage {
+  order:1;
+  width:min(100%,750px);
+  max-width:100%;
+  margin:0 auto;
+  position:relative;
+  isolation:isolate;
+  text-align:center;
+  color:var(--fg);
+  --hero-x:0px;
+  --hero-y:0px;
+}
+.aerv-hero-moving {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition:transform 700ms cubic-bezier(.22,1,.36,1);
+  transform:translate3d(var(--hero-x),var(--hero-y),0);
+}
+.aerv-hero-icon {
+  display:grid;
+  place-items:center;
+  height:66px;
+  width:66px;
+  margin:0 auto 26px;
+  color:#f1f1f2;
+  transform-origin:center;
+  animation:aervMarkEnter 900ms cubic-bezier(.22,1,.36,1) 70ms both;
+}
+.aerv-hero-icon svg {height:58px;width:58px;display:block;overflow:visible}
+.aerv-hero-purple {transition:transform 680ms cubic-bezier(.22,1,.36,1);transform-origin:32px 42px}
+@keyframes aervMarkEnter {
+  from {opacity:0;transform:translateY(16px) scale(.93)}
+  to {opacity:1;transform:translateY(0) scale(1)}
+}
+/* Prevent previous full-title animation from clashing with glyph stagger. */
+.hero .aerv-hero-title {
+  animation:none!important;
+  font-size:inherit;
+  letter-spacing:normal;
+  width:100%;
+  line-height:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin:0;
+  color:#f2f2f3;
+}
+.aerv-hero-wordmark {
+  width:min(100%,650px);
+  height:auto;
+  display:block;
+  overflow:visible;
+  padding:0 8px;
+}
+.aerv-hero-wordmark .aerv-glyph {
+  animation:aervGlyphEnter 950ms cubic-bezier(.22,1,.36,1) both;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.aerv-glyph-1 {animation-delay:180ms!important}
+.aerv-glyph-2 {animation-delay:250ms!important}
+.aerv-glyph-3 {animation-delay:320ms!important}
+.aerv-glyph-4 {animation-delay:390ms!important}
+@keyframes aervGlyphEnter {
+  0% {opacity:0;transform:translateY(22px)}
+  100% {opacity:1;transform:translateY(0)}
+}
+.hero .aerv-hero-title .line2 {
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:clamp(11px,1.2vw,13px);
+  font-weight:600;
+  color:#a9abb3;
+  letter-spacing:.22em;
+  line-height:1.6;
+  margin:21px 0 0;
+  animation:aervSubtitleEnter 950ms cubic-bezier(.22,1,.36,1) 550ms both;
+}
+@keyframes aervSubtitleEnter {
+  from {opacity:0;transform:translateY(10px)}
+  to {opacity:1;transform:translateY(0)}
+}
+.aerv-hero-rule {width:88px;height:1px;margin:24px auto 0;overflow:hidden;background:rgba(255,255,255,.075)}
+.aerv-hero-rule span {display:block;height:100%;width:100%;background:#85868b;transform-origin:left;animation:aervRuleEnter 1150ms cubic-bezier(.22,1,.36,1) 650ms both}
+@keyframes aervRuleEnter {from {transform:scaleX(0)}to{transform:scaleX(1)}}
+/* Very subtle cursor interaction: the whole brand moves only ~5px. */
+@media(hover:hover) and (pointer:fine) {
+  .aerv-hero-stage:hover .aerv-hero-purple {transform:translateY(-2px)}
+}
+/* Layout remains stable when the text is enlarged on mobile. */
+.hero .aerv-hero-stage + .hero-sub {order:2;margin-top:23px}
+@media(max-width:760px) {
+  .aerv-hero-icon {height:58px;width:58px;margin-bottom:18px}
+  .aerv-hero-icon svg {height:49px;width:49px}
+  .aerv-hero-wordmark {width:min(100%,540px);padding:0 5px}
+  .hero .aerv-hero-title .line2 {font-size:11px;letter-spacing:.15em;margin-top:14px}
+  .aerv-hero-rule {margin-top:19px}
+}
+@media(max-width:420px) {
+  .aerv-hero-wordmark {padding:0 7px}
+  .hero .aerv-hero-title .line2 {font-size:10.5px;letter-spacing:.10em}
+}
+/* Respect motion preferences, including cursor motion. */
+@media(prefers-reduced-motion:reduce) {
+  .aerv-hero-moving {transform:none!important;transition:none!important}
+  .aerv-hero-icon,.aerv-hero-wordmark .aerv-glyph,
+  .hero .aerv-hero-title .line2,.aerv-hero-rule span {
+    animation:none!important;opacity:1!important;transform:none!important;
+  }
+  .aerv-hero-stage:hover .aerv-hero-purple {transform:none!important}
+}
+</style>
+<script id="aerv-hero-motion">
+/* Pointer interaction is optional: content is completely usable without JS. */
+(function(){
+  var stage=document.getElementById('aervHeroStage');
+  if(!stage || !window.matchMedia) return;
+  var canHover=window.matchMedia('(hover: hover) and (pointer: fine)');
+  var prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var frame=0, x=0, y=0;
+  function paint(){
+    stage.style.setProperty('--hero-x',x.toFixed(2)+'px');
+    stage.style.setProperty('--hero-y',y.toFixed(2)+'px');
+    frame=0;
+  }
+  function move(event){
+    if(!canHover.matches || prefersReduced.matches) return;
+    var rect=stage.getBoundingClientRect();
+    if(!rect.width || !rect.height) return;
+    x=((event.clientX-rect.left)/rect.width-.5)*10;
+    y=((event.clientY-rect.top)/rect.height-.5)*7;
+    if(!frame) frame=requestAnimationFrame(paint);
+  }
+  function reset(){x=0;y=0;if(!frame) frame=requestAnimationFrame(paint)}
+  stage.addEventListener('pointermove',move,{passive:true});
+  stage.addEventListener('pointerleave',reset,{passive:true});
+  if(prefersReduced.addEventListener) prefersReduced.addEventListener('change',reset);
+})();
+</script>
+<style id="aerv-v2-editorial">
+/* ==============================================================
+   AERV / V2 — EDITORIAL TECH SYSTEM
+   One restrained visual language: graphite, white, 1 violet mark.
+   =============================================================== */
+:root, :root[data-theme="dark"] {
+  --bg: #090a0b;
+  --surface: #111214;
+  --surface2: #17181b;
+  --border: rgba(241,242,245,.115);
+  --border-hi: rgba(241,242,245,.255);
+  --fg: #f4f4f4;
+  --fg-dim: #b6b8bd;
+  --fg-muted: #878a92;
+  --accent: #d8d9db;
+  --accent-bright: #f4f4f4;
+  --accent-glow: transparent;
+  color-scheme:dark;
+  --aerv-ease: cubic-bezier(.22,1,.36,1);
+  --aerv-white: #f2f2f3;
+}
+@media (prefers-color-scheme:light) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --bg:#090a0b;--surface:#111214;--surface2:#17181b;
+    --border:rgba(241,242,245,.115);--border-hi:rgba(241,242,245,.255);
+    --fg:#f4f4f4;--fg-dim:#b6b8bd;--fg-muted:#878a92;
+    --accent:#d8d9db;--accent-bright:#f4f4f4;--accent-glow:transparent;
+    color-scheme:dark;
+  }
+}
+html {scroll-padding-top:96px}
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  letter-spacing:0;
+  background:#090a0b;
+  background:var(--bg);
+  color:var(--fg);
+  -webkit-font-smoothing:antialiased;
+}
+::selection {background:#3c3e43;color:#fff}
+:focus-visible {outline:2px solid #f2f2f2;outline-offset:4px}
+/* Header: quiet, anchored, usable on touch and desktop. */
+nav {
+  height:78px!important;
+  padding-left:max(30px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(30px,env(safe-area-inset-right,0px))!important;
+  background:rgba(9,10,11,.86)!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
+  backdrop-filter:blur(18px) saturate(105%);
+  -webkit-backdrop-filter:blur(18px) saturate(105%);
+}
+nav.is-scrolled {background:rgba(9,10,11,.97)!important;box-shadow:0 12px 38px rgba(0,0,0,.16)}
+.logo {gap:12px}
+.logo .logo-mark {width:34px;height:34px;transition:opacity .2s ease!important;filter:none!important}
+.logo:hover .logo-mark{opacity:.75;transform:none!important}
+.logo .aerv-wordmark {font-family:Syne,system-ui,sans-serif;letter-spacing:.15em!important;font-size:20px!important}
+.logo .aerv-store {font-size:9px!important;letter-spacing:.3em;color:#9b9da3!important}
+.nav-badge {
+  font-size:10px!important;letter-spacing:.10em!important;text-transform:uppercase;
+  background:transparent!important;color:#8f939b!important;
+  border:1px solid #25272c!important;border-radius:99px;
+  padding:6px 11px;
+}
+.nav-badge-dot {background:#e8e8e8!important;animation:none!important;box-shadow:none!important;width:5px;height:5px}
+.nav-links {gap:26px!important}
+.nav-links a {font-size:14px!important;font-weight:600;color:#a7a9ae;position:relative}
+.nav-links a::after {
+  content:'';position:absolute;left:0;right:0;bottom:-11px;height:1px;
+  transform:scaleX(0);transform-origin:left;background:#e3e3e5;
+  transition:transform .38s var(--aerv-ease);
+}
+.nav-links a:hover,.nav-links a[aria-current="location"]{color:#fff}
+.nav-links a:hover::after,.nav-links a[aria-current="location"]::after {transform:scaleX(1)}
+.nav-cta {gap:9px!important}
+.btn {border-radius:9px!important;font-weight:650;letter-spacing:-.01em;
+  transition:background .3s ease,color .3s ease,border-color .3s ease,
+  box-shadow .3s ease,transform .45s var(--aerv-ease)!important;
+}
+.btn:hover {transform:translateY(-2px)!important}
+.btn:active {transform:translateY(0)!important}
+.btn-primary {background:#ededee!important;color:#111215!important;border-color:#ededee!important;box-shadow:none!important}
+.btn-primary:hover {background:#fff!important;color:#090a0b!important;border-color:#fff!important;box-shadow:0 8px 25px rgba(0,0,0,.22)!important}
+.btn-ghost {background:#101113!important;color:#e3e3e4!important;border-color:#33353a!important}
+.btn-ghost:hover {border-color:#777980!important;color:#fff!important;background:#17191c!important}
+.btn-discord {background:#101113!important;color:#f0f0f0!important;border-color:#33353a!important}
+.btn-discord:hover {background:#17191c!important;color:#fff!important;filter:none!important;box-shadow:none!important;border-color:#777980!important}
+.aerv-scroll-progress {height:1px!important;background:#f3f3f3!important;top:calc(78px + env(safe-area-inset-top,0px))!important;z-index:52}
+/* Hero: product-brand mood, clear type and plenty of room to breathe. */
+.hero {
+  max-width:1100px!important;
+  min-height:min(830px,calc(100svh - 78px));
+  padding:120px 0 90px!important;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  isolation:isolate;
+}
+.hero::before {display:none!important}
+.hero::after {
+  top:60px!important;height:520px!important;opacity:.35!important;
+  background-size:74px 74px!important;
+  -webkit-mask-image:radial-gradient(ellipse 42% 45% at center,#000 0%,transparent 100%);
+  mask-image:radial-gradient(ellipse 42% 45% at center,#000 0%,transparent 100%);
+}
+.aerv-hero-overline {
+  order:0;align-items:center;gap:10px;display:inline-flex;
+  color:#858991;font-weight:700;font-size:11px;letter-spacing:.19em;
+  line-height:1.6;text-transform:uppercase;margin:0 auto 36px;
+  animation:aervV2Rise 1100ms var(--aerv-ease) 0ms both;
+}
+.aerv-overline-dash {display:inline-block;width:20px;height:1px;background:#a1a2a6}
+.aerv-overline-sep {opacity:.45;font-weight:400}
+@keyframes aervV2Rise {from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero .aerv-hero-stage {order:1!important;width:min(100%,770px)!important}
+.aerv-hero-icon {height:62px!important;width:62px!important;margin-bottom:22px!important;color:#f4f4f5}
+.aerv-hero-icon svg {width:55px!important;height:55px!important}
+.aerv-hero-wordmark {width:min(100%,670px)!important}
+.hero .aerv-hero-title .line2 {
+  margin-top:22px!important;font-size:13px!important;
+  font-weight:700!important;letter-spacing:.28em!important;color:#b8bac0!important;
+}
+.aerv-hero-rule {margin-top:24px!important;background:rgba(255,255,255,.09)!important}
+.aerv-hero-rule span{background:#b2b3b8!important}
+.hero .hero-sub {
+  order:2!important;max-width:610px!important;margin:31px auto 0!important;
+  font-size:clamp(17px,1.75vw,20px)!important;color:#b5b7bd!important;
+  line-height:1.6!important;letter-spacing:-.012em;
+}
+.hero .hero-buttons {order:3!important;margin:32px 0 0!important;gap:12px!important}
+.hero-buttons .btn {min-width:178px;justify-content:center;padding:14px 23px!important;border-radius:10px!important}
+.hero .slot-bar-wrap {
+  order:4!important;width:min(100%,690px)!important;max-width:690px!important;
+  margin:65px auto 0!important;padding:20px 24px!important;
+  background:#101113!important;border:1px solid #25272b!important;border-radius:12px!important;
+}
+.slot-bar-head {margin-bottom:12px!important}
+.slot-bar-label {color:#d1d2d5!important;font-size:11px!important;letter-spacing:.13em!important}
+.slot-bar-count {font-size:13px!important;color:#989ba2!important}
+.slot-bar-count strong {color:#ededed!important}
+.live-dot {width:6px!important;height:6px!important;background:#a3a7ae!important;box-shadow:none!important;animation:none!important}
+.slot-bar {height:3px!important;border-radius:9px!important;background:#27292d!important}
+.slot-bar-fill {background:#dadbdd!important;border-radius:9px!important}
+.slot-bar-fill::after {display:none!important}
+.slot-bar-note {font-size:13px!important;line-height:1.65;color:#92959e!important;margin-top:12px!important}
+.hero .hero-stats {
+  order:5!important;width:min(100%,690px)!important;max-width:690px!important;
+  background:transparent!important;border:0!important;border-radius:0!important;
+  border-top:1px solid #292b30!important;padding:22px 4px 0!important;margin:24px auto 0!important;
+  justify-content:space-around!important;gap:15px!important;
+}
+.stat-num {font-size:24px!important;color:#e9e9ea!important;font-weight:750!important;letter-spacing:-.045em}
+.stat-lbl {font-size:10px!important;color:#85888f!important;letter-spacing:.11em!important}
+.stat-sub{color:#bfc0c4!important}
+.stat-divider {background:#2e3034!important;height:30px!important}
+/* Section rhythm and headings */
+.section {padding-top:106px!important;padding-bottom:106px!important}
+.section-head {margin-bottom:48px!important}
+.section-head h2, .why-copy h2 {
+  color:#f1f1f2!important;font-size:clamp(34px,4vw,51px)!important;
+  letter-spacing:-.055em!important;line-height:1.12!important;
+  font-weight:750!important;
+}
+.section-head p{max-width:610px!important;font-size:16px!important;line-height:1.75!important;color:#a8abb2!important;margin-top:13px!important}
+.aerv-section-label {display:block;color:#92959d;font-size:11px;letter-spacing:.19em;
+  font-weight:700;margin-bottom:16px;text-transform:uppercase}
+.section-divider {border-color:#202226!important}
+/* Unified surface treatment; no pink/purple gradients or inflated glows. */
+.product-card,.price-card,.how-step,.feature-card,.req-card,.trust-item,.why-point,
+.status-row,.pv-card,.roadmap-item,.faq-item {
+  box-shadow:none!important;
+}
+.product-card,.price-card,.how-step,.req-card {
+  background:#101113!important;border:1px solid #27292d!important;border-radius:15px!important;
+}
+.product-card,.price-card,.how-step,.feature-card,.trust-item {
+  transition:transform .5s var(--aerv-ease),background .3s ease,border-color .3s ease,box-shadow .4s ease!important;
+}
+.product-card:hover,.price-card:hover,.how-step:hover,.feature-card:hover {
+  transform:translateY(-4px)!important;background:#151619!important;
+  border-color:#4d5056!important;box-shadow:0 17px 42px rgba(0,0,0,.24)!important;
+}
+.product-card.live,.product-card.deploy,.price-card.featured,.price-card.lifetime,.req-card.req-makcu {
+  background:#101113!important;border-color:#27292d!important;
+}
+.price-card.featured {border-color:#76787e!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.11)!important}
+.price-card.lifetime::before {display:none!important}
+.price-card.lifetime:hover,.price-card.featured:hover,.product-card.live:hover,.product-card.deploy:hover {background:#151619!important}
+.product-card {padding:33px!important;gap:14px!important}
+.product-card h3 {font-size:25px!important;letter-spacing:-.034em!important}
+.product-card p {font-size:15px!important;color:#afb2b8!important;line-height:1.72!important}
+.product-head {align-items:center}
+.product-status,.product-tag,.product-badge,.featured-tag,.status-pill,
+.price-label,.roadmap-status {box-shadow:none!important;text-shadow:none!important}
+.product-status.live,.product-status.deploy,.product-tag,.product-tag.all-ac,
+.product-badge,.featured-tag,.featured-tag.lifetime-tag {
+  background:#1b1d20!important;border:1px solid #36383d!important;color:#c7c9ce!important;
+  background-image:none!important;
+}
+.product-status,.product-tag,.featured-tag {font-size:10px!important;letter-spacing:.08em!important;font-weight:700!important}
+.product-dot,.status-dot{box-shadow:none!important;animation:none!important;background:#b6b8bd!important;color:#b6b8bd!important}
+.product-foot {margin-top:7px!important}
+.product-foot .btn {min-width:130px}
+.pricing-grid {gap:16px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.price-card {padding:40px 32px 33px!important;min-width:0}
+.price-label {color:#c3c5ca!important;font-size:12px!important;letter-spacing:.12em!important}
+.price-amount {font-size:clamp(45px,4.2vw,63px)!important;letter-spacing:-.07em!important;
+  font-weight:750!important;line-height:1.16!important;white-space:nowrap}
+.price-period {font-size:14px!important;font-weight:450!important;letter-spacing:-.02em!important;color:#a4a6ae!important}
+.price-desc {font-size:15px!important;color:#b4b6bc!important;line-height:1.7!important}
+.price-features li {font-size:14.5px!important;line-height:1.6!important;color:#c1c3c9!important}
+.price-features li::before {color:#c8c9ce!important}
+.price-card>.btn {width:100%;min-height:49px;font-size:15px!important;margin-top:auto!important}
+.featured-tag {border-radius:8px!important;padding:7px 10px!important;color:#e5e5e5!important}
+.lifetime-tag {box-shadow:none!important}
+.pay-strip {border-color:#26282c!important;background:#101113!important}
+/* All small technical copy remains readable without bloating the layout. */
+.trust-item{background:#111214!important}
+.trust-item:hover {background:#151619!important;transform:translateY(-2px)!important}
+.trust-text strong {font-size:15px!important}
+.trust-text span {font-size:13px!important;color:#aeb0b6!important}
+.feature-card {background:#111214!important}
+.feature-card:hover {background:#17181b!important}
+.feature-card::after {display:none!important}
+.feature-icon,.trust-icon {background:#1e2023!important;border-color:#393c42!important;color:#e9e9eb!important}
+.feature-card h3 {font-size:18px!important}
+.feature-card p {font-size:14.5px!important;line-height:1.75!important;color:#adafb6!important}
+.how-step h3 {font-size:20px!important}
+.how-step p{font-size:15px!important;color:#b2b5ba!important}
+.why-num,.how-num,.stat-num,.status-pct{color:#e5e6e8!important}
+.status-row,.roadmap-item{border-color:#292b2f!important}
+.status-pill.ok,.status-pill,.roadmap-status{background:#1b1c1f!important;border-color:#34363b!important;color:#d7d9dc!important}
+.preview-shell{border-color:#393b41!important;box-shadow:0 18px 50px rgba(0,0,0,.3)!important;animation:none!important}
+.cta-block{border:1px solid #2e3035!important;background:#111214!important;box-shadow:none!important;border-radius:18px!important}
+.cta-block::before,.cta-block::after {display:none!important}
+.cta-block h2 {font-size:clamp(30px,4.1vw,46px)!important;letter-spacing:-.045em!important}
+.faq-item {border-color:#25272b!important;background:#101113!important;border-radius:12px!important}
+.faq-q {font-size:16px!important}
+.faq-a {font-size:15px!important;line-height:1.75!important;color:#afb1b8!important}
+/* Floating contact icon is sized to avoid obscuring content on compact screens. */
+.float-discord {background:#ededed!important;border:1px solid #ededed!important;color:#131417!important;
+  width:48px!important;height:48px!important;box-shadow:0 6px 30px rgba(0,0,0,.3)!important}
+.float-discord:hover {transform:translateY(-3px)!important;box-shadow:0 12px 34px rgba(0,0,0,.38)!important}
+footer {border-color:#24262a!important}
+.footer-links a,.footer-links button {font-size:14px!important}
+/* Smooth feel: short, composed and never a forced scroll-jack. */
+.motion-enabled .motion-item {transition-timing-function:var(--aerv-ease)!important}
+.motion-enabled .motion-item:not(.is-visible) {filter:none!important;transform:translate3d(0,22px,0)}
+@media(min-width:1200px) {
+  .hero {padding-top:130px!important}
+  .section {max-width:1120px!important}
+}
+@media(max-width:1100px) {
+  nav {padding-inline:20px!important}
+  .nav-links {gap:14px!important}
+  .nav-badge {display:none!important}
+  .nav-cta>.btn {padding:10px 13px!important}
+  .price-card {padding:34px 23px 27px!important}
+  .pricing-grid {gap:12px!important}
+  .price-amount {font-size:clamp(38px,5vw,58px)!important}
+}
+@media(max-width:900px) {
+  .pricing-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .price-card:last-child {grid-column:1/-1}
+  .section {padding-top:80px!important;padding-bottom:80px!important}
+}
+@media(max-width:760px) {
+  nav {height:68px!important;padding-inline:max(16px,env(safe-area-inset-left,0px))!important;gap:9px!important}
+  .aerv-scroll-progress {top:calc(68px + env(safe-area-inset-top,0px))!important}
+  .nav-links{display:none!important}
+  .logo .logo-mark {width:29px;height:29px}
+  .logo .aerv-wordmark {font-size:17px!important}
+  .logo .aerv-store {font-size:8px!important}
+  .nav-cta>.btn-primary{min-height:40px!important;padding:9px 12px!important;font-size:13px!important}
+  .hero {min-height:unset!important;padding:105px 0 68px!important}
+  .aerv-hero-overline {font-size:9px;letter-spacing:.12em;gap:7px;margin-bottom:24px}
+  .aerv-overline-dash{width:12px}
+  .aerv-hero-icon{height:49px!important;width:49px!important;margin-bottom:18px!important}
+  .aerv-hero-icon svg{height:46px!important;width:46px!important}
+  .aerv-hero-wordmark{width:min(100%,600px)!important;padding:0 4px!important}
+  .hero .aerv-hero-title .line2 {font-size:10.5px!important;letter-spacing:.12em!important;margin-top:16px!important}
+  .aerv-hero-rule{margin-top:17px!important}
+  .hero .hero-sub {font-size:16px!important;max-width:500px!important;margin-top:25px!important}
+  .hero .hero-buttons {width:100%;margin-top:25px!important}
+  .hero-buttons .btn {flex:1 1 0;min-width:0!important;padding:13px 12px!important;font-size:14.5px!important}
+  .hero .slot-bar-wrap {margin-top:48px!important;padding:19px!important;border-radius:12px!important}
+  .hero .hero-stats{margin-top:19px!important;padding-top:18px!important;gap:7px!important}
+  .stat-num{font-size:21px!important}
+  .stat-lbl{font-size:9px!important;letter-spacing:.06em!important}
+  .stat-divider{height:22px!important}
+  .section-head{margin-bottom:32px!important}
+  .section-head h2,.why-copy h2 {font-size:clamp(31px,8vw,42px)!important}
+  .section-head p {font-size:15px!important}
+  .product-card {padding:25px!important}
+  .product-card h3 {font-size:23px!important}
+  .price-card {padding:29px 23px!important}
+  .float-discord {width:43px!important;height:43px!important;bottom:16px!important;right:12px!important;opacity:.85}
+}
+@media(max-width:600px) {
+  .pricing-grid {grid-template-columns:1fr!important}
+  .price-card:last-child{grid-column:auto!important}
+  .price-amount{font-size:clamp(49px,13vw,60px)!important}
+  .hero .hero-stats {display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important}
+  .hero .hero-stats .stat-divider{display:none!important}
+  .stat-num{font-size:clamp(18px,5vw,22px)!important}
+  .stat-lbl{font-size:8.5px!important}
+  .hero .slot-bar-head{align-items:flex-start!important}
+  .slot-bar-label {font-size:10px!important}
+  .slot-bar-count {font-size:12px!important}
+}
+@media(max-width:420px) {
+  .aerv-hero-overline{font-size:8.5px;letter-spacing:.08em}
+  .hero {padding-top:92px!important}
+  .hero .aerv-hero-title .line2 {font-size:10px!important}
+  .hero .hero-sub {font-size:15.5px!important}
+  .hero-buttons .btn {font-size:13px!important}
+  .hero .hero-stats{margin-bottom:14px!important}
+}
+@media(prefers-reduced-motion:reduce) {
+  .aerv-hero-overline{animation:none!important;opacity:1!important;transform:none!important}
+  *,*::before,*::after {scroll-behavior:auto!important;animation-duration:.01ms!important;
+    animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .hero .aerv-hero-stage,.hero .aerv-hero-moving {transform:none!important}
+}
+
+</style>
+<script id="aerv-nav-highlight">
+(function(){
+  'use strict';
+  // Quiet active-link underline at the section currently in view.
+  var links=Array.from(document.querySelectorAll('nav .nav-links a[href^="#"]'));
+  var items=links.map(function(a){return {a:a,el:document.querySelector(a.getAttribute('href'))}})
+                 .filter(function(item){return !!item.el});
+  var pending=false;
+  function update(){
+    pending=false;
+    var active=null, threshold=Math.min(360,window.innerHeight*.40), nearest=-Infinity;
+    items.forEach(function(item){
+      var top=item.el.getBoundingClientRect().top;
+      if(top<=threshold&&top>nearest){nearest=top;active=item.a}
+    });
+    links.forEach(function(a){if(a===active)a.setAttribute('aria-current','location');
+      else a.removeAttribute('aria-current')});
+  }
+  window.addEventListener('scroll',function(){if(!pending){pending=true;requestAnimationFrame(update)}},{passive:true});
+  window.addEventListener('resize',update,{passive:true});
+  update();
+  // Match visual hamburger open/closed state with accessibility semantics.
+  var hamburger=document.getElementById('navHamburger'), menu=document.getElementById('mobileMenu');
+  if(hamburger&&menu){
+    hamburger.setAttribute('aria-controls','mobileMenu');
+    hamburger.setAttribute('aria-expanded','false');
+    hamburger.addEventListener('click',function(){
+      hamburger.setAttribute('aria-expanded',menu.classList.contains('open')?'true':'false');
+    });
+    menu.addEventListener('click',function(e){
+      if(e.target.closest('a'))hamburger.setAttribute('aria-expanded','false');
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&menu.classList.contains('open')){
+        menu.classList.remove('open');hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded','false');document.body.style.overflow='';
+        hamburger.focus();
+      }
+    });
+  }
+})();
+</script>
+<script id="aerv-v3-script">(()=>{'use strict';const body=document.body;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;body.classList.add('aerv-v3-ready');const setScroll=()=>body.classList.toggle('aerv-v3-scrolled',window.scrollY>22);setScroll();window.addEventListener('scroll',setScroll,{passive:true});const links=Array.from(document.querySelectorAll('nav .nav-links a[href^="#"]'));if('IntersectionObserver' in window){const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);const obs=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){const active='#'+entry.target.id;for(const a of links){if(a.getAttribute('href')===active)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');}}}},{rootMargin:'-20% 0px -67% 0px',threshold:0});sections.forEach(sec=>obs.observe(sec));}if(reduced)return;/* Functional content remains visible without JS; all animated properties are compositor-friendly. */})();</script></body></html>
