@@ -1,7 +1,172 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Kamil Software</title>
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="aerv-brand-refinement">
+/* Crisp flat icon + restrained editorial brand lockup */
+.logo {gap:11px;align-items:center}
+.logo .logo-mark{flex:none;filter:none!important}
+.aerv-brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1}
+.aerv-wordmark{font-family:Syne,system-ui,sans-serif!important;font-weight:800;letter-spacing:.17em;font-size:19px!important;color:var(--fg)}
+.aerv-store{font-family:'DM Sans',system-ui,sans-serif;font-size:8px;font-weight:700;letter-spacing:.47em;color:var(--fg-dim);padding-left:1px}
+footer .aerv-wordmark{font-size:16px!important}
+footer .aerv-store{font-size:7px}
+@media(max-width:420px){.aerv-wordmark{font-size:16px!important}.aerv-store{font-size:7px}}
+</style><style>/* ============================================================
+   AERV — SMOOTH MOTION SYSTEM / monochrome editorial interface
+   Maintains existing content, urls, interaction and price tiers.
+   ============================================================ */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-ease-quick: cubic-bezier(.2, .75, .25, 1);
+  --motion-time: 720ms;
+}
+html { scroll-behavior:smooth; scroll-padding-top:95px; }
+body { -webkit-font-smoothing: antialiased; text-rendering:optimizeLegibility; }
+::selection { background:#4c4d54; color:#fff; }
+:focus-visible { outline:2px solid #e5e5e6; outline-offset:4px; }
 
+/* Translucent top navigation with a restrained scroll state */
+nav {
+  transition: background-color 420ms ease, border-color 420ms ease, box-shadow 420ms ease;
+  background: rgba(9,10,11,.78) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(115%);
+  backdrop-filter: blur(22px) saturate(115%);
+}
+nav.is-scrolled {
+  background:rgba(9,10,11,.95) !important;
+  border-bottom-color:rgba(255,255,255,.14) !important;
+  box-shadow:0 8px 28px rgba(0,0,0,.15);
+}
+.aerv-scroll-progress {
+  position:fixed; z-index:60; pointer-events:none;
+  left:0;top:calc(76px + env(safe-area-inset-top, 0px));
+  height:2px;width:100%; background:rgba(255,255,255,.72);
+  transform:scaleX(0);transform-origin:left center;
+  transition: transform 95ms linear;
+}
+@media(max-width:720px){ .aerv-scroll-progress {top:calc(68px + env(safe-area-inset-top,0px));} }
 
+/* Hero: clean negative space and a barely-there design grid. */
+.hero { isolation:isolate; }
+.hero::after {
+  content:'';position:absolute;z-index:-1;pointer-events:none;
+  top:96px;left:50%;width:min(94vw,920px);height:500px;
+  transform:translateX(-50%);
+  background-image:linear-gradient(rgba(255,255,255,.023) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(255,255,255,.023) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 56% 53% at center, #000 5%, transparent 100%);
+  mask-image:radial-gradient(ellipse 56% 53% at center, #000 5%, transparent 100%);
+  opacity:.67;
+}
+.hero h1 { letter-spacing:-.065em; }
+.hero h1 .line2 { text-transform:uppercase; }
+.hero-sub { max-width:460px; }
+.hero h1, .hero .line2, .hero-sub, .hero .slot-bar-wrap, .hero-stats, .hero-buttons {
+  will-change:opacity,transform;
+  animation: aervHeroArrive 920ms var(--motion-ease) both;
+}
+.hero h1 { animation-delay:70ms; }
+.hero h1 .line2 { animation-delay:210ms; }
+.hero-sub { animation-delay:270ms; }
+.hero .slot-bar-wrap { animation-delay:370ms; }
+.hero-stats { animation-delay:470ms; }
+.hero-buttons { animation-delay:560ms; }
+@keyframes aervHeroArrive {
+  from {opacity:0; transform:translate3d(0,22px,0);filter:blur(5px)}
+  to {opacity:1; transform:translate3d(0,0,0);filter:blur(0)}
+}
+
+/* Section reveals: JS adds motion-enabled only if observer is supported. */
+.motion-enabled .motion-item {
+  transition: opacity var(--motion-time) var(--motion-ease),
+              transform var(--motion-time) var(--motion-ease),
+              filter var(--motion-time) var(--motion-ease);
+  transition-delay:var(--motion-delay, 0ms);
+}
+.motion-enabled .motion-item:not(.is-visible) {
+  opacity:0; transform:translate3d(0,27px,0);filter:blur(3px);
+}
+.motion-enabled .motion-item.is-visible {
+  opacity:1; transform:translate3d(0,0,0);filter:blur(0);
+}
+/* Preserve hover movement after scroll reveal. */
+.motion-enabled .product-card.is-visible:hover,
+.motion-enabled .price-card.is-visible:hover,
+.motion-enabled .how-step.is-visible:hover,
+.motion-enabled .feature-card.is-visible:hover {
+  transform:translate3d(0,-3px,0) !important;
+}
+
+/* Editorial cards: subtle highlights, never neon. */
+.product-card,.price-card,.how-step,.feature-card,.req-card,.trust-item,.why-point {
+  transition: border-color 380ms ease, background-color 380ms ease, box-shadow 380ms ease, transform 440ms var(--motion-ease-quick);
+}
+.product-card:hover,.price-card:hover,.how-step:hover,.feature-card:hover {
+  border-color:rgba(255,255,255,.27) !important;
+  background:#151619 !important;
+  box-shadow:0 14px 42px rgba(0,0,0,.15) !important;
+}
+.price-card.featured:hover,.price-card.lifetime:hover,.product-card.live:hover,.product-card.deploy:hover {
+  background:#151619 !important;
+}
+.price-card.featured {border-color:rgba(255,255,255,.26)!important;}
+
+/* Precision typography and subtle dividers. */
+.section-head h2 {letter-spacing:-.055em;line-height:1.1}
+.section-head p {line-height:1.75}
+.price-amount {letter-spacing:-.055em}
+nav .nav-links a, .footer-links a, .product-link {
+  transition:color 240ms ease,opacity 240ms ease;
+}
+nav .nav-links a:hover { color:#fff; }
+
+/* Buttons: crisp pill-less shapes, responsive to hover and press. */
+.btn,.pv-btn,.product-link {
+  transition:transform 350ms var(--motion-ease-quick),background-color 260ms ease,
+             border-color 260ms ease,color 260ms ease,opacity 260ms ease !important;
+}
+.btn:hover { transform:translateY(-2px); }
+.btn:active { transform:translateY(0) scale(.985); }
+.btn-primary {border:1px solid #e8e8e8!important}
+.btn-primary:hover {background:#fff!important}
+.hero-buttons .btn { min-height:49px;justify-content:center; }
+
+/* Status fill animates subtly on page load. */
+.slot-bar-fill {
+  transform:scaleX(0);transform-origin:left center;
+  animation:aervBarGrow 1200ms var(--motion-ease) 720ms forwards;
+}
+@keyframes aervBarGrow {to{transform:scaleX(1)}}
+
+/* Panels and overlays remain functional; animate state changes quietly. */
+.pv-nav-btn {transition:background-color 220ms ease,color 220ms ease,box-shadow 220ms ease!important}
+.pv-pane.active {animation:aervPanelIn 330ms var(--motion-ease) both}
+@keyframes aervPanelIn {from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.modal-backdrop.open .modal-card {animation:aervModalIn 440ms var(--motion-ease) both}
+@keyframes aervModalIn {from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* Floating Discord stays stationary: it should not distract or pulse. */
+.float-discord {animation:none!important;box-shadow:0 8px 28px rgba(0,0,0,.3)!important}
+.float-discord:hover {transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.4)!important}
+
+@media(max-width:760px) {
+  .hero::after {background-size:42px 42px;top:85px;height:390px;opacity:.48}
+  .hero {padding-top:138px;padding-bottom:66px}
+  .hero h1 {font-size:clamp(64px,17vw,94px)}
+  .hero-buttons .btn {min-width:160px}
+  .motion-enabled .motion-item:not(.is-visible) {transform:translate3d(0,18px,0);filter:none}
+}
+@media(prefers-reduced-motion: reduce) {
+  html {scroll-behavior:auto}
+  *,*::before,*::after {animation-duration:.01ms!important; animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .motion-enabled .motion-item:not(.is-visible) {opacity:1!important;transform:none!important;filter:none!important}
+  .hero h1,.hero .line2,.hero-sub,.hero .slot-bar-wrap,.hero-stats,.hero-buttons {
+    opacity:1!important;transform:none!important;filter:none!important
+  }
+  .slot-bar-fill {transform:scaleX(1)!important}
+}
+</style></head><body>
+<title>AERV — Slotted Cheats</title><meta content="#08080F" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308080F'/%3E%3Cpath d='M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z' fill='white'/%3E%3Cpath d='M25 46 L30 38 H34 L39 46 Z' fill='%238B5CF6'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><style>.logo .logo-mark{filter:none!important;transition:none!important}.logo:hover .logo-mark{transform:none!important}.aerv-wordmark{font-family:Syne,system-ui,sans-serif;font-weight:800;letter-spacing:.15em;font-size:19px;color:var(--fg)}</style>
 <script>
   (function(){
     try {
@@ -22,10 +187,8 @@
     } catch (e) {}
   })();
 </script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <style>
 /* ─── TOKENS ─── editorial dark-first, electric violet accent on near-black */
 :root {
@@ -2301,534 +2464,581 @@ footer .logo { font-size: 15px; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
-</style>
 
+/* AERV — understated editorial interface, no neon/AI-style glow */
+:root { --bg:#08090b;--surface:#111216;--surface2:#181a20;--border:rgba(255,255,255,.085);--border-hi:rgba(255,255,255,.19);--fg:#f5f5f7;--fg-dim:#a2a3ae;--fg-muted:#737580;--accent:#7651d8;--accent-bright:#a58be9;--accent-glow:rgba(118,81,216,.055); }
+:root[data-theme="light"] { --bg:#f7f7f9;--surface:#fff;--surface2:#f0f0f4;--border:rgba(18,18,25,.09);--border-hi:rgba(18,18,25,.18);--fg:#15151b;--fg-dim:#62636c;--fg-muted:#83848d;--accent:#6844c6;--accent-bright:#6844c6;--accent-glow:rgba(104,68,198,.05); }
+body{font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-.012em}
+nav{background:rgba(8,9,11,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:76px}
+.logo{gap:13px}.logo-mark{filter:none!important;transform:none!important;width:33px;height:33px}
+.logo:hover .logo-mark{transform:none!important}
+.aerv-wordmark{font-family:'DM Sans',sans-serif!important;font-weight:800!important;letter-spacing:.19em!important;font-size:18px!important;line-height:1.12}
+.aerv-store{letter-spacing:.31em!important;font-size:8px!important;color:var(--fg-muted)!important}
+.nav-links a{font-size:12px;letter-spacing:.015em}
+.btn{border-radius:9px;box-shadow:none!important;transition:background .18s,border-color .18s,transform .18s}
+.btn-primary{background:#eeeef1;color:#121217;border-color:#eeeef1}
+.btn-primary:hover{background:#fff;color:#09090b}
+.btn-primary::after{display:none}
+.btn-discord{background:transparent;border:1px solid var(--border-hi);color:var(--fg)}
+.btn-discord:hover{background:var(--surface2);filter:none}
+.btn-ghost{border:1px solid var(--border-hi)}
+.hero{max-width:940px;padding:176px 0 112px}
+.hero::before,.hero-glow{display:none!important}
+.hero h1{font-family:'DM Sans',sans-serif;font-size:clamp(62px,11vw,130px);letter-spacing:-.09em;line-height:.95;font-weight:800;margin-bottom:22px}
+.hero h1 .line2{font-family:'DM Sans',sans-serif;font-size:clamp(12px,1.55vw,19px);font-weight:600;letter-spacing:.33em;line-height:2.3;color:var(--fg-dim);background:none!important;-webkit-text-fill-color:currentColor!important;margin-top:19px}
+.hero-sub{font-size:16px;line-height:1.8;max-width:540px;color:var(--fg-dim)}
+.hero-eyebrow,.why-eyebrow,.game-eyebrow{border-radius:7px;background:var(--surface);border-color:var(--border);color:var(--fg-dim);letter-spacing:.15em}
+.slot-bar-wrap,.hero-stats,.how-step,.req-card,.product-card,.price-card,.feature-card,.trust-item,.pv-card{background:var(--surface)!important;border-color:var(--border)!important;box-shadow:none!important}
+.slot-bar-wrap,.hero-stats,.how-step,.req-card,.product-card,.price-card{border-radius:14px}
+.slot-bar-fill{background:var(--accent)}.slot-bar-fill::after{display:none}
+.hero-stats{margin-top:60px}
+.stat-num,.how-num,.why-num{color:var(--fg)!important}
+.section{padding-top:106px;padding-bottom:106px}
+.section-head h2,.why-copy h2,.req-card h3,.product-card h3{font-family:'DM Sans',sans-serif;letter-spacing:-.045em}
+.how-step:hover,.product-card:hover,.price-card:hover,.feature-card:hover,.trust-item:hover{transform:none!important;box-shadow:none!important;border-color:var(--border-hi)!important}
+.how-step:hover .how-num,.trust-item:hover .trust-icon,.feature-card:hover .feature-icon{transform:none!important}
+.feature-card::after{display:none}
+.preview-shell{animation:none!important;box-shadow:none!important;border-color:var(--border-hi);border-radius:14px}
+.pv-main{background:#101116}.pv-grid,.pv-side{background:#0d0e12}
+.price-card.featured,.price-card.lifetime,.product-card.live,.product-card.deploy,.req-card.req-makcu{background:var(--surface)!important;border-color:var(--border-hi)!important}
+.price-card.lifetime::before{display:none}
+.product-status,.product-tag,.product-badge,.nav-badge{border-radius:6px}
+.product-dot,.nav-badge-dot,.live-dot{animation:none;box-shadow:none}
+.reveal{transition:opacity .35s ease,transform .35s ease}
+@media(max-width:720px){nav{height:68px}.hero{padding:134px 0 74px}.hero h1{font-size:clamp(55px,15vw,90px)}.hero h1 .line2{font-size:12px;letter-spacing:.19em}.section{padding-top:70px;padding-bottom:70px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* AERV / Monochrome edition — refined neutral palette */
+:root{--bg:#090a0b;--surface:#101113;--surface2:#191a1d;--border:rgba(255,255,255,.095);--border-hi:rgba(255,255,255,.24);--fg:#ededed;--fg-dim:#999b9e;--fg-muted:#72757b;--accent:#c5c6c9;--accent-bright:#e1e2e4;--accent-glow:transparent}
+:root[data-theme="light"]{--bg:#f6f6f4;--surface:#fff;--surface2:#eeefed;--border:rgba(0,0,0,.12);--border-hi:rgba(0,0,0,.26);--fg:#171819;--fg-dim:#56595e;--fg-muted:#767980;--accent:#4a4c50;--accent-bright:#25272a;--accent-glow:transparent}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#090a0b;--surface:#101113;--surface2:#191a1d;--border:rgba(255,255,255,.095);--border-hi:rgba(255,255,255,.24);--fg:#ededed;--fg-dim:#999b9e;--fg-muted:#72757b;--accent:#c5c6c9;--accent-bright:#e1e2e4;--accent-glow:transparent}}
+body{background:var(--bg);color:var(--fg)}
+nav{background:rgba(9,10,11,.96);border-color:var(--border)}
+.logo{gap:11px}.aerv-wordmark{font-size:17px!important;letter-spacing:.15em!important}.aerv-store{font-size:8px!important;letter-spacing:.23em!important}
+.hero{padding-top:162px;padding-bottom:90px;max-width:780px}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(64px,11vw,112px);font-weight:800;letter-spacing:-.085em;line-height:1}
+.hero h1 .line2{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.28em;line-height:1.7;margin-top:20px;color:#999b9e}
+.hero-sub{font-size:15px;line-height:1.8;max-width:440px;margin-top:25px;margin-bottom:36px;color:#999b9e}
+.slot-bar-wrap{max-width:520px;border:1px solid rgba(255,255,255,.11)!important;background:#101113!important;padding:20px 24px;border-radius:12px}
+.slot-bar-label{font-size:10px;letter-spacing:.12em;color:#aeb0b5}.slot-bar-count strong{color:#ededed}
+.slot-bar{height:4px;background:#25262a}.slot-bar-fill{background:#c7c8cb!important}
+.slot-bar-note{font-size:12px;color:#777a80}.live-dot{background:#a8aaaf!important;box-shadow:none!important}
+.hero-stats,.how-step,.req-card,.product-card,.price-card,.feature-card,.trust-item,.pv-card{border-color:var(--border)!important;background:var(--surface)!important}
+.stat-num,.how-num,.why-num,.pv-row-val,.pv-title .pv-logo,.pv-title .pv-sub{color:var(--fg)!important}
+.btn-primary,.pv-btn-start{background:#e8e8e8!important;color:#121315!important;border-color:#e8e8e8!important}
+.btn-primary:hover{background:#fff!important}
+.btn-discord,.btn-ghost{border-color:rgba(255,255,255,.18)!important;background:transparent!important;color:#e8e8e8!important}
+.product-tag,.product-badge,.product-status,.nav-badge,.hero-eyebrow,.why-eyebrow,.game-eyebrow,.req-tag{background:#1c1d20!important;border-color:rgba(255,255,255,.15)!important;color:#c7c8cb!important}
+.product-dot,.nav-badge-dot,.pv-pill-dot{background:#c7c8cb!important;box-shadow:none!important}
+.price-card.featured,.price-card.lifetime,.product-card.live,.product-card.deploy,.req-card.req-makcu{background:var(--surface)!important;border-color:var(--border-hi)!important}
+.price-card.lifetime::before,.hero::before,.feature-card::after{display:none!important}
+.preview-shell{border-color:rgba(255,255,255,.15)!important;box-shadow:none!important}
+.pv-main{background:#101113!important}.pv-grid,.pv-side,.pv-chrome{background:#0e0f11!important}
+.pv-toggle.on,.pv-sld-fill{background:#c5c6c9!important}
+.pv-nav-btn.active{background:#202125!important;box-shadow:inset 2px 0 0 #c5c6c9!important}
+.pv-nav-btn.active .pv-nav-ico{color:#e1e2e4!important}
+/* Remove decorative violet across existing components while keeping the logo's small violet mark. */
+.logo-mark path:last-child{fill:#7d68aa}
+@media(max-width:720px){.hero{padding:125px 0 66px}.hero h1{font-size:clamp(64px,17vw,94px)}.hero h1 .line2{font-size:10px;letter-spacing:.19em}.slot-bar-wrap{padding:17px 18px}}
+
+/* Consistent monochrome utility accents; purple is reserved for the A emblem. */
+.float-discord { background:#e8e8ea !important; color:#101114 !important; border:1px solid rgba(255,255,255,.3); }
+.float-discord:hover { background:#ffffff !important; }
+.trust-icon.ok, .pv-pill:not(.off), .product-status.live, .product-tag.all-ac {
+  background:#1b1c20 !important; border-color:rgba(255,255,255,.18) !important; color:#d5d6d9 !important;
+}
+.trust-icon.ok svg, .trust-icon.ok span {color:#d5d6d9!important}
+</style>
 <!-- NAV -->
 <nav>
-  <div class="logo-wrap">
-    <a href="#" class="logo">
-      <svg class="logo-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><defs><linearGradient id="kcGrad" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#C4B5FD"/></linearGradient></defs><path d="M4 4 L20 4 L22 6 L22 18 L20 20 L4 20 L2 18 L2 6 Z" fill="url(#kcGrad)"/><circle cx="12" cy="12" r="5" fill="none" stroke="#0D0D1A" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="#0D0D1A"/><path d="M12 5 L12 8 M12 16 L12 19 M5 12 L8 12 M16 12 L19 12" stroke="#0D0D1A" stroke-width="1.6" stroke-linecap="round"/></svg>Kamil<em>Software</em>
-    </a>
-    <span class="nav-badge" title="Last update: Oct 14, 2026"><span class="nav-badge-dot"></span>Updated 2d ago</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#products">Products</a></li>
-    <li><a href="#woofer">Woofer</a></li>
-    <li><a href="#compare">Compare</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#faq">FAQ</a></li>
-  </ul>
-  <div class="nav-cta">
-    <a href="https://panel.gamerdoc.eu" class="btn btn-ghost">Client Panel</a>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <a href="https://discord.gg/TXncAahcT" class="btn btn-discord" target="_blank" rel="noopener noreferrer">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+<div class="logo-wrap">
+<a class="logo" href="#">
+<svg aria-hidden="true" class="logo-mark" fill="none" height="32" viewbox="0 0 64 64" width="32"><path d="M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z" fill="#F6F6F8"></path><path d="M25 46 L30 38 H34 L39 46 Z" fill="#8B5CF6"></path></svg><span class="aerv-brand"><span class="aerv-wordmark">AERV</span><span class="aerv-store">SLOTTED</span></span>
+</a>
+<span class="nav-badge" title="Last update: Oct 14, 2026"><span class="nav-badge-dot"></span>Updated 2d ago</span>
+</div>
+<ul class="nav-links">
+<li><a href="#products">Products</a></li>
+<li><a href="#woofer">Woofer</a></li>
+<li><a href="#compare">Compare</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<div class="nav-cta">
+<a class="btn btn-ghost" href="https://panel.gamerdoc.eu">Client Panel</a>
+<button aria-label="Menu" class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+<a class="btn btn-discord" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" height="12" viewbox="0 0 16 12" width="16"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"></path></svg>
       Discord
     </a>
-    <a href="#pricing" class="btn btn-primary">Get Started</a>
-  </div>
-</nav>
-
+<a class="btn btn-primary" href="#pricing">Get Started</a>
+</div>
+</nav><div aria-hidden="true" class="aerv-scroll-progress"></div>
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <h1>
-      Kamil<span class="line2">Software</span>
-    </h1>
-    <p class="hero-sub">
-      Slotted cheats built one slot at a time. Personal support, no leaks, off the radar.
+<!-- HERO -->
+<section class="hero">
+<div aria-hidden="true" class="hero-glow"></div>
+<h1>
+      AERV<span class="line2">LIMITED ACCESS SOFTWARE</span>
+</h1>
+<p class="hero-sub">
+      Limited availability. Focused development. Direct support.
     </p>
-
-    <!-- DEPLOYMENT STATUS BAR -->
-    <div class="slot-bar-wrap">
-      <div class="slot-bar-head">
-        <span class="slot-bar-label"><span class="live-dot"></span>Deployment status</span>
-        <span class="slot-bar-count"><strong>2</strong> of 4 products shipped</span>
-      </div>
-      <div class="slot-bar">
-        <div class="slot-bar-fill" style="width:50%;"></div>
-      </div>
-      <p class="slot-bar-note">Colorbot &amp; Manual Woofer live — Valorant ESP &amp; FaceIt ESP in deployment.</p>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">4</span><span class="stat-lbl">Products</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num">2</span><span class="stat-lbl">Live now</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num">99.8<span class="stat-sub">%</span></span><span class="stat-lbl">Uptime</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num">24/7</span><span class="stat-lbl">Discord support</span></div>
-    </div>
-    <div class="hero-buttons">
-      <a href="#products" class="btn btn-primary btn-lg">See Products →</a>
-      <a href="https://discord.gg/TXncAahcT" class="btn btn-discord btn-lg" target="_blank" rel="noopener noreferrer">
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+<!-- DEPLOYMENT STATUS BAR -->
+<div class="slot-bar-wrap">
+<div class="slot-bar-head">
+<span class="slot-bar-label"><span class="live-dot"></span>Deployment status</span>
+<span class="slot-bar-count"><strong>2</strong> of 4 products shipped</span>
+</div>
+<div class="slot-bar">
+<div class="slot-bar-fill" style="width:50%;"></div>
+</div>
+<p class="slot-bar-note">Colorbot &amp; Manual Woofer live — Valorant ESP &amp; FaceIt ESP in deployment.</p>
+</div>
+<div class="hero-stats">
+<div class="stat"><span class="stat-num">4</span><span class="stat-lbl">Products</span></div>
+<div class="stat-divider"></div>
+<div class="stat"><span class="stat-num">2</span><span class="stat-lbl">Live now</span></div>
+<div class="stat-divider"></div>
+<div class="stat"><span class="stat-num">99.8<span class="stat-sub">%</span></span><span class="stat-lbl">Uptime</span></div>
+<div class="stat-divider"></div>
+<div class="stat"><span class="stat-num">24/7</span><span class="stat-lbl">Discord support</span></div>
+</div>
+<div class="hero-buttons">
+<a class="btn btn-primary btn-lg" href="#products">See Products →</a>
+<a class="btn btn-discord btn-lg" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" height="12" viewbox="0 0 16 12" width="16"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"></path></svg>
         Join Discord
       </a>
-    </div>
-  </section>
-
-  <!-- TRUST / SAFETY STRIP -->
-  <section class="trust-strip">
-    <div class="trust-grid">
-      <div class="trust-item">
-        <div class="trust-icon ok">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>Undetected</strong>
-          <span>Since Oct 10, 2026</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>HWID locked</strong>
-          <span>One PC per slot</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>PayPal · Crypto</strong>
-          <span>Instant delivery</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>Patched same day</strong>
-          <span>Every game update</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon ok">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>Last update</strong>
-          <span>Oct 14, 2026 · 2d ago</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 11a5 5 0 0 0-10 0M5 11h14l-1 10H6L5 11zM12 15v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="trust-text">
-          <strong>Private Discord</strong>
-          <span>Vetted members only</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- WHAT IS SLOTTED -->
-  <section class="section" id="whatis">
-    <div class="whatis-grid">
-      <div class="whatis-copy">
-        <div class="section-head" style="text-align:left;margin-bottom:24px;">
-          <h2 style="text-align:left;">What is slotted?</h2>
-        </div>
-        <p>A <strong>slotted</strong> product sells only to a hard-capped number of users. No open sale, no mass distribution — just a vetted pool of members.</p>
-        <p>Small base means fewer leaks, longer undetected windows, and direct developer attention when something breaks.</p>
-      </div>
-      <div class="whatis-points">
-        <div class="whatis-point">
-          <div class="whatis-point-ico">01</div>
-          <div>
-            <h4>Hard-capped user count</h4>
-            <p>Each product runs on a strict slot limit. When slots fill, sales close until a restock.</p>
-          </div>
-        </div>
-        <div class="whatis-point">
-          <div class="whatis-point-ico">02</div>
-          <div>
-            <h4>Vetted members only</h4>
-            <p>Discord verification, no public resellers, no cracked copies in the wild.</p>
-          </div>
-        </div>
-        <div class="whatis-point">
-          <div class="whatis-point-ico">03</div>
-          <div>
-            <h4>Direct developer line</h4>
-            <p>You talk to Kamil, not a support bot. Setup help and fixes in hours, not days.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-    <div class="section-head">
-      <h2>Our products</h2>
-      <p>Four tools in rotation. Two live, two in deployment.</p>
-    </div>
-
-    <div class="products-grid">
-      <article class="product-card live">
-        <div class="product-head">
-          <span class="product-status live"><span class="product-dot"></span>Live</span>
-          <span class="product-tag">Valorant</span>
-        </div>
-        <h3>Slotted Colorbot</h3>
-        <p>Pixel-based color detection built for competitive Valorant. 20-slot cap, Makcu-powered, undetected since launch.</p>
-        <div class="product-foot">
-          <a href="#pricing" class="btn btn-primary">Get Access</a>
-          <a href="#preview" class="product-link">Preview →</a>
-        </div>
-      </article>
-
-      <article class="product-card live">
-        <div class="product-head">
-          <span class="product-status live"><span class="product-dot"></span>Live</span>
-          <span class="product-tag all-ac">All AC</span>
-        </div>
-        <h3>Manual Woofer</h3>
-        <p>Manual HWID spoofer that bypasses every anti-cheat on the market. Fresh hardware fingerprint every run — play ranked again after a HWID ban.</p>
-        <div class="product-foot">
-          <a href="https://discord.gg/TXncAahcT" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Access</a>
-          <a href="https://discord.gg/TXncAahcT" class="product-link" target="_blank" rel="noopener noreferrer">Discord →</a>
-        </div>
-      </article>
-
-      <article class="product-card deploy">
-        <div class="product-head">
-          <span class="product-status deploy"><span class="product-dot"></span>In Deployment</span>
-          <span class="product-tag">Valorant</span>
-        </div>
-        <h3>Slotted ESP</h3>
-        <p>Wallhack overlay for Valorant — enemy boxes, distance, visibility checks. Testing on 5 slots this week, public rollout soon.</p>
-        <div class="product-foot">
-          <a href="https://discord.gg/TXncAahcT" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Join Waitlist</a>
-          <a href="#roadmap" class="product-link">Roadmap →</a>
-        </div>
-      </article>
-
-      <article class="product-card deploy">
-        <div class="product-head">
-          <span class="product-status deploy"><span class="product-dot"></span>In Deployment</span>
-          <span class="product-tag">FaceIt</span>
-        </div>
-        <h3>Slotted ESP</h3>
-        <p>Dedicated FaceIt ESP with anti-cheat bypass layer. Separate verification flow for ranked players. Shipping Q1 2027.</p>
-        <div class="product-foot">
-          <a href="https://discord.gg/TXncAahcT" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Join Waitlist</a>
-          <a href="#roadmap" class="product-link">Roadmap →</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- STATUS PAGE -->
-  <section class="section" id="status">
-    <div class="section-head">
-      <h2>Live status</h2>
-      <p>Uptime and deployment state across all products.</p>
-    </div>
-    <div class="status-list">
-      <div class="status-row">
-        <div class="status-name"><span class="status-dot" style="color:#4ADE80;"></span>Slotted Colorbot <span class="status-tag">Valorant</span></div>
-        <span class="status-pill ok">Operational</span>
-        <span class="status-pct">99.8%</span>
-      </div>
-      <div class="status-row">
-        <div class="status-name"><span class="status-dot" style="color:#4ADE80;"></span>Manual Woofer <span class="status-tag">All AC</span></div>
-        <span class="status-pill ok">Operational</span>
-        <span class="status-pct">100%</span>
-      </div>
-      <div class="status-row deploy">
-        <div class="status-name"><span class="status-dot" style="color:#FACC15;"></span>Slotted ESP <span class="status-tag">Valorant</span></div>
-        <span class="status-pill deploy">Testing</span>
-        <span class="status-pct">—</span>
-      </div>
-      <div class="status-row deploy">
-        <div class="status-name"><span class="status-dot" style="color:#FACC15;"></span>Slotted ESP <span class="status-tag">FaceIt</span></div>
-        <span class="status-pill deploy">Deployment</span>
-        <span class="status-pct">—</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- COMPARISON MATRIX -->
-  <section class="section" id="compare">
-    <div class="section-head">
-      <h2>Which product fits you</h2>
-      <p>Side-by-side so you can pick without the Discord ticket.</p>
-    </div>
-    <div class="compare-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Colorbot</th>
-            <th>Woofer</th>
-            <th>Val ESP</th>
-            <th>FaceIt ESP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Status</td><td class="check">Live</td><td class="check">Live</td><td style="color:#FACC15;">Deploy</td><td style="color:#FACC15;">Deploy</td></tr>
-          <tr><td>Game</td><td>Valorant</td><td>Any</td><td>Valorant</td><td>FaceIt (CS2)</td></tr>
-          <tr><td>Starting price</td><td>$50 / wk</td><td>Bundled</td><td>TBA</td><td>TBA</td></tr>
-          <tr><td>HWID lock</td><td class="check">Yes</td><td class="cross">No</td><td class="check">Yes</td><td class="check">Yes</td></tr>
-          <tr><td>Slot cap</td><td>20</td><td>Open</td><td>20</td><td>20</td></tr>
-          <tr><td>Needs Makcu</td><td class="check">Yes</td><td class="cross">No</td><td class="cross">No</td><td class="cross">No</td></tr>
-          <tr><td>AC bypass</td><td>Vanguard</td><td>All</td><td>Vanguard</td><td>FaceIt + VAC</td></tr>
-          <tr><td>Best for</td><td>Aim help</td><td>HWID bans</td><td>Map awareness</td><td>Ranked FaceIt</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- MANUAL WOOFER DEEP DIVE -->
-  <section class="section" id="woofer">
-    <div class="section-head" style="margin-bottom:40px;">
-      <span class="product-badge" style="background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3);color:#4ADE80;"><span class="product-dot" style="background:#4ADE80;"></span>Manual Woofer · Live</span>
-    </div>
-    <div class="woofer-grid">
-      <div class="woofer-copy">
-        <h2>Fresh HWID. Every run.</h2>
-        <p>HWID banned? Manual Woofer rotates your hardware fingerprint on demand so you boot back into ranked clean. No kernel-level stuff, no permanent system changes — just a layer that lies to the anti-cheat for the session.</p>
-        <ul class="woofer-feats">
-          <li>Bypasses Vanguard, FaceIt, VAC, EAC, BE</li>
-          <li>Spoof on-demand (one click, no reboot required)</li>
-          <li>No HWID lock on the tool itself — portable</li>
-          <li>Covers CPU, motherboard, disk, MAC, volume serial</li>
-          <li>Clean reversal — restores original IDs anytime</li>
-        </ul>
-        <div class="woofer-price-note">● Remote service via AnyDesk · One-time job, book through Discord</div>
-      </div>
-      <div class="woofer-preview">
-        <div class="woofer-prev-head">
-          <strong>Manual Woofer v1.4</strong>
-          <span class="pv-pill"><span class="pv-pill-dot"></span>Ready</span>
-        </div>
-        <div class="woofer-prev-rows">
-          <div class="woofer-prev-row"><span>Current HWID</span><span>A4F2-9E31-...</span></div>
-          <div class="woofer-prev-row"><span>Spoof count</span><span>7</span></div>
-          <div class="woofer-prev-row"><span>Last spoof</span><span>12 min ago</span></div>
-          <div class="woofer-prev-row"><span>Status</span><span style="color:#4ADE80;">Clean</span></div>
-        </div>
-        <button class="woofer-spoof-btn">▶ Spoof HWID now</button>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- PRODUCT PREVIEW -->
-  <section class="section" id="preview">
-    <div class="section-head">
-      <span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Live preview</span>
-      <h2>Inside the Colorbot panel</h2>
-      <p>Nine modules, every slider and toggle a click away. Click a tab to see what's under the hood.</p>
-    </div>
-
-    <div class="preview-shell">
-      <div class="pv-chrome">
-        <div class="pv-title">
-          <span class="pv-logo">◆</span>
-          <strong>Kamil</strong><span class="pv-sub">Colorbot</span>
-          <span class="pv-ver">v2.0</span>
-        </div>
-        <div class="pv-chrome-right">
-          <span class="pv-pill off"><span class="pv-pill-dot"></span>VG off</span>
-          <span class="pv-wctl">— ×</span>
-        </div>
-      </div>
-
-      <div class="pv-grid">
-        <aside class="pv-side">
-          <div class="pv-side-head">Status</div>
-          <div class="pv-status-box">
-            <strong><span class="pv-pill-dot" style="color:#4ADE80"></span>Standby</strong>
-            <small>ready</small>
-          </div>
-
-          <div class="pv-side-head">Modules</div>
-          <div class="pv-nav" id="pvNav">
-            <button class="pv-nav-btn active" data-pane="aim"><span class="pv-nav-ico">◎</span>Aim</button>
-            <button class="pv-nav-btn" data-pane="trigger"><span class="pv-nav-ico">→</span>Trigger</button>
-            <button class="pv-nav-btn" data-pane="flick"><span class="pv-nav-ico">⇾</span>Flick</button>
-            <button class="pv-nav-btn" data-pane="weapons"><span class="pv-nav-ico">⚔</span>Weapons</button>
-            <button class="pv-nav-btn" data-pane="vision"><span class="pv-nav-ico">◇</span>Vision</button>
-            <button class="pv-nav-btn" data-pane="safety"><span class="pv-nav-ico">⬢</span>Safety</button>
-            <button class="pv-nav-btn" data-pane="perf"><span class="pv-nav-ico">⚡</span>Perf</button>
-            <button class="pv-nav-btn" data-pane="stealth"><span class="pv-nav-ico">◍</span>Stealth</button>
-            <button class="pv-nav-btn" data-pane="diag"><span class="pv-nav-ico">☰</span>Diag</button>
-          </div>
-
-          <div class="pv-side-head">Profile</div>
-          <div class="pv-profile-sel">normal <span class="arr">▾</span></div>
-        </aside>
-
-        <main class="pv-main" id="pvMain">
-
-          <div class="pv-pane active" data-pane="aim">
-            <div class="pv-head"><h4>Aim</h4><small>detection + tracking</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Detection <small>preset · zone · FOV</small></div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Color</span><span class="pv-row-ctl"></span><span class="pv-sel">purple <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">Zone</span><span class="pv-row-ctl"></span><span class="pv-sel">Head <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">FOV</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:62%"></span><span class="pv-sld-knob" style="left:62%"></span></span></span><span class="pv-row-val">82px</span></div>
-            </div>
-            <div class="pv-card">
-              <div class="pv-card-title">Tracking</div>
-              <div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:70%"></span><span class="pv-sld-knob" style="left:70%"></span></span></span><span class="pv-row-val pink">4/10</span></div>
-              <div class="pv-row"><span class="pv-row-label">Humanize</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:24%"></span><span class="pv-sld-knob" style="left:24%"></span></span></span><span class="pv-row-val pink">24%</span></div>
-              <div class="pv-row"><span class="pv-row-label">Off X</span><span class="pv-row-ctl"></span><input class="pv-row-input" value="1" readonly></div>
-              <div class="pv-row"><span class="pv-row-label">Off Y</span><span class="pv-row-ctl"></span><input class="pv-row-input" value="7" readonly></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="trigger">
-            <div class="pv-head"><h4>Trigger</h4><small>auto-fire on target</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Behavior</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Mode</span><span class="pv-row-ctl"></span><span class="pv-sel">tap <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton1 <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:22%"></span><span class="pv-sld-knob" style="left:22%"></span></span></span><span class="pv-row-val">220ms</span></div>
-              <div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">3</span></div>
-              <div class="pv-row"><span class="pv-row-label">Burst</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:33%"></span><span class="pv-sld-knob" style="left:33%"></span></span></span><span class="pv-row-val">3</span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="flick">
-            <div class="pv-head"><h4>Flick</h4><small>snap to target</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Snap</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton2 <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:100%"></span><span class="pv-sld-knob" style="left:100%"></span></span></span><span class="pv-row-val pink">100%</span></div>
-              <div class="pv-row"><span class="pv-row-label">Max step</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">180</span></div>
-              <div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:15%"></span><span class="pv-sld-knob" style="left:15%"></span></span></span><span class="pv-row-val">300ms</span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="weapons">
-            <div class="pv-head"><h4>Weapons</h4><small>per-weapon recoil patterns</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">RCS</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Active</span><span class="pv-row-ctl"></span><span class="pv-sel">Rifle <span class="arr">▾</span></span></div>
-              <div class="pv-row"><span class="pv-row-label">RCS X</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:0%"></span><span class="pv-sld-knob" style="left:0%"></span></span></span><span class="pv-row-val">0</span></div>
-              <div class="pv-row"><span class="pv-row-label">RCS Y</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">20</span></div>
-              <div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:50%"></span><span class="pv-sld-knob" style="left:50%"></span></span></span><span class="pv-row-val">5</span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="vision">
-            <div class="pv-head"><h4>Vision</h4><small>silent aim + crosshair assist</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Silent aim</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Max pixels</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">60</span></div>
-              <div class="pv-row"><span class="pv-row-label">Boost</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">1.3x</span></div>
-            </div>
-            <div class="pv-card">
-              <div class="pv-card-title">Crosshair assist</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:20%"></span><span class="pv-sld-knob" style="left:20%"></span></span></span><span class="pv-row-val">20%</span></div>
-              <div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">40</span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="safety">
-            <div class="pv-head"><h4>Safety</h4><small>watchdog + protection</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Watchdog</div>
-              <div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">OBS</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Discord</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Shadowplay</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-            </div>
-            <div class="pv-card">
-              <div class="pv-card-title">Protection</div>
-              <div class="pv-row"><span class="pv-row-label">HWID lock</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Panic key</span><span class="pv-row-ctl"></span><span class="pv-sel">F8 <span class="arr">▾</span></span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="perf">
-            <div class="pv-head"><h4>Perf</h4><small>resource &amp; priority</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Runtime</div>
-              <div class="pv-row"><span class="pv-row-label">OpenCL</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Low-latency</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">High priority</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Poll (ms)</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:12%"></span><span class="pv-sld-knob" style="left:12%"></span></span></span><span class="pv-row-val">0.5</span></div>
-            </div>
-            <div class="pv-card">
-              <div class="pv-card-title">Live stats</div>
-              <div class="pv-row"><span class="pv-row-label">CPU</span><span class="pv-row-ctl"></span><span class="pv-row-val">1.2%</span></div>
-              <div class="pv-row"><span class="pv-row-label">RAM</span><span class="pv-row-ctl"></span><span class="pv-row-val">48 MB</span></div>
-              <div class="pv-row"><span class="pv-row-label">Latency</span><span class="pv-row-ctl"></span><span class="pv-row-val green">0.8 ms</span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="stealth">
-            <div class="pv-head"><h4>Stealth</h4><small>Makcu bridge</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">Makcu</div>
-              <div class="pv-row"><span class="pv-row-label">Device</span><span class="pv-row-ctl"></span><span class="pv-row-val" style="min-width:140px;">Makcu v5 · COM3</span></div>
-              <div class="pv-row"><span class="pv-row-label">Status</span><span class="pv-row-ctl"></span><span class="pv-row-val green">connected</span></div>
-              <div class="pv-row"><span class="pv-row-label">Auto-reconnect</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-            </div>
-            <div class="pv-card">
-              <div class="pv-card-title">Humanize</div>
-              <div class="pv-row"><span class="pv-row-label">Bezier curve</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Curvature</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:25%"></span><span class="pv-sld-knob" style="left:25%"></span></span></span><span class="pv-row-val">25</span></div>
-              <div class="pv-row"><span class="pv-row-label">Jitter</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-              <div class="pv-row"><span class="pv-row-label">Reaction</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:18%"></span><span class="pv-sld-knob" style="left:18%"></span></span></span><span class="pv-row-val">90ms</span></div>
-              <div class="pv-row"><span class="pv-row-label">Overshoot</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
-            </div>
-          </div>
-
-          <div class="pv-pane" data-pane="diag">
-            <div class="pv-head"><h4>Diag</h4><small>live log</small></div>
-            <div class="pv-card">
-              <div class="pv-card-title">System log <small>last 5 events</small></div>
-              <div class="pv-log">
-                <div class="pv-log-line"><span class="pv-log-ts">16:48:02</span><span class="pv-log-ok">OK</span>Makcu v5 handshake complete</div>
-                <div class="pv-log-line"><span class="pv-log-ts">16:48:01</span><span class="pv-log-ok">OK</span>Profile <strong style="color:var(--accent-bright)">normal</strong> loaded</div>
-                <div class="pv-log-line"><span class="pv-log-ts">16:47:58</span><span class="pv-log-ok">OK</span>OpenCL ACTIVE · HIGH priority</div>
-                <div class="pv-log-line"><span class="pv-log-ts">16:47:56</span><span class="pv-log-wn">!</span>VG not detected — standby</div>
-                <div class="pv-log-line"><span class="pv-log-ts">16:47:55</span><span class="pv-log-ok">OK</span>Engine running · FOV 82px</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pv-actions">
-            <button class="pv-btn pv-btn-stop">■ STOP</button>
-            <button class="pv-btn pv-btn-start">▶ START</button>
-          </div>
-        </main>
-      </div>
-    </div>
-
-    <script>
+</div>
+</section>
+<!-- TRUST / SAFETY STRIP -->
+<section class="trust-strip">
+<div class="trust-grid">
+<div class="trust-item">
+<div class="trust-icon ok">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+<div class="trust-text">
+<strong>Undetected</strong>
+<span>Since Oct 10, 2026</span>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="trust-text">
+<strong>HWID locked</strong>
+<span>One PC per slot</span>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><rect height="13" rx="2" stroke="currentColor" stroke-width="2" width="18" x="3" y="6"></rect><path d="M3 10h18" stroke="currentColor" stroke-width="2"></path></svg>
+</div>
+<div class="trust-text">
+<strong>PayPal · Crypto</strong>
+<span>Instant delivery</span>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle><path d="M12 7v5l3 2" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+</div>
+<div class="trust-text">
+<strong>Patched same day</strong>
+<span>Every game update</span>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon ok">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+</div>
+<div class="trust-text">
+<strong>Last update</strong>
+<span>Oct 14, 2026 · 2d ago</span>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">
+<svg aria-hidden="true" fill="none" height="18" viewbox="0 0 24 24" width="18"><path d="M17 11a5 5 0 0 0-10 0M5 11h14l-1 10H6L5 11zM12 15v3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="trust-text">
+<strong>Private Discord</strong>
+<span>Vetted members only</span>
+</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- WHAT IS SLOTTED -->
+<section class="section" id="whatis">
+<div class="whatis-grid">
+<div class="whatis-copy">
+<div class="section-head" style="text-align:left;margin-bottom:24px;">
+<h2 style="text-align:left;">What is slotted?</h2>
+</div>
+<p>A <strong>slotted</strong> product sells only to a hard-capped number of users. No open sale, no mass distribution — just a vetted pool of members.</p>
+<p>Small base means fewer leaks, longer undetected windows, and direct developer attention when something breaks.</p>
+</div>
+<div class="whatis-points">
+<div class="whatis-point">
+<div class="whatis-point-ico">01</div>
+<div>
+<h4>Hard-capped user count</h4>
+<p>Each product runs on a strict slot limit. When slots fill, sales close until a restock.</p>
+</div>
+</div>
+<div class="whatis-point">
+<div class="whatis-point-ico">02</div>
+<div>
+<h4>Vetted members only</h4>
+<p>Discord verification, no public resellers, no cracked copies in the wild.</p>
+</div>
+</div>
+<div class="whatis-point">
+<div class="whatis-point-ico">03</div>
+<div>
+<h4>Direct developer line</h4>
+<p>You talk directly to the developer, not a support bot. Setup help and fixes in hours, not days.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- PRODUCTS -->
+<section class="section" id="products">
+<div class="section-head">
+<h2>Our products</h2>
+<p>Four tools in rotation. Two live, two in deployment.</p>
+</div>
+<div class="products-grid">
+<article class="product-card live">
+<div class="product-head">
+<span class="product-status live"><span class="product-dot"></span>Live</span>
+<span class="product-tag">Valorant</span>
+</div>
+<h3>Slotted Colorbot</h3>
+<p>Pixel-based color detection built for competitive Valorant. 20-slot cap, Makcu-powered, undetected since launch.</p>
+<div class="product-foot">
+<a class="btn btn-primary" href="#pricing">Get Access</a>
+<a class="product-link" href="#preview">Preview →</a>
+</div>
+</article>
+<article class="product-card live">
+<div class="product-head">
+<span class="product-status live"><span class="product-dot"></span>Live</span>
+<span class="product-tag all-ac">All AC</span>
+</div>
+<h3>Manual Woofer</h3>
+<p>Manual HWID spoofer that bypasses every anti-cheat on the market. Fresh hardware fingerprint every run — play ranked again after a HWID ban.</p>
+<div class="product-foot">
+<a class="btn btn-primary" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Access</a>
+<a class="product-link" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Discord →</a>
+</div>
+</article>
+<article class="product-card deploy">
+<div class="product-head">
+<span class="product-status deploy"><span class="product-dot"></span>In Deployment</span>
+<span class="product-tag">Valorant</span>
+</div>
+<h3>Slotted ESP</h3>
+<p>Wallhack overlay for Valorant — enemy boxes, distance, visibility checks. Testing on 5 slots this week, public rollout soon.</p>
+<div class="product-foot">
+<a class="btn btn-ghost" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Join Waitlist</a>
+<a class="product-link" href="#roadmap">Roadmap →</a>
+</div>
+</article>
+<article class="product-card deploy">
+<div class="product-head">
+<span class="product-status deploy"><span class="product-dot"></span>In Deployment</span>
+<span class="product-tag">FaceIt</span>
+</div>
+<h3>Slotted ESP</h3>
+<p>Dedicated FaceIt ESP with anti-cheat bypass layer. Separate verification flow for ranked players. Shipping Q1 2027.</p>
+<div class="product-foot">
+<a class="btn btn-ghost" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Join Waitlist</a>
+<a class="product-link" href="#roadmap">Roadmap →</a>
+</div>
+</article>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- STATUS PAGE -->
+<section class="section" id="status">
+<div class="section-head">
+<h2>Live status</h2>
+<p>Uptime and deployment state across all products.</p>
+</div>
+<div class="status-list">
+<div class="status-row">
+<div class="status-name"><span class="status-dot" style="color:#4ADE80;"></span>Slotted Colorbot <span class="status-tag">Valorant</span></div>
+<span class="status-pill ok">Operational</span>
+<span class="status-pct">99.8%</span>
+</div>
+<div class="status-row">
+<div class="status-name"><span class="status-dot" style="color:#4ADE80;"></span>Manual Woofer <span class="status-tag">All AC</span></div>
+<span class="status-pill ok">Operational</span>
+<span class="status-pct">100%</span>
+</div>
+<div class="status-row deploy">
+<div class="status-name"><span class="status-dot" style="color:#FACC15;"></span>Slotted ESP <span class="status-tag">Valorant</span></div>
+<span class="status-pill deploy">Testing</span>
+<span class="status-pct">—</span>
+</div>
+<div class="status-row deploy">
+<div class="status-name"><span class="status-dot" style="color:#FACC15;"></span>Slotted ESP <span class="status-tag">FaceIt</span></div>
+<span class="status-pill deploy">Deployment</span>
+<span class="status-pct">—</span>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- COMPARISON MATRIX -->
+<section class="section" id="compare">
+<div class="section-head">
+<h2>Which product fits you</h2>
+<p>Side-by-side so you can pick without the Discord ticket.</p>
+</div>
+<div class="compare-wrap">
+<table class="compare-table">
+<thead>
+<tr>
+<th></th>
+<th>Colorbot</th>
+<th>Woofer</th>
+<th>Val ESP</th>
+<th>FaceIt ESP</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Status</td><td class="check">Live</td><td class="check">Live</td><td style="color:#FACC15;">Deploy</td><td style="color:#FACC15;">Deploy</td></tr>
+<tr><td>Game</td><td>Valorant</td><td>Any</td><td>Valorant</td><td>FaceIt (CS2)</td></tr>
+<tr><td>Starting price</td><td>$35 / wk</td><td>Bundled</td><td>TBA</td><td>TBA</td></tr>
+<tr><td>HWID lock</td><td class="check">Yes</td><td class="cross">No</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+<tr><td>Slot cap</td><td>20</td><td>Open</td><td>20</td><td>20</td></tr>
+<tr><td>Needs Makcu</td><td class="check">Yes</td><td class="cross">No</td><td class="cross">No</td><td class="cross">No</td></tr>
+<tr><td>AC bypass</td><td>Vanguard</td><td>All</td><td>Vanguard</td><td>FaceIt + VAC</td></tr>
+<tr><td>Best for</td><td>Aim help</td><td>HWID bans</td><td>Map awareness</td><td>Ranked FaceIt</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- MANUAL WOOFER DEEP DIVE -->
+<section class="section" id="woofer">
+<div class="section-head" style="margin-bottom:40px;">
+<span class="product-badge" style="background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3);color:#4ADE80;"><span class="product-dot" style="background:#4ADE80;"></span>Manual Woofer · Live</span>
+</div>
+<div class="woofer-grid">
+<div class="woofer-copy">
+<h2>Fresh HWID. Every run.</h2>
+<p>HWID banned? Manual Woofer rotates your hardware fingerprint on demand so you boot back into ranked clean. No kernel-level stuff, no permanent system changes — just a layer that lies to the anti-cheat for the session.</p>
+<ul class="woofer-feats">
+<li>Bypasses Vanguard, FaceIt, VAC, EAC, BE</li>
+<li>Spoof on-demand (one click, no reboot required)</li>
+<li>No HWID lock on the tool itself — portable</li>
+<li>Covers CPU, motherboard, disk, MAC, volume serial</li>
+<li>Clean reversal — restores original IDs anytime</li>
+</ul>
+<div class="woofer-price-note">● Remote service via AnyDesk · One-time job, book through Discord</div>
+</div>
+<div class="woofer-preview">
+<div class="woofer-prev-head">
+<strong>Manual Woofer v1.4</strong>
+<span class="pv-pill"><span class="pv-pill-dot"></span>Ready</span>
+</div>
+<div class="woofer-prev-rows">
+<div class="woofer-prev-row"><span>Current HWID</span><span>A4F2-9E31-...</span></div>
+<div class="woofer-prev-row"><span>Spoof count</span><span>7</span></div>
+<div class="woofer-prev-row"><span>Last spoof</span><span>12 min ago</span></div>
+<div class="woofer-prev-row"><span>Status</span><span style="color:#4ADE80;">Clean</span></div>
+</div>
+<button class="woofer-spoof-btn">▶ Spoof HWID now</button>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- PRODUCT PREVIEW -->
+<section class="section" id="preview">
+<div class="section-head">
+<span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Live preview</span>
+<h2>Inside the Colorbot panel</h2>
+<p>Nine modules, every slider and toggle a click away. Click a tab to see what's under the hood.</p>
+</div>
+<div class="preview-shell">
+<div class="pv-chrome">
+<div class="pv-title">
+<span class="pv-logo">◆</span>
+<strong>AERV</strong><span class="pv-sub">Colorbot</span>
+<span class="pv-ver">v2.0</span>
+</div>
+<div class="pv-chrome-right">
+<span class="pv-pill off"><span class="pv-pill-dot"></span>VG off</span>
+<span class="pv-wctl">— ×</span>
+</div>
+</div>
+<div class="pv-grid">
+<aside class="pv-side">
+<div class="pv-side-head">Status</div>
+<div class="pv-status-box">
+<strong><span class="pv-pill-dot" style="color:#4ADE80"></span>Standby</strong>
+<small>ready</small>
+</div>
+<div class="pv-side-head">Modules</div>
+<div class="pv-nav" id="pvNav">
+<button class="pv-nav-btn active" data-pane="aim"><span class="pv-nav-ico">◎</span>Aim</button>
+<button class="pv-nav-btn" data-pane="trigger"><span class="pv-nav-ico">→</span>Trigger</button>
+<button class="pv-nav-btn" data-pane="flick"><span class="pv-nav-ico">⇾</span>Flick</button>
+<button class="pv-nav-btn" data-pane="weapons"><span class="pv-nav-ico">⚔</span>Weapons</button>
+<button class="pv-nav-btn" data-pane="vision"><span class="pv-nav-ico">◇</span>Vision</button>
+<button class="pv-nav-btn" data-pane="safety"><span class="pv-nav-ico">⬢</span>Safety</button>
+<button class="pv-nav-btn" data-pane="perf"><span class="pv-nav-ico">⚡</span>Perf</button>
+<button class="pv-nav-btn" data-pane="stealth"><span class="pv-nav-ico">◍</span>Stealth</button>
+<button class="pv-nav-btn" data-pane="diag"><span class="pv-nav-ico">☰</span>Diag</button>
+</div>
+<div class="pv-side-head">Profile</div>
+<div class="pv-profile-sel">normal <span class="arr">▾</span></div>
+</aside>
+<main class="pv-main" id="pvMain">
+<div class="pv-pane active" data-pane="aim">
+<div class="pv-head"><h4>Aim</h4><small>detection + tracking</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Detection <small>preset · zone · FOV</small></div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Color</span><span class="pv-row-ctl"></span><span class="pv-sel">purple <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">Zone</span><span class="pv-row-ctl"></span><span class="pv-sel">Head <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">FOV</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:62%"></span><span class="pv-sld-knob" style="left:62%"></span></span></span><span class="pv-row-val">82px</span></div>
+</div>
+<div class="pv-card">
+<div class="pv-card-title">Tracking</div>
+<div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:70%"></span><span class="pv-sld-knob" style="left:70%"></span></span></span><span class="pv-row-val pink">4/10</span></div>
+<div class="pv-row"><span class="pv-row-label">Humanize</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:24%"></span><span class="pv-sld-knob" style="left:24%"></span></span></span><span class="pv-row-val pink">24%</span></div>
+<div class="pv-row"><span class="pv-row-label">Off X</span><span class="pv-row-ctl"></span><input class="pv-row-input" readonly="" value="1"/></div>
+<div class="pv-row"><span class="pv-row-label">Off Y</span><span class="pv-row-ctl"></span><input class="pv-row-input" readonly="" value="7"/></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="trigger">
+<div class="pv-head"><h4>Trigger</h4><small>auto-fire on target</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Behavior</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Mode</span><span class="pv-row-ctl"></span><span class="pv-sel">tap <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton1 <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:22%"></span><span class="pv-sld-knob" style="left:22%"></span></span></span><span class="pv-row-val">220ms</span></div>
+<div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">3</span></div>
+<div class="pv-row"><span class="pv-row-label">Burst</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:33%"></span><span class="pv-sld-knob" style="left:33%"></span></span></span><span class="pv-row-val">3</span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="flick">
+<div class="pv-head"><h4>Flick</h4><small>snap to target</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Snap</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
+<div class="pv-row"><span class="pv-row-label">Hotkey</span><span class="pv-row-ctl"></span><span class="pv-sel">XButton2 <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:100%"></span><span class="pv-sld-knob" style="left:100%"></span></span></span><span class="pv-row-val pink">100%</span></div>
+<div class="pv-row"><span class="pv-row-label">Max step</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">180</span></div>
+<div class="pv-row"><span class="pv-row-label">Cooldown</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:15%"></span><span class="pv-sld-knob" style="left:15%"></span></span></span><span class="pv-row-val">300ms</span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="weapons">
+<div class="pv-head"><h4>Weapons</h4><small>per-weapon recoil patterns</small></div>
+<div class="pv-card">
+<div class="pv-card-title">RCS</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Active</span><span class="pv-row-ctl"></span><span class="pv-sel">Rifle <span class="arr">▾</span></span></div>
+<div class="pv-row"><span class="pv-row-label">RCS X</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:0%"></span><span class="pv-sld-knob" style="left:0%"></span></span></span><span class="pv-row-val">0</span></div>
+<div class="pv-row"><span class="pv-row-label">RCS Y</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">20</span></div>
+<div class="pv-row"><span class="pv-row-label">Smooth</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:50%"></span><span class="pv-sld-knob" style="left:50%"></span></span></span><span class="pv-row-val">5</span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="vision">
+<div class="pv-head"><h4>Vision</h4><small>silent aim + crosshair assist</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Silent aim</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle"></span></div>
+<div class="pv-row"><span class="pv-row-label">Max pixels</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:30%"></span><span class="pv-sld-knob" style="left:30%"></span></span></span><span class="pv-row-val">60</span></div>
+<div class="pv-row"><span class="pv-row-label">Boost</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:60%"></span><span class="pv-sld-knob" style="left:60%"></span></span></span><span class="pv-row-val">1.3x</span></div>
+</div>
+<div class="pv-card">
+<div class="pv-card-title">Crosshair assist</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Strength</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:20%"></span><span class="pv-sld-knob" style="left:20%"></span></span></span><span class="pv-row-val">20%</span></div>
+<div class="pv-row"><span class="pv-row-label">Radius</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:40%"></span><span class="pv-sld-knob" style="left:40%"></span></span></span><span class="pv-row-val">40</span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="safety">
+<div class="pv-head"><h4>Safety</h4><small>watchdog + protection</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Watchdog</div>
+<div class="pv-row"><span class="pv-row-label">Enable</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">OBS</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Discord</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Shadowplay</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+</div>
+<div class="pv-card">
+<div class="pv-card-title">Protection</div>
+<div class="pv-row"><span class="pv-row-label">HWID lock</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Panic key</span><span class="pv-row-ctl"></span><span class="pv-sel">F8 <span class="arr">▾</span></span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="perf">
+<div class="pv-head"><h4>Perf</h4><small>resource &amp; priority</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Runtime</div>
+<div class="pv-row"><span class="pv-row-label">OpenCL</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Low-latency</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">High priority</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Poll (ms)</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:12%"></span><span class="pv-sld-knob" style="left:12%"></span></span></span><span class="pv-row-val">0.5</span></div>
+</div>
+<div class="pv-card">
+<div class="pv-card-title">Live stats</div>
+<div class="pv-row"><span class="pv-row-label">CPU</span><span class="pv-row-ctl"></span><span class="pv-row-val">1.2%</span></div>
+<div class="pv-row"><span class="pv-row-label">RAM</span><span class="pv-row-ctl"></span><span class="pv-row-val">48 MB</span></div>
+<div class="pv-row"><span class="pv-row-label">Latency</span><span class="pv-row-ctl"></span><span class="pv-row-val green">0.8 ms</span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="stealth">
+<div class="pv-head"><h4>Stealth</h4><small>Makcu bridge</small></div>
+<div class="pv-card">
+<div class="pv-card-title">Makcu</div>
+<div class="pv-row"><span class="pv-row-label">Device</span><span class="pv-row-ctl"></span><span class="pv-row-val" style="min-width:140px;">Makcu v5 · COM3</span></div>
+<div class="pv-row"><span class="pv-row-label">Status</span><span class="pv-row-ctl"></span><span class="pv-row-val green">connected</span></div>
+<div class="pv-row"><span class="pv-row-label">Auto-reconnect</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+</div>
+<div class="pv-card">
+<div class="pv-card-title">Humanize</div>
+<div class="pv-row"><span class="pv-row-label">Bezier curve</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Curvature</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:25%"></span><span class="pv-sld-knob" style="left:25%"></span></span></span><span class="pv-row-val">25</span></div>
+<div class="pv-row"><span class="pv-row-label">Jitter</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+<div class="pv-row"><span class="pv-row-label">Reaction</span><span class="pv-row-ctl"><span class="pv-sld"><span class="pv-sld-fill" style="width:18%"></span><span class="pv-sld-knob" style="left:18%"></span></span></span><span class="pv-row-val">90ms</span></div>
+<div class="pv-row"><span class="pv-row-label">Overshoot</span><span class="pv-row-ctl"></span><span class="pv-toggle on"></span></div>
+</div>
+</div>
+<div class="pv-pane" data-pane="diag">
+<div class="pv-head"><h4>Diag</h4><small>live log</small></div>
+<div class="pv-card">
+<div class="pv-card-title">System log <small>last 5 events</small></div>
+<div class="pv-log">
+<div class="pv-log-line"><span class="pv-log-ts">16:48:02</span><span class="pv-log-ok">OK</span>Makcu v5 handshake complete</div>
+<div class="pv-log-line"><span class="pv-log-ts">16:48:01</span><span class="pv-log-ok">OK</span>Profile <strong style="color:var(--accent-bright)">normal</strong> loaded</div>
+<div class="pv-log-line"><span class="pv-log-ts">16:47:58</span><span class="pv-log-ok">OK</span>OpenCL ACTIVE · HIGH priority</div>
+<div class="pv-log-line"><span class="pv-log-ts">16:47:56</span><span class="pv-log-wn">!</span>VG not detected — standby</div>
+<div class="pv-log-line"><span class="pv-log-ts">16:47:55</span><span class="pv-log-ok">OK</span>Engine running · FOV 82px</div>
+</div>
+</div>
+</div>
+<div class="pv-actions">
+<button class="pv-btn pv-btn-stop">■ STOP</button>
+<button class="pv-btn pv-btn-start">▶ START</button>
+</div>
+</main>
+</div>
+</div>
+<script>
       (function(){
         var nav = document.getElementById('pvNav');
         var main = document.getElementById('pvMain');
@@ -2850,379 +3060,354 @@ footer .logo { font-size: 15px; }
         }, { passive: true });
       })();
     </script>
-  </section>
-
-  <!-- WHY SLOTTED -->
-  <section class="section" id="why-slotted">
-    <div class="why-grid">
-      <div class="why-copy">
-        <div class="why-eyebrow">Why slotted?</div>
-        <h2>20 slots. No more.</h2>
-        <p>Open-sale cheats get burned fast. Every extra user is one more leak vector, one more support ticket, one more way the detection vector catches up.</p>
-        <p>Kamil Software runs on a hard cap of 20 active slots. That means every member gets personal attention on Discord, every update is tested on real setups before it ships, and the bot stays off the radar for longer.</p>
-      </div>
-      <div class="why-stack">
-        <div class="why-point">
-          <div class="why-num">01</div>
-          <div>
-            <strong>Safer by design</strong>
-            <p>Small user base means slower spread, longer undetected windows.</p>
-          </div>
-        </div>
-        <div class="why-point">
-          <div class="why-num">02</div>
-          <div>
-            <strong>Direct support</strong>
-            <p>You talk to the dev, not a bot. Fixes land in hours, not days.</p>
-          </div>
-        </div>
-        <div class="why-point">
-          <div class="why-num">03</div>
-          <div>
-            <strong>No leaks</strong>
-            <p>Vetted members only. No resellers, no cracked copies in the wild.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- REQUIREMENTS -->
-  <section class="section" id="requirements">
-    <div class="section-head">
-      <span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Setup</span>
-      <h2>Requirements</h2>
-      <p>What you need on your desk before loading the first slot.</p>
-    </div>
-
-    <div class="req-split">
-      <div class="req-card req-makcu">
-        <div class="req-tag">Required hardware</div>
-        <h3>Makcu device</h3>
-        <p>A Makcu USB input device is required to run Kamil Software. It handles the mouse input layer and keeps the aim movement off the kernel — the key to staying undetected.</p>
-        <ul class="req-list">
-          <li>Any Makcu model (v3, v4, v5)</li>
-          <li>One free USB port</li>
-          <li>Plug-and-play setup, no drivers</li>
-        </ul>
-      </div>
-
-      <div class="req-card">
-        <div class="req-tag">System</div>
-        <h3>Supported resolutions</h3>
-        <p>Tuned and tested across the resolutions Valorant players actually use.</p>
-        <div class="res-grid">
-          <div class="res-chip">
-            <span class="res-main">1920×1080</span>
-            <span class="res-note">16:9 native</span>
-          </div>
-          <div class="res-chip">
-            <span class="res-main">2560×1440</span>
-            <span class="res-note">16:9 QHD</span>
-          </div>
-          <div class="res-chip">
-            <span class="res-main">1680×1050</span>
-            <span class="res-note">16:10</span>
-          </div>
-          <div class="res-chip">
-            <span class="res-main">1440×1080</span>
-            <span class="res-note">4:3 stretched</span>
-          </div>
-          <div class="res-chip">
-            <span class="res-main">1280×960</span>
-            <span class="res-note">4:3 stretched</span>
-          </div>
-          <div class="res-chip">
-            <span class="res-main">1024×768</span>
-            <span class="res-note">4:3 classic</span>
-          </div>
-        </div>
-        <p class="req-foot">Running a resolution not listed? Ask on Discord — custom profiles cover almost anything.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- FEATURES -->
-  <section class="section" id="features">
-    <div class="section-head">
-      <span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Feature list</span>
-      <h2>Built for competitive players</h2>
-      <p>Every tool in your kit, tuned for the edge cases that matter.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">◎</div>
-        <h3>Pixel-perfect detection</h3>
-        <p>Reads enemy outlines in under a millisecond. Tuned for every silhouette on screen.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Zero input lag</h3>
-        <p>Lightweight by design. Runs clean on anything from a laptop to a flagship rig.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">◈</div>
-        <h3>Custom profiles</h3>
-        <p>Save a config per role or playstyle. Switch loadouts without touching a single slider.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⌖</div>
-        <h3>Smoothing & FOV</h3>
-        <p>Dial in smoothing curves and field-of-view radius until the aim feels like your own hand.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">◇</div>
-        <h3>Clean overlay</h3>
-        <p>Minimal UI that stays out of your way. Toggle every indicator, hotkey anything.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚙</div>
-        <h3>Live updates</h3>
-        <p>Patched the day Valorant pushes an update. You never log in to a broken bot.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- ROADMAP -->
-  <section class="section" id="roadmap">
-    <div class="section-head">
-      <h2>Roadmap</h2>
-      <p>What's shipped, what's being built, what's next on the bench.</p>
-    </div>
-    <div class="roadmap">
-      <div class="road-col">
-        <div class="road-head"><span class="road-pill shipped">✓ Shipped</span></div>
-        <div class="road-item"><h4>Core aim engine v2.0</h4><p>Pixel detection, FOV, smoothing, humanization — all live and tuned.</p></div>
-        <div class="road-item"><h4>Makcu v5 integration</h4><p>Full support for v3, v4, v5 with auto-reconnect and jitter.</p></div>
-        <div class="road-item"><h4>Watchdog system</h4><p>Auto-pause on OBS, Discord screen share, and Shadowplay detection.</p></div>
-      </div>
-      <div class="road-col">
-        <div class="road-head"><span class="road-pill progress">• In Progress</span></div>
-        <div class="road-item"><h4>WH overlay</h4><p>Lightweight enemy box and distance overlay. Testing on 5 slots this week.</p></div>
-        <div class="road-item"><h4>Per-role configs</h4><p>Save a different smoothing curve per role, swap automatically.</p></div>
-      </div>
-      <div class="road-col">
-        <div class="road-head"><span class="road-pill planned">○ Planned</span></div>
-        <div class="road-item"><h4>FaceIt support</h4><p>FaceIt anti-cheat bypass layer. Separate verification flow for ranked players. Target: Q1 2027.</p></div>
-        <div class="road-item"><h4>Cloud config sync</h4><p>Save your profiles to your Discord account — reload anywhere.</p></div>
-        <div class="road-item"><h4>Mobile companion</h4><p>View logs and toggle modules from your phone over local network.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- PRICING -->
-  <section class="section" id="pricing">
-    <div class="section-head">
-      <span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Pricing</span>
-      <h2>Simple, honest pricing</h2>
-      <p>Pick your window. No subscriptions, no auto-renewal.</p>
-    </div>
-    <div class="pricing-grid">
-      <article class="price-card">
-        <div class="price-label">7 Days</div>
-        <div class="price-amount">$50<span class="price-period"> / week</span></div>
-        <p class="price-desc">One-week access — try it out, see if it fits.</p>
-        <ul class="price-features">
-          <li>All standard features</li>
-          <li>1 PC activation</li>
-          <li>Discord support</li>
-          <li>Setup guide included</li>
-        </ul>
-        <a href="https://discord.gg/TXncAahcT" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Get Started</a>
-      </article>
-
-      <article class="price-card featured">
-        <div class="featured-tag">Most Popular</div>
-        <div class="price-label">30 Days</div>
-        <div class="price-amount">$120<span class="price-period"> / month</span></div>
-        <p class="price-desc">Full month — room to dial in every setting properly.</p>
-        <ul class="price-features">
-          <li>All standard features</li>
-          <li>1 PC activation</li>
-          <li>Priority Discord support</li>
-          <li>One configuration reset</li>
-          <li>Access to updates</li>
-        </ul>
-        <a href="https://discord.gg/TXncAahcT" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Started</a>
-      </article>
-
-      <article class="price-card lifetime">
-        <div class="featured-tag lifetime-tag">Best Value</div>
-        <div class="price-label">Lifetime</div>
-        <div class="price-amount">$500<span class="price-period"> / one-time</span></div>
-        <p class="price-desc">Pay once. Yours forever — every update, every new feature.</p>
-        <ul class="price-features">
-          <li>All current &amp; future features</li>
-          <li>1 PC activation (HWID transferable)</li>
-          <li>VIP Discord role</li>
-          <li>Unlimited configuration resets</li>
-          <li>Direct dev access</li>
-          <li>First dibs on new modules</li>
-        </ul>
-        <a href="https://discord.gg/TXncAahcT" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Lifetime</a>
-      </article>
-    </div>
-
-    <div class="pay-strip">
-      <span class="pay-strip-label">We accept</span>
-      <span class="pay-method">💳 PayPal</span>
-      <span class="pay-method">₿ BTC</span>
-      <span class="pay-method">Ł LTC</span>
-      <span class="pay-method">Ξ ETH</span>
-      <span class="pay-method">₮ USDT</span>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how">
-    <div class="section-head">
-      <h2>How it works</h2>
-      <p>Three steps from first click to first match.</p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step">
-        <div class="how-num">01</div>
-        <h3>Buy a slot</h3>
-        <p>Pick 7-day or 30-day in the pricing section. Pay via PayPal or crypto in the Discord ticket. One slot, one HWID.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">02</div>
-        <h3>Join the Discord</h3>
-        <p>You get your license key, the download link, and setup instructions in one place. Direct support when you need it.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">03</div>
-        <h3>Load the config</h3>
-        <p>Plug in your Makcu, launch the panel, bind your keys, hit START. Config saves per profile — switch loadouts in one click.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="section-head">
-      <h2>Questions</h2>
-      <p>The ones people actually ask before buying.</p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item"><details open><summary>What is Kamil Software?</summary><p>A small studio building slotted cheats for competitive FPS. Four products total — Colorbot and Woofer live, two ESPs in deployment. Every tool runs on a hard slot cap with direct developer support.</p></details></div>
-      <div class="faq-item"><details><summary>Which games are supported?</summary><p>Colorbot and ESP target Valorant. The upcoming FaceIt ESP targets CS2 on FaceIt. Manual Woofer is game-agnostic — it works wherever an HWID ban blocks you.</p></details></div>
-      <div class="faq-item"><details><summary>What do I need to run the Colorbot?</summary><p>A Windows PC and a Makcu USB device. The Makcu handles mouse input so the aim movement stays off the kernel — that's the piece that keeps it undetected. Full specs are in the Discord setup guide.</p></details></div>
-      <div class="faq-item"><details><summary>Can I use it on more than one PC?</summary><p>Every plan covers one PC activation. Lifetime includes HWID transfer. Reach out on Discord if you need something else — we'll sort it out.</p></details></div>
-      <div class="faq-item"><details><summary>How do I buy?</summary><p>Join the Discord, open a ticket, and we'll walk you through access and payment. PayPal, BTC, LTC, ETH, USDT accepted. Takes a few minutes.</p></details></div>
-      <div class="faq-item"><details><summary>Is Manual Woofer included with the Colorbot plan?</summary><p>Yes. Any Colorbot slot comes with Woofer access at no extra cost. You can also grab Woofer standalone — ask in Discord for pricing.</p></details></div>
-      <div class="faq-item"><details><summary>What's the refund policy?</summary><p>No refunds once access is delivered. If something isn't working, contact support first — we'll fix it before calling it done.</p></details></div>
-    </div>
-  </section>
-
-  <!-- CONTACT CTA -->
-  <section class="section" id="contact">
-    <div class="cta-block">
-      <h2>Ready to lock in your config?</h2>
-      <p>Join the Discord to get started. Support, updates, and the community are all in one place.</p>
-      <div class="cta-buttons">
-        <a href="https://discord.gg/TXncAahcT" class="btn btn-discord btn-lg" target="_blank" rel="noopener noreferrer">
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+</section>
+<!-- WHY SLOTTED -->
+<section class="section" id="why-slotted">
+<div class="why-grid">
+<div class="why-copy">
+<div class="why-eyebrow">Why slotted?</div>
+<h2>20 slots. No more.</h2>
+<p>Open-sale cheats get burned fast. Every extra user is one more leak vector, one more support ticket, one more way the detection vector catches up.</p>
+<p>AERV runs on a hard cap of 20 active slots. That means every member gets personal attention on Discord, every update is tested on real setups before it ships, and the bot stays off the radar for longer.</p>
+</div>
+<div class="why-stack">
+<div class="why-point">
+<div class="why-num">01</div>
+<div>
+<strong>Safer by design</strong>
+<p>Small user base means slower spread, longer undetected windows.</p>
+</div>
+</div>
+<div class="why-point">
+<div class="why-num">02</div>
+<div>
+<strong>Direct support</strong>
+<p>You talk to the dev, not a bot. Fixes land in hours, not days.</p>
+</div>
+</div>
+<div class="why-point">
+<div class="why-num">03</div>
+<div>
+<strong>No leaks</strong>
+<p>Vetted members only. No resellers, no cracked copies in the wild.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- REQUIREMENTS -->
+<section class="section" id="requirements">
+<div class="section-head">
+<span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Setup</span>
+<h2>Requirements</h2>
+<p>What you need on your desk before loading the first slot.</p>
+</div>
+<div class="req-split">
+<div class="req-card req-makcu">
+<div class="req-tag">Required hardware</div>
+<h3>Makcu device</h3>
+<p>A Makcu USB input device is required to run AERV. It handles the mouse input layer and keeps the aim movement off the kernel — the key to staying undetected.</p>
+<ul class="req-list">
+<li>Any Makcu model (v3, v4, v5)</li>
+<li>One free USB port</li>
+<li>Plug-and-play setup, no drivers</li>
+</ul>
+</div>
+<div class="req-card">
+<div class="req-tag">System</div>
+<h3>Supported resolutions</h3>
+<p>Tuned and tested across the resolutions Valorant players actually use.</p>
+<div class="res-grid">
+<div class="res-chip">
+<span class="res-main">1920×1080</span>
+<span class="res-note">16:9 native</span>
+</div>
+<div class="res-chip">
+<span class="res-main">2560×1440</span>
+<span class="res-note">16:9 QHD</span>
+</div>
+<div class="res-chip">
+<span class="res-main">1680×1050</span>
+<span class="res-note">16:10</span>
+</div>
+<div class="res-chip">
+<span class="res-main">1440×1080</span>
+<span class="res-note">4:3 stretched</span>
+</div>
+<div class="res-chip">
+<span class="res-main">1280×960</span>
+<span class="res-note">4:3 stretched</span>
+</div>
+<div class="res-chip">
+<span class="res-main">1024×768</span>
+<span class="res-note">4:3 classic</span>
+</div>
+</div>
+<p class="req-foot">Running a resolution not listed? Ask on Discord — custom profiles cover almost anything.</p>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- FEATURES -->
+<section class="section" id="features">
+<div class="section-head">
+<span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Feature list</span>
+<h2>Built for competitive players</h2>
+<p>Every tool in your kit, tuned for the edge cases that matter.</p>
+</div>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">◎</div>
+<h3>Pixel-perfect detection</h3>
+<p>Reads enemy outlines in under a millisecond. Tuned for every silhouette on screen.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⚡</div>
+<h3>Zero input lag</h3>
+<p>Lightweight by design. Runs clean on anything from a laptop to a flagship rig.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">◈</div>
+<h3>Custom profiles</h3>
+<p>Save a config per role or playstyle. Switch loadouts without touching a single slider.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⌖</div>
+<h3>Smoothing &amp; FOV</h3>
+<p>Dial in smoothing curves and field-of-view radius until the aim feels like your own hand.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">◇</div>
+<h3>Clean overlay</h3>
+<p>Minimal UI that stays out of your way. Toggle every indicator, hotkey anything.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⚙</div>
+<h3>Live updates</h3>
+<p>Patched the day Valorant pushes an update. You never log in to a broken bot.</p>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+<div class="section-head">
+<h2>Roadmap</h2>
+<p>What's shipped, what's being built, what's next on the bench.</p>
+</div>
+<div class="roadmap">
+<div class="road-col">
+<div class="road-head"><span class="road-pill shipped">✓ Shipped</span></div>
+<div class="road-item"><h4>Core aim engine v2.0</h4><p>Pixel detection, FOV, smoothing, humanization — all live and tuned.</p></div>
+<div class="road-item"><h4>Makcu v5 integration</h4><p>Full support for v3, v4, v5 with auto-reconnect and jitter.</p></div>
+<div class="road-item"><h4>Watchdog system</h4><p>Auto-pause on OBS, Discord screen share, and Shadowplay detection.</p></div>
+</div>
+<div class="road-col">
+<div class="road-head"><span class="road-pill progress">• In Progress</span></div>
+<div class="road-item"><h4>WH overlay</h4><p>Lightweight enemy box and distance overlay. Testing on 5 slots this week.</p></div>
+<div class="road-item"><h4>Per-role configs</h4><p>Save a different smoothing curve per role, swap automatically.</p></div>
+</div>
+<div class="road-col">
+<div class="road-head"><span class="road-pill planned">○ Planned</span></div>
+<div class="road-item"><h4>FaceIt support</h4><p>FaceIt anti-cheat bypass layer. Separate verification flow for ranked players. Target: Q1 2027.</p></div>
+<div class="road-item"><h4>Cloud config sync</h4><p>Save your profiles to your Discord account — reload anywhere.</p></div>
+<div class="road-item"><h4>Mobile companion</h4><p>View logs and toggle modules from your phone over local network.</p></div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- PRICING -->
+<section class="section" id="pricing">
+<div class="section-head">
+<span class="product-badge"><span class="product-dot" style="background:#4ADE80;"></span>Colorbot · Pricing</span>
+<h2>Simple, honest pricing</h2>
+<p>Pick your window. No subscriptions, no auto-renewal.</p>
+</div>
+<div class="pricing-grid">
+<article class="price-card">
+<div class="price-label">7 Days</div>
+<div class="price-amount">$35<span class="price-period"> / week</span></div>
+<p class="price-desc">One-week access — try it out, see if it fits.</p>
+<ul class="price-features">
+<li>All standard features</li>
+<li>1 PC activation</li>
+<li>Discord support</li>
+<li>Setup guide included</li>
+</ul>
+<a class="btn btn-ghost" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Started</a>
+</article>
+<article class="price-card featured">
+<div class="featured-tag">Most Popular</div>
+<div class="price-label">30 Days</div>
+<div class="price-amount">$90<span class="price-period"> / month</span></div>
+<p class="price-desc">Full month — room to dial in every setting properly.</p>
+<ul class="price-features">
+<li>All standard features</li>
+<li>1 PC activation</li>
+<li>Priority Discord support</li>
+<li>One configuration reset</li>
+<li>Access to updates</li>
+</ul>
+<a class="btn btn-primary" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Started</a>
+</article>
+<article class="price-card lifetime">
+<div class="featured-tag lifetime-tag">Best Value</div>
+<div class="price-label">Lifetime</div>
+<div class="price-amount">$500<span class="price-period"> / one-time</span></div>
+<p class="price-desc">Pay once. Yours forever — every update, every new feature.</p>
+<ul class="price-features">
+<li>All current &amp; future features</li>
+<li>1 PC activation (HWID transferable)</li>
+<li>VIP Discord role</li>
+<li>Unlimited configuration resets</li>
+<li>Direct dev access</li>
+<li>First dibs on new modules</li>
+</ul>
+<a class="btn btn-primary" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Get Lifetime</a>
+</article>
+</div>
+<div class="pay-strip">
+<span class="pay-strip-label">We accept</span>
+<span class="pay-method">💳 PayPal</span>
+<span class="pay-method">₿ BTC</span>
+<span class="pay-method">Ł LTC</span>
+<span class="pay-method">Ξ ETH</span>
+<span class="pay-method">₮ USDT</span>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+<div class="section-head">
+<h2>How it works</h2>
+<p>Three steps from first click to first match.</p>
+</div>
+<div class="how-grid">
+<div class="how-step">
+<div class="how-num">01</div>
+<h3>Buy a slot</h3>
+<p>Pick 7-day or 30-day in the pricing section. Pay via PayPal or crypto in the Discord ticket. One slot, one HWID.</p>
+</div>
+<div class="how-step">
+<div class="how-num">02</div>
+<h3>Join the Discord</h3>
+<p>You get your license key, the download link, and setup instructions in one place. Direct support when you need it.</p>
+</div>
+<div class="how-step">
+<div class="how-num">03</div>
+<h3>Load the config</h3>
+<p>Plug in your Makcu, launch the panel, bind your keys, hit START. Config saves per profile — switch loadouts in one click.</p>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- FAQ -->
+<section class="section" id="faq">
+<div class="section-head">
+<h2>Questions</h2>
+<p>The ones people actually ask before buying.</p>
+</div>
+<div class="faq-list">
+<div class="faq-item"><details open=""><summary>What is AERV?</summary><p>A small studio building slotted cheats for competitive FPS. Four products total — Colorbot and Woofer live, two ESPs in deployment. Every tool runs on a hard slot cap with direct developer support.</p></details></div>
+<div class="faq-item"><details><summary>Which games are supported?</summary><p>Colorbot and ESP target Valorant. The upcoming FaceIt ESP targets CS2 on FaceIt. Manual Woofer is game-agnostic — it works wherever an HWID ban blocks you.</p></details></div>
+<div class="faq-item"><details><summary>What do I need to run the Colorbot?</summary><p>A Windows PC and a Makcu USB device. The Makcu handles mouse input so the aim movement stays off the kernel — that's the piece that keeps it undetected. Full specs are in the Discord setup guide.</p></details></div>
+<div class="faq-item"><details><summary>Can I use it on more than one PC?</summary><p>Every plan covers one PC activation. Lifetime includes HWID transfer. Reach out on Discord if you need something else — we'll sort it out.</p></details></div>
+<div class="faq-item"><details><summary>How do I buy?</summary><p>Join the Discord, open a ticket, and we'll walk you through access and payment. PayPal, BTC, LTC, ETH, USDT accepted. Takes a few minutes.</p></details></div>
+<div class="faq-item"><details><summary>Is Manual Woofer included with the Colorbot plan?</summary><p>Yes. Any Colorbot slot comes with Woofer access at no extra cost. You can also grab Woofer standalone — ask in Discord for pricing.</p></details></div>
+<div class="faq-item"><details><summary>What's the refund policy?</summary><p>No refunds once access is delivered. If something isn't working, contact support first — we'll fix it before calling it done.</p></details></div>
+</div>
+</section>
+<!-- CONTACT CTA -->
+<section class="section" id="contact">
+<div class="cta-block">
+<h2>Ready to lock in your config?</h2>
+<p>Join the Discord to get started. Support, updates, and the community are all in one place.</p>
+<div class="cta-buttons">
+<a class="btn btn-discord btn-lg" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" height="12" viewbox="0 0 16 12" width="16"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"></path></svg>
           Join Discord
         </a>
-        <a href="#pricing" class="btn btn-ghost btn-lg">See Plans</a>
-      </div>
-    </div>
-  </section>
+<a class="btn btn-ghost btn-lg" href="#pricing">See Plans</a>
+</div>
+</div>
+</section>
 </main>
-
 <footer>
-  <div class="wrapper" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%;">
-    <a href="#" class="logo" style="color:var(--fg);">
-      <svg class="logo-mark" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><defs><linearGradient id="kcGrad2" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#C4B5FD"/></linearGradient></defs><path d="M4 4 L20 4 L22 6 L22 18 L20 20 L4 20 L2 18 L2 6 Z" fill="url(#kcGrad2)"/><circle cx="12" cy="12" r="5" fill="none" stroke="#0D0D1A" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="#0D0D1A"/><path d="M12 5 L12 8 M12 16 L12 19 M5 12 L8 12 M16 12 L19 12" stroke="#0D0D1A" stroke-width="1.6" stroke-linecap="round"/></svg>Kamil<em>Software</em>
-    </a>
-    <ul class="footer-links">
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="https://discord.gg/TXncAahcT" target="_blank" rel="noopener noreferrer">Discord</a></li>
-      <li><button class="modal-trigger" data-modal="tos">Terms</button></li>
-      <li><button class="modal-trigger" data-modal="privacy">Privacy</button></li>
-    </ul>
-    <span>© 2026 Kamil Software</span>
-  </div>
-  <p class="footer-disclaimer">
+<div class="wrapper" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%;">
+<a class="logo" href="#" style="color:var(--fg);">
+<svg aria-hidden="true" class="logo-mark" fill="none" height="32" viewbox="0 0 64 64" width="32"><path d="M7 49 L27 15 H37 L57 49 H46 L32 26 L18 49 Z" fill="#F6F6F8"></path><path d="M25 46 L30 38 H34 L39 46 Z" fill="#8B5CF6"></path></svg><span class="aerv-brand"><span class="aerv-wordmark">AERV</span><span class="aerv-store">SLOTTED</span></span>
+</a>
+<ul class="footer-links">
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">Discord</a></li>
+<li><button class="modal-trigger" data-modal="tos">Terms</button></li>
+<li><button class="modal-trigger" data-modal="privacy">Privacy</button></li>
+</ul>
+<span>© 2026 AERV Store</span>
+</div>
+<p class="footer-disclaimer">
     Not affiliated with, endorsed by, or connected to Riot Games, Inc.
-    VALORANT is a trademark of Riot Games, Inc. Kamil Software is independent third-party software.
+    VALORANT is a trademark of Riot Games, Inc. AERV is independent third-party software.
   </p>
 </footer>
-
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="https://panel.gamerdoc.eu">Client Panel</a>
-  <a href="#products">Products</a>
-  <a href="#status">Status</a>
-  <a href="#compare">Compare</a>
-  <a href="#woofer">Manual Woofer</a>
-  <a href="#preview">Colorbot preview</a>
-  <a href="#features">Features</a>
-  <a href="#requirements">Requirements</a>
-  <a href="#pricing">Pricing</a>
-  <a href="#roadmap">Roadmap</a>
-  <a href="#how">How it works</a>
-  <a href="#faq">FAQ</a>
-  <a href="https://discord.gg/TXncAahcT" target="_blank" rel="noopener noreferrer" style="background:var(--discord);color:#fff;border-color:var(--discord);text-align:center;">Join Discord</a>
+<a href="https://panel.gamerdoc.eu">Client Panel</a>
+<a href="#products">Products</a>
+<a href="#status">Status</a>
+<a href="#compare">Compare</a>
+<a href="#woofer">Manual Woofer</a>
+<a href="#preview">Colorbot preview</a>
+<a href="#features">Features</a>
+<a href="#requirements">Requirements</a>
+<a href="#pricing">Pricing</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#how">How it works</a>
+<a href="#faq">FAQ</a>
+<a href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" style="background:var(--discord);color:#fff;border-color:var(--discord);text-align:center;" target="_blank">Join Discord</a>
 </div>
-
 <!-- FLOATING DISCORD -->
-<a href="https://discord.gg/TXncAahcT" class="float-discord" target="_blank" rel="noopener noreferrer" aria-label="Join Discord">
-  <svg width="26" height="20" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"/></svg>
+<a aria-label="Join Discord" class="float-discord" href="https://discord.gg/TXncAahcT" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" height="20" viewbox="0 0 16 12" width="26"><path d="M13.552 1.077A13.3 13.3 0 0 0 10.286 0a.05.05 0 0 0-.052.025c-.141.252-.297.58-.406.839a12.274 12.274 0 0 0-3.655 0 8.47 8.47 0 0 0-.412-.839.052.052 0 0 0-.052-.025 13.262 13.262 0 0 0-3.266 1.077.047.047 0 0 0-.021.019C.355 4.391-.213 7.61.066 10.788a.055.055 0 0 0 .021.037 13.357 13.357 0 0 0 4.012 2.027.052.052 0 0 0 .056-.019c.309-.421.584-.866.82-1.333a.051.051 0 0 0-.028-.071 8.793 8.793 0 0 1-1.257-.598.052.052 0 0 1-.005-.086c.085-.063.169-.129.25-.196a.05.05 0 0 1 .052-.007c2.637 1.203 5.492 1.203 8.098 0a.05.05 0 0 1 .052.006c.081.067.165.134.25.197a.052.052 0 0 1-.004.086 8.254 8.254 0 0 1-1.257.598.051.051 0 0 0-.027.071c.24.467.515.912.819 1.333a.051.051 0 0 0 .056.02 13.316 13.316 0 0 0 4.018-2.028.052.052 0 0 0 .021-.036c.334-3.451-.559-6.444-2.366-9.692a.041.041 0 0 0-.021-.02ZM5.35 8.878c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.637 1.61-1.438 1.61Zm5.31 0c-.788 0-1.438-.723-1.438-1.61 0-.888.637-1.61 1.438-1.61.807 0 1.45.728 1.438 1.61 0 .887-.63 1.61-1.438 1.61Z"></path></svg>
 </a>
-
 <!-- MODAL: TERMS -->
-<div class="modal-backdrop" id="modal-tos" data-modal-id="tos">
-  <div class="modal-card">
-    <button class="modal-close" data-close>×</button>
-    <h3>Terms of Service</h3>
-    <p>By accessing Kamil Software products you confirm you are 18+ and accept full responsibility for how you use them.</p>
-    <h4>License</h4>
-    <p>Software is licensed per-slot, non-transferable except where noted (Lifetime tier). HWID is locked at activation. One slot = one PC.</p>
-    <h4>Risk</h4>
-    <p>Game bans and anti-cheat detection are inherent risks. Kamil Software provides no guarantee of undetected status. All use is at your own risk.</p>
-    <h4>Refunds</h4>
-    <p>No refunds after access delivery. Technical issues are handled via Discord support — reach out before escalating.</p>
-    <h4>Prohibited use</h4>
-    <p>No resale, no leaks, no sharing credentials. Breach terminates your slot without refund and bans you from future restocks.</p>
-    <h4>Not affiliated</h4>
-    <p>Kamil Software is not affiliated with Riot Games, Inc., FaceIt, or any game publisher. All trademarks belong to their owners.</p>
-  </div>
+<div class="modal-backdrop" data-modal-id="tos" id="modal-tos">
+<div class="modal-card">
+<button class="modal-close" data-close="">×</button>
+<h3>Terms of Service</h3>
+<p>By accessing AERV products you confirm you are 18+ and accept full responsibility for how you use them.</p>
+<h4>License</h4>
+<p>Software is licensed per-slot, non-transferable except where noted (Lifetime tier). HWID is locked at activation. One slot = one PC.</p>
+<h4>Risk</h4>
+<p>Game bans and anti-cheat detection are inherent risks. AERV provides no guarantee of undetected status. All use is at your own risk.</p>
+<h4>Refunds</h4>
+<p>No refunds after access delivery. Technical issues are handled via Discord support — reach out before escalating.</p>
+<h4>Prohibited use</h4>
+<p>No resale, no leaks, no sharing credentials. Breach terminates your slot without refund and bans you from future restocks.</p>
+<h4>Not affiliated</h4>
+<p>AERV is not affiliated with Riot Games, Inc., FaceIt, or any game publisher. All trademarks belong to their owners.</p>
 </div>
-
+</div>
 <!-- MODAL: PRIVACY -->
-<div class="modal-backdrop" id="modal-privacy" data-modal-id="privacy">
-  <div class="modal-card">
-    <button class="modal-close" data-close>×</button>
-    <h3>Privacy Policy</h3>
-    <p>What we collect, why, and what we don't touch.</p>
-    <h4>What we store</h4>
-    <p>Your Discord ID, slot activation date, and HWID fingerprint hash — nothing else from your machine. No gameplay data, no screenshots, no telemetry.</p>
-    <h4>Payments</h4>
-    <p>Payment is processed through PayPal or on-chain wallets. We don't store card numbers or wallet seeds. Transaction records are kept for 2 years for accounting.</p>
-    <h4>Discord</h4>
-    <p>Your username and role data in our Discord server are visible to our moderators. Standard Discord TOS applies to those messages.</p>
-    <h4>Data requests</h4>
-    <p>Open a ticket on Discord to request deletion of your slot record and HWID hash. We'll process within 72 hours.</p>
-    <h4>No third parties</h4>
-    <p>We don't sell, trade, or share your info with anyone. No analytics tools, no ad trackers, no third-party SDKs.</p>
-  </div>
+<div class="modal-backdrop" data-modal-id="privacy" id="modal-privacy">
+<div class="modal-card">
+<button class="modal-close" data-close="">×</button>
+<h3>Privacy Policy</h3>
+<p>What we collect, why, and what we don't touch.</p>
+<h4>What we store</h4>
+<p>Your Discord ID, slot activation date, and HWID fingerprint hash — nothing else from your machine. No gameplay data, no screenshots, no telemetry.</p>
+<h4>Payments</h4>
+<p>Payment is processed through PayPal or on-chain wallets. We don't store card numbers or wallet seeds. Transaction records are kept for 2 years for accounting.</p>
+<h4>Discord</h4>
+<p>Your username and role data in our Discord server are visible to our moderators. Standard Discord TOS applies to those messages.</p>
+<h4>Data requests</h4>
+<p>Open a ticket on Discord to request deletion of your slot record and HWID hash. We'll process within 72 hours.</p>
+<h4>No third parties</h4>
+<p>We don't sell, trade, or share your info with anyone. No analytics tools, no ad trackers, no third-party SDKs.</p>
 </div>
-
+</div>
 <script>
   (function(){
     // Hamburger menu
@@ -3272,27 +3457,194 @@ footer .logo { font-size: 15px; }
   })();
 </script>
 
-<script>
-  (function(){
-    var targets = document.querySelectorAll(
-      '.section-head, .features-grid, .pricing-grid, .faq-list, .how-grid, .trust-grid, .req-split, .cta-block, .why-grid, .game-card, .hero-stats, .slot-bar-wrap, .hero-buttons'
-    );
-    for (var i=0; i<targets.length; i++) targets[i].classList.add('reveal');
-
-    if (!('IntersectionObserver' in window)) {
-      for (var k=0; k<targets.length; k++) targets[k].classList.add('in');
-      return;
+<script>(function(){
+  'use strict';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.querySelector('nav');
+  var progress = document.querySelector('.aerv-scroll-progress');
+  var ticking = false;
+  function updateScroll(){
+    var y = Math.max(0, window.scrollY || window.pageYOffset || 0);
+    if (nav) nav.classList.toggle('is-scrolled', y > 24);
+    if (progress){
+      var limit = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      progress.style.transform='scaleX(' + Math.min(1,y/limit).toFixed(4) + ')';
     }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    for (var j=0; j<targets.length; j++) io.observe(targets[j]);
-  })();
-</script>
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking){ ticking=true; requestAnimationFrame(updateScroll); }
+  }, {passive:true});
+  window.addEventListener('resize', updateScroll, {passive:true});
+  updateScroll();
 
-</body></html>
+  if (reduced || !('IntersectionObserver' in window)) return;
+  var selector = [
+    '.section-head','.whatis-copy','.whatis-grid > :not(.whatis-copy)',
+    '.product-card','.price-card','.feature-card','.how-step',
+    '.trust-item','.req-card','.why-point','.game-card',
+    '.faq-item','.cta-block','.preview-shell', '.hero-stats',
+    '.roadmap-item','.status-card'
+  ].join(',');
+  var nodes = Array.prototype.slice.call(document.querySelectorAll(selector)).filter(function(el){
+    return !el.closest('.hero') && !el.closest('.modal-backdrop');
+  });
+  // Determine stagger based on siblings in each card/list container.
+  nodes.forEach(function(el){
+    var siblings = el.parentElement ? Array.prototype.filter.call(el.parentElement.children,function(sib){
+      return sib.matches && sib.matches(selector);
+    }) : [];
+    var idx = Math.max(0, siblings.indexOf(el));
+    el.style.setProperty('--motion-delay', Math.min(idx * 75, 225) + 'ms');
+    el.classList.add('motion-item');
+  });
+  document.documentElement.classList.add('motion-enabled');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold: .07, rootMargin:'0px 0px -20px 0px'});
+  nodes.forEach(function(el){
+    // Above-the-fold content should never disappear briefly on load.
+    if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('is-visible');
+    else io.observe(el);
+  });
+})();</script><style id="aerv-readable-refinement">
+/* AERV — readability / spacing refinement: no new URLs or dependencies */
+:root {
+  --aerv-copy:#b8bac1;
+  --aerv-caption:#9699a3;
+}
+body {font-size:16px;line-height:1.7;letter-spacing:.002em}
+/* Less tiny UI copy and a readable typographic hierarchy */
+.nav-links a {font-size:14px;letter-spacing:0}
+.logo .aerv-wordmark {font-size:20px!important;letter-spacing:.13em}
+.logo .aerv-store {font-size:9px;letter-spacing:.29em;color:#adb0b8}
+.nav-badge {font-size:12px;letter-spacing:.015em}
+.btn,.pv-btn {font-size:14.5px;line-height:1.35;min-height:44px;justify-content:center}
+.btn-lg {font-size:16px;min-height:54px}
+.hero {max-width:900px;padding-top:146px;padding-bottom:84px}
+.hero h1 {font-size:clamp(88px,9.4vw,142px);line-height:1.01;letter-spacing:-.072em}
+.hero h1 .line2 {font-size:12px;letter-spacing:.19em;line-height:1.6;margin-top:21px;color:#a8abb3}
+.hero-sub {font-size:18px;line-height:1.65;color:var(--aerv-copy);max-width:620px;margin:24px auto 34px}
+.hero-buttons {gap:12px}
+.hero-buttons .btn {min-width:168px}
+.slot-bar-wrap {max-width:560px;margin-top:34px;padding:22px 26px}
+.slot-bar-label {font-size:12px;letter-spacing:.09em;color:#b8bac2}
+.slot-bar-count {font-size:14px;color:#bec0c8}
+.slot-bar-note {font-size:13.5px;line-height:1.55;color:#9fa2ab;margin-top:13px}
+.stat-num {font-size:28px}
+.stat-lbl {font-size:12px;letter-spacing:.075em;color:#aeb0b9}
+.stat-sub {font-size:16px;color:#9fa2ac}
+.hero-stats {margin-top:44px;gap:23px;max-width:720px;padding:24px}
+/* Section titles read well at a glance, even on wide screens */
+.section {padding-top:82px;padding-bottom:82px}
+.section-head {margin-bottom:38px}
+.section-head h2,.why-copy h2 {font-size:clamp(34px,3.7vw,48px);line-height:1.14;letter-spacing:-.045em}
+.section-head p,.why-copy>p {font-size:16.5px;line-height:1.75;color:var(--aerv-copy);max-width:630px}
+.product-card,.how-step,.feature-card {padding:30px}
+.product-card h3 {font-size:25px;line-height:1.25;letter-spacing:-.025em}
+.product-card p,.how-step p,.req-card>p {font-size:15.5px;line-height:1.75;color:var(--aerv-copy)}
+.feature-card h3,.how-step h3 {font-size:18px;line-height:1.3}
+.feature-card p,.why-point p,.trust-text span {font-size:14.5px;line-height:1.7;color:var(--aerv-copy)}
+.why-point strong,.trust-text strong {font-size:16px}
+.product-link {font-size:14.5px}
+.product-tag,.product-status,.product-badge,.req-tag,.why-eyebrow {font-size:11.5px;letter-spacing:.08em}
+.req-list li {font-size:15px;line-height:1.65;color:var(--aerv-copy)}
+.res-main {font-size:15px}
+.res-note {font-size:12px}
+/* Pricing: clearer tiers, more comfortable spacing, no neon */
+.pricing-grid {gap:18px;align-items:stretch}
+.price-card {padding:38px 30px 32px}
+.price-label {font-size:12px;letter-spacing:.095em;margin-bottom:19px;color:#afb1b9}
+.price-amount {font-size:clamp(48px,4.7vw,64px);line-height:1.12;letter-spacing:-.065em;white-space:nowrap}
+.price-period {font-size:16px;letter-spacing:0;color:#adb0b8}
+.price-desc {font-size:15px;line-height:1.7;color:var(--aerv-copy);margin-top:14px;padding-top:19px}
+.price-features {gap:14px;margin:25px 0 28px}
+.price-features li {font-size:15px;line-height:1.6;color:var(--aerv-copy)}
+.price-card>.btn {width:100%;min-height:50px;font-size:15px}
+/* Supporting navigation, comparison, FAQ and footer */
+.faq-item {padding:26px 30px}
+.faq-item summary {font-size:17px;line-height:1.55}
+.faq-item p {font-size:15.5px;line-height:1.75;color:var(--aerv-copy)}
+.footer-links a, footer p, .footer-copy {font-size:13.5px;line-height:1.6;color:#a5a7af}
+.pv-title strong,.pv-title .pv-sub {font-size:14px}
+.pv-nav-btn {font-size:14px}
+.pv-head h4 {font-size:23px}
+.pv-row {font-size:14px}
+.pv-row-label {font-size:13px}
+.pv-card-title {font-size:14px}
+.pv-row-val {font-size:13px}
+/* Keyboard clarity and smoother focus when tabbing */
+a,button,summary { -webkit-tap-highlight-color:transparent }
+a:focus-visible,button:focus-visible,summary:focus-visible {outline:2px solid #fafafa;outline-offset:4px}
+@media(max-width:1080px) {
+  .pricing-grid {gap:14px}
+  .price-card {padding:32px 24px}
+  .price-amount {font-size:clamp(40px,4.1vw,55px)}
+  .nav-links {gap:16px}
+}
+@media(max-width:760px) {
+  body {font-size:15.5px}
+  .hero {padding:120px 0 68px;max-width:100%}
+  .hero h1 {font-size:clamp(66px,16.5vw,100px)}
+  .hero h1 .line2 {font-size:11px;letter-spacing:.13em;margin-top:13px}
+  .hero-sub {font-size:16.5px;line-height:1.65;margin:20px auto 26px;padding:0 4px}
+  .section {padding-top:68px;padding-bottom:68px}
+  .section-head h2,.why-copy h2 {font-size:clamp(32px,8.6vw,42px)}
+  .section-head p {font-size:15.5px}
+  .hero-buttons .btn {min-width:0;flex:1 1 145px;max-width:260px}
+  .slot-bar-wrap {padding:19px 18px}
+  .slot-bar-label {font-size:11.5px}
+  .slot-bar-note {font-size:13px}
+  .stat-num {font-size:26px}
+  .stat-lbl {font-size:11.5px}
+  .price-card {padding:30px 24px}
+  .price-amount {font-size:58px}
+  .price-desc,.price-features li {font-size:15px}
+  .product-card,.how-step,.feature-card {padding:26px 22px}
+  .product-card h3 {font-size:23px}
+  .pv-row-label {font-size:12.5px}
+  .faq-item {padding:23px 20px}
+}
+@media(max-width:420px) {
+  .hero h1 {font-size:clamp(59px,16vw,75px)}
+  .hero h1 .line2 {font-size:10.5px;letter-spacing:.09em}
+  .hero-sub {font-size:16px}
+  .hero-stats {gap:15px;padding:19px 14px}
+  .stat-num {font-size:23px}
+  .stat-lbl {font-size:10.5px}
+  .price-amount {font-size:54px}
+  .nav-cta .btn {font-size:13px}
+}
+/* Put primary actions before the secondary stats on the hero. */
+.hero {display:flex;flex-direction:column;align-items:center}
+.hero h1 {order:1}
+.hero-sub {order:2}
+.hero .slot-bar-wrap {order:3;width:min(100%,560px)}
+.hero-buttons {order:4;width:100%;margin-top:22px}
+.hero-stats {order:5;width:min(100%,720px);margin-top:36px}
+@media(max-width:600px) {
+  /* All actions are still available in the hamburger menu. */
+  nav {padding-left:max(14px,env(safe-area-inset-left,0px))!important;padding-right:max(14px,env(safe-area-inset-right,0px))!important;gap:10px}
+  nav .nav-cta {gap:8px}
+  nav .nav-cta>.btn-ghost,nav .nav-cta>.btn-discord {display:none!important}
+  nav .nav-cta>.btn-primary {display:inline-flex!important;min-height:42px;padding:9px 13px;font-size:13px}
+  nav .nav-hamburger {flex:0 0 auto}
+  .logo-wrap {flex:0 1 auto;min-width:0}
+  .logo {gap:7px}
+  .logo .logo-mark {width:28px;height:28px}
+  .logo .aerv-wordmark {font-size:17px!important}
+  .logo .aerv-store {font-size:7.5px}
+}
+@media(max-width:360px) {
+  nav .nav-cta>.btn-primary {display:none!important}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {scroll-behavior:auto!important}
+}
+
+</style></body></html>
